@@ -27,18 +27,18 @@ function ManageReviews() {
                     .eq('product_id', productId);
                 if (reviewError) throw reviewError;
 
-                // Iterate through reviews to compute likes count for each review
-                const reviewsWithLikes = await Promise.all(reviewData.map(async (review) => {
-                    const { data: likesData, error: likesError } = await supabase
-                        .from('review_likes')
-                        .select('id')
-                        .eq('review_id', review.id);
-                    if (likesError) throw likesError;
+                // Fetch user's liked reviews
+                const { data: likedReviews, error: likedReviewsError } = await supabase
+                    .from('review_likes')
+                    .select('review_id')
+                    .eq('user_id', userId);
+                if (likedReviewsError) throw likedReviewsError;
 
-                    return {
-                        ...review,
-                        likes: likesData.length // Compute likes count
-                    };
+                const likedReviewIds = likedReviews.map(like => like.review_id);
+
+                const reviewsWithLikes = reviewData.map(review => ({
+                    ...review,
+                    userLiked: likedReviewIds.includes(review.id),
                 }));
 
                 setReviews(reviewsWithLikes);
@@ -55,9 +55,6 @@ function ManageReviews() {
     const handleLikeReview = async (reviewId) => {
         try {
             if (!userId) throw new Error('User not logged in');
-
-            // Display alert while liking
-            alert('Liking review...');
 
             // Check if user already liked the review
             const { data: likedData, error: likedError } = await supabase
@@ -91,17 +88,18 @@ function ManageReviews() {
                 .eq('product_id', productId);
             if (fetchError) throw fetchError;
 
-            // Update reviews with new likes count
-            const reviewsWithUpdatedLikes = await Promise.all(updatedReviews.map(async (review) => {
-                const { data: likesData } = await supabase
-                    .from('review_likes')
-                    .select('id')
-                    .eq('review_id', review.id);
+            // Fetch user's liked reviews again
+            const { data: likedReviews, error: likedReviewsError } = await supabase
+                .from('review_likes')
+                .select('review_id')
+                .eq('user_id', userId);
+            if (likedReviewsError) throw likedReviewsError;
 
-                return {
-                    ...review,
-                    likes: likesData.length // Compute likes count
-                };
+            const likedReviewIds = likedReviews.map(like => like.review_id);
+
+            const reviewsWithUpdatedLikes = updatedReviews.map(review => ({
+                ...review,
+                userLiked: likedReviewIds.includes(review.id),
             }));
 
             setReviews(reviewsWithUpdatedLikes);
@@ -128,7 +126,7 @@ function ManageReviews() {
                         <strong>Rating:</strong> {review.rating} <br />
                         <strong>Comment:</strong> {review.comment} <br />
                         <button onClick={() => handleLikeReview(review.id)}>
-                            Like ({review.likes})
+                            {review.userLiked ? 'Unlike' : 'Like'} ({review.likes})
                         </button>
                         <hr />
                     </li>

@@ -177,8 +177,8 @@ function ProductSpecifications() {
                                 </>
                             )}
                             {review.user_id !== userId && ( // Hide other users' reviews
-                             <></>
-                            )} 
+                                <></>
+                            )}
                         </div>
                     ))}
                 </div>
@@ -207,10 +207,14 @@ function ProductSpecifications() {
                 </form>
             </div>
 
+
             <div>
                 <h3>Like Product</h3>
+                <div>
+                    Total Likes : {likes}
+                </div>
                 <button onClick={handleLikeProduct}>
-                    {likedByUser ? 'Unlike' : 'Like'} ({likes})
+                    {likedByUser ? 'Unlike' : 'Like'}
                 </button>
             </div>
 

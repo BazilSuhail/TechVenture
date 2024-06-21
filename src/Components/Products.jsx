@@ -73,6 +73,7 @@ function Products() {
 
   return (
     <div>
+      <div><button onClick={()=>{navigate("/searchprojects")}} >Search Projects</button></div>
       <h2>Products</h2>
       <div>
         <select value={selectedCategory} onChange={handleCategoryChange}>

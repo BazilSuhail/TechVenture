@@ -11,6 +11,7 @@ import Products from "./Components/Products";
 import ProductSpecifications from "./Components/Product_specifications";
 import AddSpecification from "./Components/Addspecification";
 import ManageReviews from "./Components/ManageReviews";
+import SearchProjects from "./Components/SearchProducts";
 
 const App = () => {
 
@@ -28,8 +29,9 @@ const App = () => {
         <Route path="/profile" element={<Profile />} />
         <Route path="/product-specifications/:productId" element={<ProductSpecifications />} />
         <Route path="/add-specifications/:productId" element={<AddSpecification />} />
+        <Route path="/searchprojects" element={<SearchProjects />} />
         <Route path="/manage-reviews/:productId" element={<ManageReviews />} />
-
+        
       </Routes>
 
 
