@@ -7,22 +7,23 @@ function ProductSpecifications() {
     const navigate = useNavigate();
     const [specifications, setSpecifications] = useState([]);
     const [reviews, setReviews] = useState([]);
-    const [likes, setLikes] = useState(0); // State for total likes
-    const [likedByUser, setLikedByUser] = useState(false); // State to track if user liked the product
-    const [userId, setUserId] = useState(null); // State to store the logged-in user's ID
+    const [likes, setLikes] = useState(0);
+    const [likedByUser, setLikedByUser] = useState(false);
+    const [userId, setUserId] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
     const [comment, setComment] = useState('');
     const [rating, setRating] = useState(1);
+    const [productImage, setProductImage] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 // Fetch user ID
-                const { data, error } = await supabase.auth.getUser();
-                if (error) throw error;
-                if (!data || !data.user) throw new Error('User not logged in');
-                const userId = data.user.id;
+                const { data: userData, error: userError } = await supabase.auth.getUser();
+                if (userError) throw userError;
+                if (!userData || !userData.user) throw new Error('User not logged in');
+                const userId = userData.user.id;
                 setUserId(userId);
 
                 // Fetch specifications
@@ -59,6 +60,14 @@ function ProductSpecifications() {
                     if (userLikedError) throw userLikedError;
                     setLikedByUser(userLikedData.length > 0);
                 }
+
+                // Fetch product image
+                const { data: imageUrl, error: imageError } = await supabase
+                    .storage
+                    .from('product_images')
+                    .getPublicUrl(`${productId}.jpeg`);
+                if (imageError) throw imageError;
+                setProductImage(imageUrl.publicUrl);
             } catch (error) {
                 setError(error.message);
             } finally {
@@ -148,6 +157,13 @@ function ProductSpecifications() {
         <div>
             <h2>Product Specifications</h2>
             <button onClick={handleBack}>Back to Products</button>
+            
+            {productImage && (
+                <div>
+                    <img src={productImage} alt="Product" style={{ width: '200px', margin: '20px 0' }} />
+                </div>
+            )}
+
             <table>
                 <thead>
                     <tr>
@@ -207,11 +223,10 @@ function ProductSpecifications() {
                 </form>
             </div>
 
-
             <div>
                 <h3>Like Product</h3>
                 <div>
-                    Total Likes : {likes}
+                    Total Likes: {likes}
                 </div>
                 <button onClick={handleLikeProduct}>
                     {likedByUser ? 'Unlike' : 'Like'}

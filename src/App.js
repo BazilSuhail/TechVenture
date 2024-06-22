@@ -4,13 +4,13 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 //const Admin = React.lazy(() => import("./Components/Admin"));
 import Navbar from "./Components/Navbar";  
 import SignIn from "./Components/Signin";
-import AdminDashboard from "./Components/AdminDashboard";
+import AdminDashboard from "./Components/Admin/AdminDashboard";
 import Signup from "./Components/Signup";
 import Profile from "./Components/Profile";
 import Products from "./Components/Products";
 import ProductSpecifications from "./Components/Product_specifications";
 import AddSpecification from "./Components/Addspecification";
-import ManageReviews from "./Components/ManageReviews";
+import ManageReview from "./Components/ManageReiews/ManageReview";
 import SearchProjects from "./Components/SearchProducts";
 
 const App = () => {
@@ -30,7 +30,7 @@ const App = () => {
         <Route path="/product-specifications/:productId" element={<ProductSpecifications />} />
         <Route path="/add-specifications/:productId" element={<AddSpecification />} />
         <Route path="/searchprojects" element={<SearchProjects />} />
-        <Route path="/manage-reviews/:productId" element={<ManageReviews />} />
+        <Route path="/manage-reviews/:productId" element={<ManageReview/>} />
         
       </Routes>
 

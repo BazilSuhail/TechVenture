@@ -9,31 +9,33 @@ function Profile() {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
     const [editMode, setEditMode] = useState(false);
+    const [profileImage, setProfileImage] = useState(null);
+    const [imageFile, setImageFile] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
-      const fetchSessionData = async () => {
-          try {
-              const { data: { session }, error } = await supabase.auth.getSession();
-              if (error || !session) throw new Error('User not logged in');
-  
-              const { user } = session;
-              await Promise.all([
-                  fetchProfile(user.id),
-                  fetchLikedProducts(user.id),
-                  fetchLikedReviews(user.id),
-              ]);
-          } catch (error) {
-              console.error('Error fetching session data:', error);
-              setError(error.message);
-          } finally {
-              setLoading(false);
-          }
-      };
-  
-      fetchSessionData();
-  }, []);
-  
+        const fetchSessionData = async () => {
+            try {
+                const { data: { session }, error } = await supabase.auth.getSession();
+                if (error || !session) throw new Error('User not logged in');
+
+                const { user } = session;
+                await Promise.all([
+                    fetchProfile(user.id),
+                    fetchLikedProducts(user.id),
+                    fetchLikedReviews(user.id),
+                    fetchProfileImage(user.id),
+                ]);
+            } catch (error) {
+                console.error('Error fetching session data:', error);
+                setError(error.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchSessionData();
+    }, []);
 
     const fetchProfile = async (userId) => {
         try {
@@ -119,6 +121,20 @@ function Profile() {
         }
     };
 
+    const fetchProfileImage = async (userId) => {
+        try {
+            const { data: imageUrl, error: imageError } = await supabase
+                .storage
+                .from('profile_images')
+                .getPublicUrl(`${userId}.jpeg`);
+            if (imageError) throw imageError;
+
+            setProfileImage(imageUrl.publicUrl);
+        } catch (error) {
+            setError(error.message);
+        }
+    };
+
     const handleUpdate = async (e) => {
         e.preventDefault();
         try {
@@ -128,8 +144,29 @@ function Profile() {
 
             if (error) throw error;
 
+            if (imageFile) {
+                await uploadProfileImage(profile.user_id);
+            }
+
+            await fetchProfileImage(profile.user_id); // Fetch the updated profile image
+
             alert('Profile updated successfully!');
             setEditMode(false);
+        } catch (error) {
+            setError(error.message);
+        }
+    };
+
+    const uploadProfileImage = async (userId) => {
+        try {
+            const { error } = await supabase.storage
+                .from('profile_images')
+                .upload(`${userId}.jpeg`, imageFile, {
+                    cacheControl: '3600',
+                    upsert: true,
+                });
+
+            if (error) throw error;
         } catch (error) {
             setError(error.message);
         }
@@ -166,6 +203,11 @@ function Profile() {
         <div>
             <h2>Profile</h2>
             <p>Email: {profile.email}</p>
+            {profileImage && (
+                <div>
+                    <img src={profileImage} alt="Profile" style={{ width: '200px', margin: '20px 0' }} />
+                </div>
+            )}
             {editMode ? (
                 <form onSubmit={handleUpdate}>
                     <input
@@ -179,6 +221,11 @@ function Profile() {
                         value={profile.bio}
                         onChange={(e) => setProfile({ ...profile, bio: e.target.value })}
                         placeholder="Bio"
+                    />
+                    <input
+                        type="file"
+                        onChange={(e) => setImageFile(e.target.files[0])}
+                        accept="image/jpeg"
                     />
                     <button type="submit">Save Changes</button>
                     <button type="button" onClick={() => setEditMode(false)}>Cancel</button>
