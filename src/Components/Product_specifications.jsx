@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '../Config/Config';
+import { IoArrowBackCircleOutline } from "react-icons/io5";
+import { FaStar } from 'react-icons/fa';
+import { AiFillLike } from "react-icons/ai";
+import { Bars } from 'react-loader-spinner';
+
 
 function ProductSpecifications() {
     const { productId } = useParams();
@@ -76,13 +81,33 @@ function ProductSpecifications() {
                 }
 
                 // Fetch product image
+                /*
                 const { data: imageUrl, error: imageError } = await supabase
                     .storage
                     .from('product_images')
                     .getPublicUrl(`${productId}.jpeg`);
                 if (imageError) throw imageError;
                 setProductImage(imageUrl.publicUrl);
-            } catch (error) {
+                */
+
+                const { data: imageUrl, error: imageError } = await supabase
+                    .storage
+                    .from('product_images')
+                    .getPublicUrl(`${productId}.jpeg`);
+
+                if (imageError) throw imageError;
+
+                // Validate if the URL returns an image
+                const response = await fetch(imageUrl.publicUrl, { method: 'HEAD' });
+
+                if (response.ok && response.headers.get('Content-Type').includes('image')) {
+                    setProductImage(imageUrl.publicUrl);
+                } else {
+
+                    setProductImage(null);
+                }
+            }
+            catch (error) {
                 setError(error.message);
             } finally {
                 setLoading(false);
@@ -92,6 +117,9 @@ function ProductSpecifications() {
         fetchData();
     }, [productId]);
 
+    const handleStarClick = (index) => {
+        setRating(index + 1); // Set rating based on star index (1-based)
+    };
     const handleAddReview = async (e) => {
         e.preventDefault();
         try {
@@ -159,102 +187,184 @@ function ProductSpecifications() {
         navigate(-1);
     };
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-
-    if (error) {
-        return <div>Error: {error}</div>;
-    }
-
     return (
-        <div className='pt-[85px]'>
-            <h2>{productName}</h2>
-            <p><strong>Description:</strong> {productDescription}</p>
-            <p><strong>Price:</strong> ${productPrice}</p>
+        <div className='h-full w-full pt-[84px]'>
+            {loading ? (
+                <div className='h-[calc(98vh-95px)] w-screen flex flex-col justify-center items-center'>
+                    <Bars
+                        height="50"
+                        width="50"
+                        color="#363636"
+                        ariaLabel="bars-loading"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                        visible={true} />
+                </div>
+            ) : error ? (
+                <div>Error: {error}</div>
+            ) : (
+                <div className='grid grid-cols-1 xsx:grid-cols-9'>
 
-            <button onClick={handleBack}>Back to Products</button>
-            
-            {productImage && (
-                <div>
-                    <img src={productImage} alt="Product" style={{ width: '200px', margin: '20px 0' }} />
+                    <div className=' xsx:col-span-3 flex flex-col'>
+                        <button onClick={handleBack}><IoArrowBackCircleOutline size={55} /></button>
+
+                        {productImage !== null ? (
+                            <div>
+                                <img src={productImage} alt="Product" className='w-[250px] h-[250px] rounded-md mx-auto my-[25px]' />
+                            </div>
+                        )
+                            :
+                            (<div className='w-[250px] mx-auto my-[25px] flex flex-col items-center justify-center rounded-lg bg-gray-400 h-[250px]'>
+                                <div className='w-[200px] flex flex-col items-center justify-center rounded-lg bg-gray-300 h-[200px]'>
+                                    <div className='w-[150px] flex flex-col items-center justify-center rounded-lg bg-gray-200 h-[150px]'>
+                                        <div className='w-[90px] flex flex-col items-center justify-center rounded-lg bg-gray-50 h-[90px]'></div>
+                                    </div>
+                                </div>
+                            </div>
+                            )
+                        }
+
+                        <h2 className='px-[16px] text-center py-[16px] border-2 mt-[8px] mx-auto font-bold text-xl border-gray-500 rounded-lg'>{productName}</h2>
+                        <div className='ml-[9px] font-bold pt-[8px] text-lg text-black'>Description: </div>
+                        <p className='ml-[9px] font-bold pt-[10px] text-md text-gray-700'>{productDescription}</p>
+
+                        <div className='xsx:ml-[9px] mx-[5px] mt-[6px] md:mt-[0px] flex justify-between'>
+                            <div className='text-xl font-extrabold text-gray-800'>Price:</div>
+                            <div className='text-xl font-extrabold text-gray-800'>${productPrice}</div>
+                        </div>
+
+                    </div>
+
+                    <div className=' xsx:col-span-1 '><div className='text-center xsx:h-[calc(98vh-85px)] mx-auto xsx:ml-[20px] my-[25px] xsx:mt-[10px] w-[95vw] h-[5px] xsx:w-[4px] bg-gray-500 rounded-lg'>.</div></div>
+
+                    <div className='xsx:col-span-5 flex flex-col xsx:overflow-auto xsx:ml-[-59px] h-[calc(98vh-85px)] scrollbar-custom'>
+
+                        <h2 className='ml-[15px] md:ml-[0px] md:text-3xl text-2xl text-custom-blue mb-[8px] font-bold '>Sepcifications Details</h2>
+                        <div className='my-[8px] flex flex-col w-[95%] mx-auto p-[15px] justify-center shadow-custom-light rounded-xl'>
+                            <div className="relative overflow-x-auto shadow-md rounded-lg"></div>
+                            <table className="w-[100%] text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                <thead className="text-md text-gray-200 uppercase bg-gray-700">
+                                    <tr className='text-center'>
+                                        <th scope="col" className="px-6 py-3 whitespace-nowrap">Name</th>
+                                        <th scope="col" className="px-6 py-3 whitespace-nowrap">Features</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {specifications.map((spec) => (
+                                        <tr key={spec.id} className='text-center odd:bg-white even:bg-gray-200 text-custom-blue text-md font-bold'>
+                                            <td className="px-6 py-4 whitespace-nowrap">{spec.attribute_name}</td>
+                                            <td className="px-6 py-4 whitespace-nowrap">{spec.attribute_value}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div className='flex justify-between my-[25px]'>
+                            <div className='flex items-center ml-[25px] px-[8px] md:px-[12px] py-[5px] shadow-custom-light rounded-lg'>
+                                <button onClick={handleLikeProduct}>
+                                    <AiFillLike size={40} className={likedByUser ? 'text-blue-600' : 'text-gray-200'} />
+                                </button>
+                                <div className='h-[70%] ml-[5px] w-[3px] bg-gray-500 '> </div>
+                                <div className='font-bold text-lg md:text-xl ml-[10px]'>Likes: </div>
+                                <p className='bg-gray-800 rounded-md px-[10px] text-xl md:text-2xl ml-[15px] text-white'> {likes} </p>
+                            </div>
+
+                            <button className='md:mr-[25px] mr-[15px] hover:bg-black bg-gray-800 text-white px-[6px] md:px-[10px] text-lg md:text-2xl rounded-3xl ' onClick={handleReadReviews}>Read Reviews</button>
+                        </div>
+
+
+                        <div className='shadow-custom-light rounded-md w-[90%] mx-auto p-[10px]'>
+                            <h3 className='text-2xl ml-[19px] text-custom-blue mb-[8px] font-bold '>Add Your Review</h3>
+                            <form onSubmit={handleAddReview} className="flex flex-col space-y-4">
+                                <textarea
+                                    value={comment}
+                                    onChange={(e) => setComment(e.target.value)}
+                                    placeholder="Write your review..."
+                                    required
+                                    className="p-2 border-2 border-gray-600 w-[95%] h-[150px] mx-auto text-md font-medium  rounded"
+                                />
+
+                                <div className="flex items-center  ml-[19px]">
+                                    <label className="mr-[10px] text-xl font-semibold">Rating:</label>
+                                    {[...Array(5)].map((_, index) => (
+                                        <FaStar
+                                            size={25}
+                                            key={index}
+                                            className={`cursor-pointer ${index < rating ? 'text-yellow-500' : 'text-gray-300'}`}
+                                            onClick={() => handleStarClick(index)}
+                                        />
+                                    ))}
+                                </div>
+
+                                <button type="submit" className="bg-gray-700 text-xl w-[180px] mx-auto my-[10px] hover:bg-gray-400 text-white py-2 px-4 rounded-xl">
+                                    Submit Review
+                                </button>
+                            </form>
+                        </div>
+
+                        <div>
+                            <h2 className='ml-[15px] md:ml-[0px] md:text-3xl text-2xl text-custom-blue mb-[8px] mt-[20px] font-bold '>My Reviews</h2>
+                            <div>
+                                {reviews.map((review) => (
+                                    <div key={review.id}>
+                                        {review.user_id === userId && ( // Show only user's own reviews
+                                            <div className='py-[8px] p-[10px]shadow-custom-light rounded-xl w-[95%] overflow-x-auto scrollbar-hide  my-[15px] mx-auto' >
+
+                                                <p className='text-xl font-bold '>Review:</p>
+                                                <p className='font-serif text-lg'> {review.comment}</p>
+                                                <div className='pl-auto flex'>
+                                                    {Array.from({ length: 5 }, (_, index) => (
+                                                        <FaStar
+                                                            size={25}
+                                                            key={index}
+                                                            className={index < review.rating ? 'text-yellow-500' : 'text-gray-300'}
+                                                        />
+                                                    ))}
+                                                </div>
+
+                                            </div>
+                                        )}
+                                        {review.user_id !== userId && ( // Hide other users' reviews
+                                            <></>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+
                 </div>
             )}
+        </div >
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Attribute Name</th>
-                        <th>Attribute Value</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {specifications.map((spec) => (
-                        <tr key={spec.id}>
-                            <td>{spec.attribute_name}</td>
-                            <td>{spec.attribute_value}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-
-            <div>
-                <h3>Reviews</h3>
-                <div>
-                    {reviews.map((review) => (
-                        <div key={review.id}>
-                            {review.user_id === userId && ( // Show only user's own reviews
-                                <>
-                                    <strong>Rating:</strong> {review.rating} <br />
-                                    <strong>Comment:</strong> {review.comment}
-                                </>
-                            )}
-                            {review.user_id !== userId && ( // Hide other users' reviews
-                                <></>
-                            )}
-                        </div>
-                    ))}
-                </div>
-            </div>
-
-            <div>
-                <h3>Add Your Review</h3>
-                <form onSubmit={handleAddReview}>
-                    <textarea
-                        value={comment}
-                        onChange={(e) => setComment(e.target.value)}
-                        placeholder="Write your review..."
-                        required
-                    />
-                    <label>
-                        Rating:
-                        <select value={rating} onChange={(e) => setRating(Number(e.target.value))}>
-                            <option value={1}>1</option>
-                            <option value={2}>2</option>
-                            <option value={3}>3</option>
-                            <option value={4}>4</option>
-                            <option value={5}>5</option>
-                        </select>
-                    </label>
-                    <button type="submit">Submit Review</button>
-                </form>
-            </div>
-
-            <div>
-                <h3>Like Product</h3>
-                <div>
-                    Total Likes: {likes}
-                </div>
-                <button onClick={handleLikeProduct}>
-                    {likedByUser ? 'Unlike' : 'Like'}
-                </button>
-            </div>
-
-            <div>
-                <button onClick={handleReadReviews}>Read Reviews</button>
-            </div>
-        </div>
     );
 }
 
 export default ProductSpecifications;
+/*
+
+                            <form onSubmit={handleAddReview}>
+                                <textarea
+                                    value={comment}
+                                    onChange={(e) => setComment(e.target.value)}
+                                    placeholder="Write your review..."
+                                    required
+                                />
+                                <label>
+                                    Rating:
+                                    <select value={rating} onChange={(e) => setRating(Number(e.target.value))}>
+                                        <option value={1}>1</option>
+                                        <option value={2}>2</option>
+                                        <option value={3}>3</option>
+                                        <option value={4}>4</option>
+                                        <option value={5}>5</option>
+                                    </select>
+                                </label>
+                                <button type="submit">Submit Review</button>
+                            </form>
+*/

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '../../Config/Config';
+import { IoArrowBackCircleOutline } from "react-icons/io5";
 import ReviewItem from './ReviewItem';
-
+import { Bars } from 'react-loader-spinner';
 function ManageReviews() {
     const { productId } = useParams();
+    const navigate = useNavigate();
     const [reviews, setReviews] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -101,28 +103,40 @@ function ManageReviews() {
         }
     };
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-
-    if (error) {
-        return <div>Error: {error}</div>;
-    }
-
+    const handleBack = () => {
+        navigate(-1);
+    };
     return (
-        <div>
-            <h2>Product Reviews</h2>
-            <ul>
-                {reviews.map((review) => (
-                    <ReviewItem
-                        key={review.id}
-                        review={review}
-                        userId={userId}
-                        handleLikeReview={handleLikeReview}
-                    />
-                ))}
-            </ul>
-        </div>
+        <div className='h-full w-full pt-[85px]'>
+            {loading ? (
+        <div className='h-[calc(98vh-95px)] w-screen flex flex-col justify-center items-center'> 
+        <Bars
+          height="50"
+          width="50"
+          color="#363636"
+          ariaLabel="bars-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true} />
+      </div>
+            ) : error ? (
+                <div>Error: {error}</div>
+            ) : (
+                <div>
+
+                    <button onClick={handleBack}><IoArrowBackCircleOutline size={55} /></button>
+                    {reviews.map((review) => (
+                        <ReviewItem
+                            key={review.id}
+                            review={review}
+                            userId={userId}
+                            handleLikeReview={handleLikeReview}
+                        />
+                    ))}
+                </div>
+            )}
+        </div >
+
     );
 }
 

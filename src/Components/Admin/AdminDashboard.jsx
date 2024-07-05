@@ -3,6 +3,7 @@ import { supabase } from '../../Config/Config';
 import Subcategories from './SubCategories';
 import Products from './Products';
 
+import { Bars } from 'react-loader-spinner'
 function AdminDashboard() {
   const [categories, setCategories] = useState([]);
   const [newCategory, setNewCategory] = useState('');
@@ -63,14 +64,23 @@ function AdminDashboard() {
       alert('Error editing category: ' + error.message);
     }
   };
- 
+
   return (
     <React.Fragment>
       <div className='h-full w-full pt-[84px]'>
         <h2 className='text-custom-blue border- text-2xl text-center font-bold p-[8px] rounded-2xl'>Categories Details</h2>
         <div className='w-[95%] mb-[15px] mx-auto h-[2px] bg-custom-blue'></div>
         {loading ? (
-          <div>Loading...</div>
+          <div className='h-[calc(98vh-95px)] w-screen flex flex-col justify-center items-center'>
+            <Bars
+              height="50"
+              width="50"
+              color="#363636"
+              ariaLabel="bars-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
+              visible={true} />
+          </div>
         ) : error ? (
           <div>Error: {error}</div>
         ) : (

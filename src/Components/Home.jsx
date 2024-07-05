@@ -5,7 +5,7 @@ const Home = () => {
     <div className='b pt-[85px]'>
      
       <div>
-      
+      lorem2500
       </div>
     </div>
   )

@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { supabase } from '../Config/Config';
 import { useNavigate } from 'react-router-dom';
 import ProductData from './ProductData';
+import { IoIosSearch } from "react-icons/io";
+
+import { Bars } from 'react-loader-spinner'
+
 
 function SearchProjects() {
     const [searchTerm, setSearchTerm] = useState('');
@@ -47,17 +51,31 @@ function SearchProjects() {
 
     return (
         <div className='pt-[85px]'>
-            <h2>Search Projects</h2>
-            <input
-                type="text"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Enter product name"
-            />
-            <button onClick={handleSearch}>Search</button>
+            <div className='w-[100%]  mt-[15px] flex justify-center mx-[5px] mb-[25px] p-[4px]'>
 
-            {loading && <p>Loading...</p>}
-            {error && <p>Error: {error}</p>}
+                <input
+                    type="text"
+                    className='w-[85%] p-[8px] border-2 border-gray-600 rounded-lg placeholder:text-gray-600 font-medium'
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    placeholder="Search Product !!"
+                />
+                <button className='text-gray-600 ml-[10px]' onClick={handleSearch}><IoIosSearch size={35} /></button>
+            </div>
+
+            {loading &&
+                <div className='h-[calc(98vh-135px)] w-screen flex flex-col justify-center items-center'>
+                    <Bars
+                        height="50"
+                        width="50"
+                        color="#363636"
+                        ariaLabel="bars-loading"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                        visible={true} />
+                </div>
+            }
+            {error && <p className='flex justify-center mx-auto text-lg text-red-600 font-medium'>Error: {error}</p>}
 
             {searched && searchTerm.trim() !== '' && (
                 products.length > 0 ? (
@@ -73,7 +91,7 @@ function SearchProjects() {
                         ))}
                     </div>
                 ) : (
-                    <p>No results found</p>
+                    <p className='flex justify-center mx-auto text-lg text-red-600 font-medium'>No results found</p>
                 )
             )}
         </div>

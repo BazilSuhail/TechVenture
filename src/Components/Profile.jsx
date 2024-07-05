@@ -205,7 +205,7 @@ function Profile() {
             <p>Email: {profile.email}</p>
             {profileImage && (
                 <div>
-                    <img src={profileImage} alt="Profile" style={{ width: '200px', margin: '20px 0' }} />
+                    <img src={profileImage} alt="Profile" className='w-[250px] h-[250px] animate-skewAnim' />
                 </div>
             )}
             {editMode ? (
@@ -259,6 +259,7 @@ function Profile() {
                             <p>Review_ID: {review.id}</p>
                             <p>Rating: {review.rating}</p>
                             <p>Comment: {review.comment}</p>
+                            <p>Comment: {review.product_id}</p>
                             {/* Display other review details as needed */}
                         </li>
                     ))}
