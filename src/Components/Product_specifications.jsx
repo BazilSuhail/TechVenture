@@ -188,7 +188,7 @@ function ProductSpecifications() {
     };
 
     return (
-        <div className='h-full w-full pt-[84px]'>
+        <div className='h-full w-full pt-[84px] scrollbar-custom'>
             {loading ? (
                 <div className='h-[calc(98vh-95px)] w-screen flex flex-col justify-center items-center'>
                     <Bars

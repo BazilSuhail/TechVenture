@@ -19,7 +19,7 @@ function ProductData({ product, subcategories, viewSpecifications, showSubcatego
                     </div>
                 )
             }
-            <button onClick={() => viewSpecifications(product.id)} className='bg-gray-500 text-white rounded-lg p-[10px] font-bold hover:bg-gray-700 transition duration-[200ms]'>View Specifications</button>
+            <button onClick={() => viewSpecifications(product.id)} className='bg-gray-800 text-white rounded-lg p-[10px] font-bold hover:bg-gray-500 transition duration-[200ms]'>View Specifications</button>
         </div>
     );
 }

@@ -228,12 +228,12 @@ function MyProfile() {
                         <h2 className='ml-[15px] text-4xl font-bold '>Profile</h2>
                         {profileImage !== null ? (
                             <div>
-                                <img src={profileImage} alt="Product" className='w-[250px] h-[250px] rounded-full mx-auto my-[25px]' />
+                                <img src={profileImage} alt="Product" className='md:w-[250px] w-[180px] h-[180px] md:h-[250px] rounded-full mx-auto my-[25px]' />
                             </div>
                         ) : (
-                            <div className='w-[250px] mx-auto  flex flex-col overflow-hidden items-center justify-center rounded-full bg-gray-300 h-[250px]'>
-                                <div className='w-[90px] translate-y-[45px]  flex flex-col items-center justify-center rounded-full bg-gray-400 h-[90px]'> </div>
-                                <div className='w-[220px] translate-y-[60px] flex flex-col items-center justify-center rounded-full bg-gray-400 h-[200px]'> </div>
+                            <div className='md:w-[250px] w-[180px] h-[180px] md:h-[250px] mx-auto  flex flex-col overflow-hidden items-center justify-center rounded-full bg-gray-300 '>
+                                <div className='md:w-[90px] w-[60px] h-[60px] md:h-[90px] translate-y-[45px]  flex flex-col items-center justify-center rounded-full bg-gray-400 '> </div>
+                                <div className='md:w-[220px] w-[160px] h-[150px] md:h-[250px] translate-y-[60px] flex flex-col items-center justify-center rounded-full bg-gray-400 '> </div>
                             </div>
                         )
                         }
@@ -302,10 +302,11 @@ function MyProfile() {
                                 </div>
                             </div>
                         )}
-                    </div>
-                    <div className='h-[3px] w-[95vw] bg-black xsx:hidden mx-auto rounded-3xl mt-[35px] mb-[-25px]'></div>
+                            </div>
+                            
+                    <div className='h-[3px] w-[95vw] bg-black xsx:hidden mx-auto rounded-3xl mt-[35px] mb-[25px]'></div>
 
-                    <div className='xsx:col-span-5 flex flex-col  xsx:overflow-auto xsx:scrollbar-custom xsx:ml-[-59px] h-[calc(98vh-85px)]'>
+                    <div className='xsx:col-span-5 flex flex-col  xsx:overflow-y-auto  xsx:ml-[-59px] h-[calc(98vh-85px)]'>
                         <div className='w-[100%] xsx:mt-[15px]  my-[15px] flex justify-evenly text-lg md:text-2xl'>
 
                             <p onClick={() => setActiveTab('reviews')}

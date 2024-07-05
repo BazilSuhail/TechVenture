@@ -87,7 +87,7 @@ const LikedReviews = ({ reviews }) => {
     }, [reviews]);
 
     return (
-        <div>
+        <div className='scrollbar-custom'>
             {reviews.map((review) => (
                 <div key={review.id} className='my-[15px] shadow-custom-card w-[85%] mx-auto rounded-lg p-[10px]' >
 

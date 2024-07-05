@@ -9,7 +9,7 @@ const LikedProducts = ({ products }) => {
     };
 
     return (
-        <div>
+        <div className='scrollbar-custom'>
             {products.map((product) => (
                 <div key={product.id}  className='flex justify-between shadow-custom-card mx-auto my-[20px] items-center p-[5px] w-[95%]'> 
                     <p className='text-md ld:text-xl ml-[12px] font-medium m-[6px] border-2 border-gray-400 p-[5px] rounded-xl'>{product.name}</p>

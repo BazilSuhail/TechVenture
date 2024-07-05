@@ -1,0 +1,283 @@
+.scrollbar-custom {
+    @apply overflow-y-scroll;
+
+    /* Webkit */
+    &::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        @apply bg-gray-900 rounded-[25px];
+        /* thumb color and rounded corners */
+    }
+
+    &::-webkit-scrollbar-track {
+        @apply bg-gray-100;
+        /* track color */
+    }
+}
+
+.sd {
+    color: rgb(49, 22, 62);
+    background-color: rgb(0, 0, 0);
+}
+
+/* styles.css */
+/* styles.css */
+
+@keyframes gradientBackground {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes blobAnimation {
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    10% {
+        transform: translate(-30px, -20px);
+    }
+
+    20% {
+        transform: translate(25px, -35px);
+    }
+
+    30% {
+        transform: translate(-20px, 25px);
+    }
+
+    40% {
+        transform: translate(35px, 20px);
+    }
+
+    50% {
+        transform: translate(-25px, -15px);
+    }
+
+    60% {
+        transform: translate(20px, 35px);
+    }
+
+    70% {
+        transform: translate(-35px, -25px);
+    }
+
+    80% {
+        transform: translate(25px, 20px);
+    }
+
+    90% {
+        transform: translate(-20px, -30px);
+    }
+}
+
+.gradient-background {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(270deg, #000000, #221f1f, #2e2d2d, #000000);
+    background-size: 800% 800%;
+    animation: gradientBackground 10s ease infinite;
+}
+
+.blob {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(270deg, #000000, #1f1e1e, #272626, #000000);
+    border-radius: 10%;
+    animation: gradientBackground 10s ease infinite, blobAnimation 8s ease-in-out infinite;
+    opacity: 0.3;
+}
+
+.blob:nth-child(1) {
+    top: 5%;
+    left: 10%;
+    width: 300px;
+    height: 300px;
+    filter: blur(60px);
+    animation-duration: 12s;
+}
+
+.blob:nth-child(2) {
+    top: 50%;
+    left: 10%;
+    width: 400px;
+    height: 400px;
+    filter: blur(40px);
+    animation-duration: 10s;
+}
+
+.blob:nth-child(3) {
+    top: 70%;
+    left: 40%;
+    width: 250px;
+    height: 250px;
+    filter: blur(20px);
+    animation-duration: 9s;
+}
+
+.blob:nth-child(4) {
+    top: 0%;
+    left: 50%;
+    width: 350px;
+    height: 350px;
+    filter: blur(25px);
+    animation-duration: 11s;
+}
+
+.blob:nth-child(5) {
+    top: 30%;
+    left: 55%;
+    width: 300px;
+    height: 300px;
+    filter: blur(35px);
+    animation-duration: 13s;
+}
+
+.blob:nth-child(6) {
+    top: 80%;
+    left: 10%;
+    width: 200px;
+    height: 200px;
+    filter: blur(15px);
+    animation-duration: 8s;
+}
+
+.blob:nth-child(7) {
+    top: 60%;
+    left: 75%;
+    width: 350px;
+    height: 350px;
+    filter: blur(28px);
+    animation-duration: 14s;
+}
+
+.blob:nth-child(8) {
+    top: 35%;
+    left: 85%;
+    width: 250px;
+    height: 250px;
+    filter: blur(20px);
+    animation-duration: 7s;
+}
+
+
+.autoAppear{
+    animation: autoAppearAnimation both;
+    animation-timeline: view(70% 5%);
+
+}
+@keyframes autoAppearAnimation{
+    from{
+        opacity: 0.6; 
+    }to{
+        opacity: 1; 
+    }
+}
+
+.autoShow{
+    animation: autoShowAnimation both;
+    animation-timeline: view(70% 5%);
+
+}
+@keyframes autoShowAnimation{
+    from{
+        opacity: 0;
+        transform: translateY(200px) scale(0.7);
+    }to{
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+.autoBLur{
+    animation: autoBLurAnimation linear both;
+    animation-timeline: view();
+}
+@keyframes autoBLurAnimation{
+    0%{
+        filter: blur(10px);
+    }
+    45%, 55%{
+        filter: blur(0px);
+    }
+    100%{
+        filter: blur(15);
+    }
+}
+
+/* slider js*/
+.slider { 
+    height: var(--height);
+    overflow: hidden;
+    mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+}
+
+.slider .list {
+    display: flex; 
+    min-width: calc(var(--width) * var(--quantity));
+    position: relative;
+}
+
+.slider .list .item {
+    width: var(--width);
+    height: var(--height);
+    position: absolute; 
+    animation: autoRun 10s linear infinite;
+    transition: filter 0.5s;
+    animation-delay: calc((10s / var(--quantity)) * (var(--position) - 1)) !important;
+}
+
+.slider .list .item > div { 
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    font-size: 18px; /* Example font size */
+}
+
+.slider:hover .item {
+    animation-play-state: paused !important;
+    filter: grayscale(1);
+}
+
+.slider .item:hover {
+    filter: grayscale(0);
+}
+
+.slider[reverse="true"] .item {
+    animation: reversePlay 10s linear infinite;
+}
+
+@keyframes autoRun {
+    from {
+        left: 100%;
+    }
+    to {
+        left: calc(var(--width) * -1);
+    }
+}
+
+@keyframes reversePlay {
+    from {
+        left: calc(var(--width) * -1);
+    }
+    to {
+        left: 100%;
+    }
+}

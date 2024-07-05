@@ -11,8 +11,9 @@ import ProductSpecifications from "./Components/Product_specifications";
 import AddSpecification from "./Components/Addspecification";
 import ManageReview from "./Components/ManageReiews/ManageReview";
 import SearchProjects from "./Components/SearchProducts";
-import Home from "./Components/Home";
+import HomePage from "./Components/Home";
 import MyProfile from "./Components/Profile/MyProfile";
+import TechToday from "./Components/TechToday";
 
 const App = () => {
 
@@ -23,7 +24,8 @@ const App = () => {
         <Routes>
           {/*  <Route path="/" element={<Loader typeOfloader="a" />} />*/} 
 
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/techtoday" element={<TechToday />} />
           <Route path="/admindashboard" element={<AdminDashboard />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<SignIn />} />
