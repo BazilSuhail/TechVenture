@@ -223,8 +223,8 @@ function MyProfile() {
             ) : error ? (
                 <div>Error: {error}</div>
             ) : (
-                <div className='grid grid-cols-1 xsx:grid-cols-9'>
-                    <div className=' xsx:col-span-4 flex flex-col justify-center'>
+                <div className='grid grid-cols-1 xsx:grid-cols-12'>
+                    <div className=' xsx:col-span-5 flex flex-col justify-center'>
                         <h2 className='ml-[15px] text-4xl font-bold '>Profile</h2>
                         {profileImage !== null ? (
                             <div>
@@ -293,7 +293,7 @@ function MyProfile() {
 
                                 <div className='ml-[15px] md:ml-[32px]'>
                                     <div className='  mt-[10px] font-bold text-2xl text-black'>Bio: </div>
-                                    <p className='  mt-[18px] border-2 border-gray-600 rounded-md w-[325px] lg:w-[300] xl:w-[610px] p-[10px] font-bold pt-[10px] text-md text-gray-700'>{profile.bio}</p>
+                                    <p className='  mt-[18px] border-2 border-gray-600 rounded-md w-[100%] p-[10px] font-bold pt-[10px] text-md text-gray-700'>{profile.bio}</p>
                                 </div>
 
                                 <div className='flex justify-around]'>
@@ -306,7 +306,7 @@ function MyProfile() {
                             
                     <div className='h-[3px] w-[95vw] bg-black xsx:hidden mx-auto rounded-3xl mt-[35px] mb-[25px]'></div>
 
-                    <div className='xsx:col-span-5 flex flex-col  xsx:overflow-y-auto  xsx:ml-[-59px] h-[calc(98vh-85px)]'>
+                    <div className='xsx:col-span-7 flex flex-col  xsx:overflow-y-auto h-[calc(98vh-85px)]'>
                         <div className='w-[100%] xsx:mt-[15px]  my-[15px] flex justify-evenly text-lg md:text-2xl'>
 
                             <p onClick={() => setActiveTab('reviews')}

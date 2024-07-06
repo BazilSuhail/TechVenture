@@ -56,10 +56,10 @@ const ReviewItem = ({ review, userId, handleLikeReview }) => {
                             <div className='w-[35px] translate-y-[14px] flex flex-col items-center justify-center rounded-full bg-gray-400 h-[30px]'> </div>
                         </div>
                     )}
-                </div> 
+                </div>
                 <div className='ml-[8px] text-xl font-medium'>  {userName} </div>
             </div>
- 
+
             <div className='my-[10px] flex'>
                 <div className='text-lg text-gray-500 font-medium mr-[10px]'>Rating:</div>
                 {Array.from({ length: 5 }, (_, index) => (
@@ -81,19 +81,11 @@ const ReviewItem = ({ review, userId, handleLikeReview }) => {
                     <div className='h-[70%] ml-[5px] w-[3px] bg-gray-500 '> </div>
                     <div className='font-bold text-md md:text-lg ml-[10px]'>Likes: </div>
                     <p className='bg-gray-800 rounded-md px-[10px] text-lg md:text- xl ml-[15px] text-white'>{review.likes}</p>
-                </div> 
+                </div>
             </div>
- 
+
         </div >
     );
 };
 
-export default ReviewItem;
-/*
-            <strong>User:</strong> {userName} <br />
-            <strong>Rating:</strong> {review.rating} <br />
-            <strong>Comment:</strong> {review.comment} <br />
-            <button onClick={() => handleLikeReview(review.id)}>
-                {review.userLiked ? 'Unlike' : 'Like'} ({review.likes})
-            </button>
-            <hr /> */
+export default ReviewItem; 
