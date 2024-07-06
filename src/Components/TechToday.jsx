@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { supabase } from '../Config/Config';
 import { Link } from 'react-router-dom';
 import { FaStar } from 'react-icons/fa';
+import { Bars } from 'react-loader-spinner'
 
 const TechToday = () => {
     const [topLikedProducts, setTopLikedProducts] = useState([]);
@@ -171,13 +172,20 @@ const TechToday = () => {
 
         <div className="container overflow-x-hidden  pt-[85px]">
             {loading ? (
-                <div className="text-center">
-                    <p>Loading...</p>
+                <div className='h-[calc(98vh-95px)] w-screen flex flex-col justify-center items-center'>
+                    <Bars
+                        height="50"
+                        width="50"
+                        color="#363636"
+                        ariaLabel="bars-loading"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                        visible={true} />
                 </div>
             ) : (
-                    
+
                 <div>
-                    <section className='w-[100%] '>
+                    <section className='w-[100%] mt-[25px] '>
                         <div className="slider" style={{ '--width': '420px', '--height': '132px', '--quantity': 9 }}>
                             <div className="list">
                                 <div className="item" style={{ '--position': 1 }}><div className='text-black text-stroke '>ULTIMATE</div></div>
@@ -335,7 +343,7 @@ const TechToday = () => {
                                 </div >
                             ))}
                         </div>
-                    </section> 
+                    </section>
                 </div>
             )}
         </div>

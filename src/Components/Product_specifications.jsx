@@ -203,24 +203,24 @@ function ProductSpecifications() {
             ) : error ? (
                 <div>Error: {error}</div>
             ) : (
-                <div className='grid grid-cols-1 xsx:grid-cols-9'>
 
-                    <div className=' xsx:col-span-3 flex flex-col'>
+                <div className='grid grid-cols-1 xsx:grid-cols-11'>
+
+                    <div className=' xsx:col-span-6 xsx:shadow-slider p-[5px] md:p-[15px] m-[5px] md:m-[20px] xsx:overflow-auto xsx:h-[calc(98vh-85px)] scrollbar-custom'>
                         <button onClick={handleBack}><IoArrowBackCircleOutline size={55} /></button>
-
-                        {productImage !== null ? (
-                            <div>
-                                <img src={productImage} alt="Product" className='w-[250px] h-[250px] rounded-md mx-auto my-[25px]' />
-                            </div>
-                        )
-                            :
-                            (<div className='w-[250px] mx-auto my-[25px] flex flex-col items-center justify-center rounded-lg bg-gray-400 h-[250px]'>
-                                <div className='w-[200px] flex flex-col items-center justify-center rounded-lg bg-gray-300 h-[200px]'>
-                                    <div className='w-[150px] flex flex-col items-center justify-center rounded-lg bg-gray-200 h-[150px]'>
-                                        <div className='w-[90px] flex flex-col items-center justify-center rounded-lg bg-gray-50 h-[90px]'></div>
+                        {
+                            productImage !== null ? (
+                                <div>
+                                    <img src={productImage} alt="Product" className='w-[250px] h-[250px] rounded-md mx-auto my-[25px]' />
+                                </div>
+                            ) : (
+                                <div className='w-[250px] mx-auto my-[25px] flex flex-col items-center justify-center rounded-lg bg-gray-400 h-[250px]'>
+                                    <div className='w-[200px] flex flex-col items-center justify-center rounded-lg bg-gray-300 h-[200px]'>
+                                        <div className='w-[150px] flex flex-col items-center justify-center rounded-lg bg-gray-200 h-[150px]'>
+                                            <div className='w-[90px] flex flex-col items-center justify-center rounded-lg bg-gray-50 h-[90px]'></div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             )
                         }
 
@@ -233,15 +233,25 @@ function ProductSpecifications() {
                             <div className='text-xl font-extrabold text-gray-800'>${productPrice}</div>
                         </div>
 
-                    </div>
+                        <div className='w-[100%] h-[2px] bg-gray-400 mt-[28px]'></div>
 
-                    <div className=' xsx:col-span-1 '><div className='text-center xsx:h-[calc(98vh-85px)] mx-auto xsx:ml-[20px] my-[25px] xsx:mt-[10px] w-[95vw] h-[5px] xsx:w-[4px] bg-gray-500 rounded-lg'>.</div></div>
+                        <div className='flex justify-between my-[25px]'>
+                            <div className='flex items-center ml-[25px] px-[8px] md:px-[12px] py-[5px] shadow-custom-light rounded-lg'>
+                                <button onClick={handleLikeProduct} className='text-[32px] md:text-[40px]'>
+                                    <AiFillLike className={likedByUser ? 'text-blue-600' : 'text-gray-200'} />
+                                </button>
+                                <div className='h-[70%] ml-[5px] w-[3px] bg-gray-500 '> </div>
+                                <div className='font-bold text-lg md:text-xl ml-[10px]'>Likes: </div>
+                                <p className='bg-gray-800 rounded-md px-[10px] text-xl md:text-2xl ml-[7px] xsx:ml-[15px] text-white'> {likes} </p>
+                            </div>
+                            <button className='md:mr-[25px] mr-[15px] hover:bg-black bg-gray-800 text-white px-[16px] text-md md:text-lg xsx:text-2xl rounded-3xl ' onClick={handleReadReviews}>
+                                Read Reviews
+                            </button>
+                        </div>
 
-                    <div className='xsx:col-span-5 flex flex-col xsx:overflow-auto xsx:ml-[-59px] h-[calc(98vh-85px)] scrollbar-custom'>
+                        <h2 className='ml-[15px] md:ml-[0px] md:text-3xl md:mb-[25px] text-2xl text-custom-blue mb-[8px] font-bold '>Sepcifications Details</h2>
+                        <div className='my-[8px] flex flex-col w-[95%] mx-auto p-[15px] justify-center overflow-y-auto shadow-custom-light rounded-xl'>
 
-                        <h2 className='ml-[15px] md:ml-[0px] md:text-3xl text-2xl text-custom-blue mb-[8px] font-bold '>Sepcifications Details</h2>
-                        <div className='my-[8px] flex flex-col w-[95%] mx-auto p-[15px] justify-center shadow-custom-light rounded-xl'>
-                            <div className="relative overflow-x-auto shadow-md rounded-lg"></div>
                             <table className="w-[100%] text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                 <thead className="text-md text-gray-200 uppercase bg-gray-700">
                                     <tr className='text-center'>
@@ -260,21 +270,11 @@ function ProductSpecifications() {
                             </table>
                         </div>
 
-                        <div className='flex justify-between my-[25px]'>
-                            <div className='flex items-center ml-[25px] px-[8px] md:px-[12px] py-[5px] shadow-custom-light rounded-lg'>
-                                <button onClick={handleLikeProduct}>
-                                    <AiFillLike size={40} className={likedByUser ? 'text-blue-600' : 'text-gray-200'} />
-                                </button>
-                                <div className='h-[70%] ml-[5px] w-[3px] bg-gray-500 '> </div>
-                                <div className='font-bold text-lg md:text-xl ml-[10px]'>Likes: </div>
-                                <p className='bg-gray-800 rounded-md px-[10px] text-xl md:text-2xl ml-[15px] text-white'> {likes} </p>
-                            </div>
+                    </div>
 
-                            <button className='md:mr-[25px] mr-[15px] hover:bg-black bg-gray-800 text-white px-[6px] md:px-[10px] text-lg md:text-2xl rounded-3xl ' onClick={handleReadReviews}>Read Reviews</button>
-                        </div>
+                    <div className='xsx:col-span-5 xsx:mt-[0px] mt-[35px] flex flex-col xsx:overflow-auto xsx:h-[calc(98vh-85px)] scrollbar-custom'>
 
-
-                        <div className='shadow-custom-light rounded-md w-[90%] mx-auto p-[10px]'>
+                        <div className='border-[1px] border-gray-700 xsx:mt-[45px] rounded-md w-[90%] mx-auto p-[10px]'>
                             <h3 className='text-2xl ml-[19px] text-custom-blue mb-[8px] font-bold '>Add Your Review</h3>
                             <form onSubmit={handleAddReview} className="flex flex-col space-y-4">
                                 <textarea
@@ -297,19 +297,18 @@ function ProductSpecifications() {
                                     ))}
                                 </div>
 
-                                <button type="submit" className="bg-gray-700 text-xl w-[180px] mx-auto my-[10px] hover:bg-gray-400 text-white py-2 px-4 rounded-xl">
+                                <button type="submit" className="bg-gray-700 text-lg w-[150px] mt-[-15px] ml-auto mb-[5px] hover:bg-gray-400 text-white py-[4px] rounded-xl">
                                     Submit Review
                                 </button>
                             </form>
                         </div>
-
-                        <div>
+                        <div className=' w-[90%] mx-auto'>
                             <h2 className='ml-[15px] md:ml-[0px] md:text-3xl text-2xl text-custom-blue mb-[8px] mt-[20px] font-bold '>My Reviews</h2>
                             <div>
                                 {reviews.map((review) => (
                                     <div key={review.id}>
                                         {review.user_id === userId && ( // Show only user's own reviews
-                                            <div className='py-[8px] p-[10px]shadow-custom-light rounded-xl w-[95%] overflow-x-auto scrollbar-hide  my-[15px] mx-auto' >
+                                            <div className='py-[8px] p-[10px] shadow-custom-light rounded-xl w-[95%] overflow-x-auto scrollbar-hide  my-[15px] mx-auto' >
 
                                                 <p className='text-xl font-bold '>Review:</p>
                                                 <p className='font-serif text-lg'> {review.comment}</p>
@@ -345,26 +344,4 @@ function ProductSpecifications() {
     );
 }
 
-export default ProductSpecifications;
-/*
-
-                            <form onSubmit={handleAddReview}>
-                                <textarea
-                                    value={comment}
-                                    onChange={(e) => setComment(e.target.value)}
-                                    placeholder="Write your review..."
-                                    required
-                                />
-                                <label>
-                                    Rating:
-                                    <select value={rating} onChange={(e) => setRating(Number(e.target.value))}>
-                                        <option value={1}>1</option>
-                                        <option value={2}>2</option>
-                                        <option value={3}>3</option>
-                                        <option value={4}>4</option>
-                                        <option value={5}>5</option>
-                                    </select>
-                                </label>
-                                <button type="submit">Submit Review</button>
-                            </form>
-*/
+export default ProductSpecifications; 

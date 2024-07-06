@@ -298,15 +298,17 @@ function MyProfile() {
 
                                 <div className='flex justify-around]'>
                                     <button className='md:ml-[32px] mt-[22px] bg-blue-950 rounded-3xl py-[8px] px-[18px]  text-lg xsx:text-2xl text-white font-medium' onClick={() => setEditMode(true)}>Edit Profile</button>
-                                    <button className='ml-[5px] mt-[22px] bg-red-800 rounded-3xl py-[8px] px-[18px] text-lg xsx:text-2xl text-white font-medium' onClick={handleDelete}>Delete Account</button>
+                                    <button className='ml-[5px] mt-[22px] bg-red-800 rounded-3xl py-[8px] px-[18px] text-lg xsx:text-2xl text-white font-medium' onClick={handleDelete} >Delete Account</button>
+                                    <button className=' hidden' onClick={() => setEditMode(true)} >Delete Account</button>
+                                    {/*onClick={handleDelete} */}
                                 </div>
                             </div>
                         )}
-                            </div>
-                            
+                    </div>
+
                     <div className='h-[3px] w-[95vw] bg-black xsx:hidden mx-auto rounded-3xl mt-[35px] mb-[25px]'></div>
 
-                    <div className='xsx:col-span-7 flex flex-col  xsx:overflow-y-auto h-[calc(98vh-85px)]'>
+                    <div className='xsx:col-span-7 flex flex-col  xsx:overflow-y-auto xsx:h-[calc(98vh-85px)]'>
                         <div className='w-[100%] xsx:mt-[15px]  my-[15px] flex justify-evenly text-lg md:text-2xl'>
 
                             <p onClick={() => setActiveTab('reviews')}

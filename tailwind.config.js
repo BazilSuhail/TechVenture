@@ -22,20 +22,11 @@ module.exports = {
       },
       boxShadow: {
         'custom-light': '0px 0px 2px rgb(0, 30, 65)',
+        'custom-slider': '0px 0px 15px rgb(0, 30, 65)',
         'custom-shadow': '0px 0px 8px rgb(0, 30, 65,0.45)',
         'custom-card': '0px 0px 9px rgba(76, 76, 76, 0.718)',
-        'custom-lighter': '0px 0px 10px rgb(255, 255, 255, 0.655 )',
-      },
-      keyframes: {
-        skewAnim: {
-          '0%': { transform: 'skew(15deg)' },
-          '50%': { transform: 'skew(45deg)' },
-          '100%': { transform: 'skew(15deg)' },
-        },
-      },
-      animation: {
-        skewAnim: 'skewAnim 2s infinite linear',
-      },
+        'custom-lighter': '0px 0px 5px rgb(255, 255, 255, 0.655 )',
+      },  
     },
   },
   variants: {

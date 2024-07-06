@@ -46,7 +46,7 @@ const Navbar = () => {
         setIsOpen(!isOpen);
     };
 
-    const linkStyles = "text-md ml-[15px] border-black border-2 hover:border-white p-[8px] flex items-center font-medium rounded-xl";
+    const linkStyles = "text-md ml-[15px] my-[8px] border-black border-2 hover:border-white px-[8px] py-[5px] flex items-center font-medium rounded-xl";
     const activeLinkStyles = "bg-white text-black";
 
     return (
@@ -86,9 +86,10 @@ const Navbar = () => {
                         <NavLink to="/techtoday" className={({ isActive }) => `${linkStyles} ${isActive ? activeLinkStyles : ""}`}><LuNewspaper className="text-[25px] mt-[1px] mr-[4px]" />TechToday</NavLink>
                         <NavLink to="/products" className={({ isActive }) => `${linkStyles} ${isActive ? activeLinkStyles : ""}`}><AiFillProduct className="text-[25px] mt-[1px] mr-[4px]" />Gadgets</NavLink>
 
-                        <NavLink to="/profile" className="text-white text-lgl mt-[10px] px-[10px] py-[2px] flex items-center font-bold hover:bg-white border-2 border-white hover:text-black rounded-xl"><FaUserEdit className="text-[30px] mt-[1px] mr-[9px]" /><p>View Profile</p></NavLink>
+                        <NavLink to="/profile" className="text-white  text-lgl mt-[19px] px-[10px] py-[2px] flex items-center font-bold hover:bg-white border-2 border-white hover:text-black rounded-xl"><FaUserEdit className="text-[30px] mt-[1px] mr-[9px]" /><p>View Profile</p></NavLink>
                     </div>
-                    <div className="ml-[10px]">
+                    <div className="ml-[-5px] flex">
+                        <div className="w-[15px]"></div>
                         {user ? (
                             <button className="text-white text-xl px-[8px] py-[2px] font-medium flex items-center hover:bg-red-700 hover:text-white rounded-xl border-2 border-white" onClick={handleLogout}><IoLogOutOutline className="text-[25px] mt-[3px] mr-[3px]" /><p>Logout</p></button>
                         ) : (
