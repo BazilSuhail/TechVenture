@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { supabase } from '../Config/Config';
+import { supabase } from '../../Config/Config';
 import { useNavigate } from 'react-router-dom';
 import ProductData from './ProductData';
 import { IoIosSearch } from "react-icons/io";
@@ -51,7 +51,6 @@ function SearchProjects() {
     return (
         <div className='pt-[85px]'>
             <div className='w-[100%]  mt-[15px] flex justify-center mx-[5px] mb-[25px] p-[4px]'>
-
                 <input
                     type="text"
                     className='w-[85%] p-[8px] border-2 border-gray-600 rounded-lg placeholder:text-gray-600 font-medium'
@@ -78,7 +77,7 @@ function SearchProjects() {
 
             {searched && searchTerm.trim() !== '' && (
                 products.length > 0 ? (
-                    <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 w-[95%] mx-auto place-items-center gap-y-[25px]'>
+                    <div className=' scrollbar-hide grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 w-[95%] mx-auto place-items-center gap-y-[25px]'>
                         {products.map((product) => (
                             <ProductData
                                 key={product.id}

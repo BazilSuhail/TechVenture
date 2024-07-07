@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { supabase } from '../Config/Config';
+import { supabase } from '../../Config/Config';
 
 function AddSpecification() {
   const { productId } = useParams();

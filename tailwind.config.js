@@ -20,6 +20,10 @@ module.exports = {
 
         'custom-size': '20px',
       },
+
+      inset: {
+        'full': '100%',
+      },
       boxShadow: {
         'custom-light': '0px 0px 2px rgb(0, 30, 65)',
         'custom-slider': '0px 0px 15px rgb(0, 30, 65)',

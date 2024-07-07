@@ -67,14 +67,20 @@ const Navbar = () => {
                     <div className="text-white font-serif text-2xl px-[8px] xsx:mr-[105px] lg:mr-[185px] xl:mr-[145px] py-[2px] rounded-xl">TechVenture</div>
                     <NavLink to="/searchprojects" className="xsx:hidden block text-white"><IoIosSearch size={30} /></NavLink>
 
-                    <div className="xsx:flex hidden">
-                        <NavLink to="/profile" className="text-white mr-[10px] text-md p-[10px] hover:bg-white hover:text-black border-2 border-white rounded-full"><FaUserEdit className="text-[25px]" /></NavLink>
-                        {user ? (
-                            <button className="text-white text-lg px-[8px] py-[2px] font-medium flex items-center hover:bg-red-700 hover:text-white rounded-xl border-2 border-white" onClick={handleLogout}><IoLogOutOutline className="text-[25px] mt-[3px] mr-[3px]" /><p>Logout</p></button>
-                        ) : (
-                            <NavLink to="/signin" className="text-white text-lg px-[8px] py-[2px] font-medium flex items-center hover:bg-white hover:text-black rounded-xl border-2 border-white" onClick={handleLogout}><IoLogOutOutline className="text-[25px] mt-[3px] mr-[3px]" /><p>Register</p></NavLink>
-                        )}
-                    </div>
+
+                    {user ? (
+                        <details className="text-white cursor-pointer xsx:block hidden">
+                            <summary className="text-white list-none mr-[10px] text-md p-[10px] hover:bg-white hover:text-black border-2 border-white rounded-full"><FaUserEdit className="text-[25px]" /></summary>
+                            <div className="absolute mt-[20px] ml-[-165px] p-[8px] w-[210px] list-none bg-white border-4 rounded-xl shadow-custom-slider text-black">
+                                <button className="text-red cursor-pointer-500 w-[100%] text-[22px] px-[12px] py-[6px] font-medium flex items-center hover:bg-red-700 hover:text-white rounded-xl border-2 border-white" onClick={handleLogout}><IoLogOutOutline className="text-[29px] mt-[4px] mr-[3px]" /><p>Logout</p></button>
+                                <NavLink to="/profile" className="text-black-500 w-[100%] text-[22px] px-[12px] py-[6px] font-medium flex items-center hover:bg-gray-800 hover:text-white rounded-xl border-2 border-white"><FaUserEdit className="text-[28px] mt-[4px] mr-[6px]" /><p>My Profile</p></NavLink>
+                            </div>
+                        </details>
+
+                    ) : (
+                        <NavLink to="/signin" className="text-white xsx:flex hidden text-lg px-[8px] py-[2px] font-medium items-center hover:bg-white hover:text-black rounded-xl border-2 border-white" onClick={handleLogout}><IoLogOutOutline className="text-[25px] mt-[3px] mr-[3px]" /><p>Register</p></NavLink>
+                    )}
+
                 </div>
             </div>
 
@@ -82,18 +88,18 @@ const Navbar = () => {
                 <div className="flex flex-col items-baseline text-white">
                     <div className="flex h-[calc(100vh-75px)] flex-col items-baseline ml-[-55px] text-white">
                         <NavLink to="/" className="mb-[75px]">Home</NavLink>
-                        <NavLink to="/" className={({ isActive }) => `${linkStyles} ${isActive ? activeLinkStyles : ""}`}><CiHome className="text-[25px] mt-[1px] mr-[4px]" />Home</NavLink>
-                        <NavLink to="/techtoday" className={({ isActive }) => `${linkStyles} ${isActive ? activeLinkStyles : ""}`}><LuNewspaper className="text-[25px] mt-[1px] mr-[4px]" />TechToday</NavLink>
-                        <NavLink to="/products" className={({ isActive }) => `${linkStyles} ${isActive ? activeLinkStyles : ""}`}><AiFillProduct className="text-[25px] mt-[1px] mr-[4px]" />Gadgets</NavLink>
+                        <NavLink to="/" onClick={toggleMenu} className={({ isActive }) => `${linkStyles} ${isActive ? activeLinkStyles : ""}`}><CiHome className="text-[25px] mt-[1px] mr-[4px]" />Home</NavLink>
+                        <NavLink to="/techtoday" onClick={toggleMenu} className={({ isActive }) => `${linkStyles} ${isActive ? activeLinkStyles : ""}`}><LuNewspaper className="text-[25px] mt-[1px] mr-[4px]" />TechToday</NavLink>
+                        <NavLink to="/products" onClick={toggleMenu} className={({ isActive }) => `${linkStyles} ${isActive ? activeLinkStyles : ""}`}><AiFillProduct className="text-[25px] mt-[1px] mr-[4px]" />Gadgets</NavLink>
 
-                        <NavLink to="/profile" className="text-white  text-lgl mt-[19px] px-[10px] py-[2px] flex items-center font-bold hover:bg-white border-2 border-white hover:text-black rounded-xl"><FaUserEdit className="text-[30px] mt-[1px] mr-[9px]" /><p>View Profile</p></NavLink>
+                        <NavLink to="/profile" onClick={toggleMenu} className="text-white  text-lgl mt-[19px] px-[10px] py-[2px] flex items-center font-bold hover:bg-white border-2 border-white hover:text-black rounded-xl"><FaUserEdit className="text-[30px] mt-[1px] mr-[9px]" /><p>View Profile</p></NavLink>
                     </div>
                     <div className="ml-[-5px] flex">
                         <div className="w-[15px]"></div>
                         {user ? (
                             <button className="text-white text-xl px-[8px] py-[2px] font-medium flex items-center hover:bg-red-700 hover:text-white rounded-xl border-2 border-white" onClick={handleLogout}><IoLogOutOutline className="text-[25px] mt-[3px] mr-[3px]" /><p>Logout</p></button>
                         ) : (
-                            <NavLink onClick={toggleMenu} className="text-white text-xl px-[8px] py-[2px] font-medium flex items-center hover:bg-white hover:text-black rounded-xl border-2 border-white"><IoLogOutOutline className="text-[25px] mt-[3px] mr-[3px]" /><p>Get Started</p></NavLink>
+                            <NavLink onClick={toggleMenu} to="/signup" className="text-white text-xl px-[8px] py-[2px] font-medium flex items-center hover:bg-white hover:text-black rounded-xl border-2 border-white"><IoLogOutOutline className="text-[25px] mt-[3px] mr-[3px]" /><p>Get Started</p></NavLink>
                         )}
                     </div>
                 </div>

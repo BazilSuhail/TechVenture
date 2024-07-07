@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { supabase } from '../Config/Config';
+import { supabase } from '../../Config/Config';
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { FaStar } from 'react-icons/fa';
 import { AiFillLike } from "react-icons/ai";
@@ -188,7 +188,7 @@ function ProductSpecifications() {
     };
 
     return (
-        <div className='h-full w-full pt-[84px] scrollbar-custom'>
+        <div className='h-full w-full pt-[84px]'>
             {loading ? (
                 <div className='h-[calc(98vh-95px)] w-screen flex flex-col justify-center items-center'>
                     <Bars

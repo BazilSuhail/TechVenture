@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { supabase } from '../Config/Config';
 import { Link } from 'react-router-dom';
 import { FaStar } from 'react-icons/fa';
-import { Bars } from 'react-loader-spinner'
+import { Bars } from 'react-loader-spinner';
+import TechNews from './TechNews';
 
 const TechToday = () => {
     const [topLikedProducts, setTopLikedProducts] = useState([]);
@@ -185,18 +186,21 @@ const TechToday = () => {
             ) : (
 
                 <div>
+
+                    <div className="text-[29px] md:text-[34px] mx-auto text-center md:w-[70%] font-serif ">Catchout Latest News</div>
+                    <TechNews />
                     <section className='w-[100%] mt-[25px] '>
                         <div className="slider" style={{ '--width': '420px', '--height': '132px', '--quantity': 9 }}>
                             <div className="list">
-                                <div className="item" style={{ '--position': 1 }}><div className='text-black text-stroke '>ULTIMATE</div></div>
-                                <div className="item" style={{ '--position': 2 }}><div className='text-no-stroke text-stroke '>DESTINATION</div></div>
-                                <div className="item" style={{ '--position': 3 }}><div className='text-black text-stroke '>FOR LATEST</div></div>
-                                <div className="item" style={{ '--position': 4 }}><div className='text-no-stroke  text-stroke'>GADGETS</div></div>
-                                <div className="item" style={{ '--position': 5 }}><div className='text-black text-stroke'>AND</div></div>
-                                <div className="item" style={{ '--position': 6 }}><div className=' text-no-stroke text-stroke '>IN DEPTH</div></div>
-                                <div className="item" style={{ '--position': 7 }}><div className='text-black text-stroke '>ANALYSIS</div></div>
-                                <div className="item" style={{ '--position': 8 }}><div className='text-no-stroke text-stroke '> WITH </div></div>
-                                <div className="item" style={{ '--position': 9 }}><div className='text-stroke text-black'> REVIEWS</div></div>
+                                <div className="techtoday" style={{ '--position': 1 }}><div className='text-black text-stroke '>ULTIMATE</div></div>
+                                <div className="techtoday" style={{ '--position': 2 }}><div className='text-no-stroke text-stroke '>DESTINATION</div></div>
+                                <div className="techtoday" style={{ '--position': 3 }}><div className='text-black text-stroke '>FOR LATEST</div></div>
+                                <div className="techtoday" style={{ '--position': 4 }}><div className='text-no-stroke  text-stroke'>GADGETS</div></div>
+                                <div className="techtoday" style={{ '--position': 5 }}><div className='text-black text-stroke'>AND</div></div>
+                                <div className="techtoday" style={{ '--position': 6 }}><div className=' text-no-stroke text-stroke '>IN DEPTH</div></div>
+                                <div className="techtoday" style={{ '--position': 7 }}><div className='text-black text-stroke '>ANALYSIS</div></div>
+                                <div className="techtoday" style={{ '--position': 8 }}><div className='text-no-stroke text-stroke '> WITH </div></div>
+                                <div className="techtoday" style={{ '--position': 9 }}><div className='text-stroke text-black'> REVIEWS</div></div>
                             </div>
                         </div>
                     </section>

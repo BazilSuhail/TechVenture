@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { supabase } from '../Config/Config';
+import { supabase } from '../../Config/Config';
 import { useNavigate } from 'react-router-dom';
 import ProductData from './ProductData';
 import { IoIosSearch } from "react-icons/io";
