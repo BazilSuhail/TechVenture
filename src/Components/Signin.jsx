@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { supabase } from '../Config/Config';
 import { useNavigate } from 'react-router-dom';
+ 
 
-function Signin() {
+const Signin = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
@@ -56,5 +57,6 @@ function Signin() {
         </div>
     );
 }
+
 
 export default Signin;

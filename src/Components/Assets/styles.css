@@ -124,7 +124,7 @@
      height: 100%;
      background: linear-gradient(270deg, #000000, #444444e8, #2f2d2dd7, #000000);
      background-size: 800% 800%;
-     animation: gradientBackground 10s ease infinite;
+     animation: gradientBackground 10s ease-in-out infinite;
  }
 
  .blob {

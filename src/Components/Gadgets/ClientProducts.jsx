@@ -3,9 +3,13 @@ import { supabase } from '../../Config/Config';
 import { useNavigate } from 'react-router-dom';
 import ProductData from './ProductData';
 import { IoIosSearch } from "react-icons/io";
+
+
+
 import { Bars } from 'react-loader-spinner'
 
 function ClientProducts() {
+
   const [categories, setCategories] = useState([]);
   const [subcategories, setSubcategories] = useState([]);
   const [products, setProducts] = useState([]);
@@ -78,7 +82,7 @@ function ClientProducts() {
   };
   // px-4 lg:hover:bg-gray-400 whitespace-nowrap hover:text-white font-bold transition duration-200 rounded-md cursor-pointer ${selectedCategory === category.id ? 'bg-black text-white' : 'bg-gray-300'}
   return (
-    <div className='h-full w-full pt-[85px] '>
+    <div className='h-full  overflow-x-hidden w-full pt-[85px] '>
       {loading ? (
         <div className='h-[calc(98vh-95px)] w-screen flex flex-col justify-center items-center'> 
         <Bars
@@ -91,7 +95,7 @@ function ClientProducts() {
           visible={true} />
       </div>
       ) : (
-        <div className='scrollbar-custom'>
+        <div className='scrollbar-custom overflow-x-hidden'>
 
           <div onClick={() => { navigate("/searchprojects") }} className='w-[100%] mt-[15px] flex justify-center mx-[5px] mb-[25px] p-[4px]'>
             <div className='w-[85%] p-[8px] border-2 border-gray-600 rounded-lg text-gray-600 font-medium'>Search Product !!</div>
@@ -100,25 +104,25 @@ function ClientProducts() {
 
           <div className=' my-[14px] md:my-[30px] '>
 
-            <div className="flex font-bold mx-[15px]rounded-lg overflow-x-auto justify-center space-x-2 py-[8px]">
-              <div onClick={() => handleCategoryChange({ target: { value: '' } })} className={`px-4 py-[6px] rounded-md cursor-pointer ${!selectedCategory ? 'bg-black text-white' : 'bg-gray-300'}`}>
+            <div className="scrollbar-hide flex font-bold mx-[15px] rounded-lg overflow-x-auto xsx:justify-center space-x-2 py-[8px]">
+              <div onClick={() => handleCategoryChange({ target: { value: '' } })} className={`px-4 py-[6px] whitespace-nowrap rounded-md cursor-pointer ${!selectedCategory ? 'bg-black text-white' : 'bg-gray-300'}`}>
                 All Categories
               </div>
               {categories.map(category => (
-                <div key={category.id} onClick={() => handleCategoryChange({ target: { value: category.id } })} className={`px-4 lg:hover:bg-gray-400 whitespace-nowrap py-[6px] hover:text-white font-bold transition duration-200 rounded-md cursor-pointer ${selectedCategory === category.id ? 'bg-black text-white' : 'bg-gray-300'}`}            >
+                <div key={category.id} onClick={() => handleCategoryChange({ target: { value: category.id } })} className={`px-4 lg:hover:bg-gray-400 whitespace-nowrap py-[6px] hover:text-white font-bold transition duration-200 rounded-md cursor-pointer ${selectedCategory === category.id ? 'bg-black text-white' : 'bg-gray-300'}`}>
                   {category.name}
                 </div>
               ))}
             </div>
 
-            <div className="scrollbar-hide flex mx-[5px] my-[10px] rounded-lg overflow-x-auto justify-center space-x-2 py-[8px]">
+            <div className="scrollbar-hide flex mx-[5px] my-[10px] rounded-lg py-[6px] overflow-x-auto  space-x-2 ">
               <div onClick={() => handleSubcategoryChange({ target: { value: '' } })} className={`px-4 hover:bg-gray-400 hover:text-white font-bold transition duration-200  whitespace-nowrap flex items-center rounded-md cursor-pointer ${!selectedSubcategory ? 'bg-black text-white' : 'bg-gray-300'}`}>
                 All Sub-Categories
               </div>
 
               {subcategories.filter(subcategory => !selectedCategory || subcategory.category_id === selectedCategory).map(subcategory => (
                 <div key={subcategory.id} onClick={() => handleSubcategoryChange({ target: { value: subcategory.id } })}
-                  className={`px-4 lg:hover:bg-gray-400 hover:text-white font-bold transition duration-200 whitespace-nowrap flex items-center py-2 rounded-md cursor-pointer ${selectedSubcategory === subcategory.id ? 'bg-black text-white' : 'bg-gray-200'}`}>
+                  className={`px-4 lg:hover:bg-gray-400 lg:hover:text-white hover:bg-gray-400 font-bold transition duration-200 whitespace-nowrap flex items-center py-2 rounded-md cursor-pointer ${selectedSubcategory === subcategory.id ? 'bg-black text-white' : 'bg-gray-200'}`}>
                   {subcategory.name}
                 </div>
               ))}

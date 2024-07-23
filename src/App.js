@@ -22,7 +22,7 @@ const App = () => {
       <div className="flex flex-col min-h-screen">
         <Navbar />
         <div className="flex-grow">
-          <Suspense fallback={<div></div>}>
+          <Suspense fallback={<div className="h-[100vh]"></div>}>
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/techtoday" element={<TechToday />} />
