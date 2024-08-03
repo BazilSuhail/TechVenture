@@ -171,7 +171,7 @@ const TechToday = () => {
 
     return (
 
-        <div className="container overflow-x-hidden  pt-[85px]">
+        <div className="overflow-x-hidden  pt-[85px]">
             {loading ? (
                 <div className='h-[calc(98vh-95px)] w-screen flex flex-col justify-center items-center'>
                     <Bars

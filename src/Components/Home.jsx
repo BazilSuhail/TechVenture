@@ -13,7 +13,8 @@ const Sectionvariants = {
 const HomePage = () => {
 
     const { scrollYProgress } = useScroll();
-    const scale = useTransform(scrollYProgress, [0.09, 0.15], [0.4, 1]);
+    const scale = useTransform(scrollYProgress, [0.09, 0.15], [0.95, 1]);
+    const opacity_Cards = useTransform(scrollYProgress, [0.07, 0.1 ], [0.4, 1]);
     const x = useTransform(scrollYProgress, [0.33, 0.40], [-900, 0]);
     const opacity = useTransform(scrollYProgress, [0.33, 0.40], [0, 1]);
     const y = useTransform(scrollYProgress, [0.15, 0.18], [20, 0]);
@@ -26,6 +27,8 @@ const HomePage = () => {
                 animate="visible"
                 variants={Sectionvariants}
             >
+                {/*
+                
                 <div className="blob"></div>
                 <div className="blob"></div>
                 <div className="blob"></div>
@@ -34,19 +37,20 @@ const HomePage = () => {
                 <div className="blob"></div>
                 <div className="blob"></div>
                 <div className="blob"></div>
+                */}
 
-                <motion.div className="mt-[-72px] lg:mt-[-85px] flex sm:flex-row flex-col font-extrabold text-[45px] sm:text-[65px] md:text-[75px]"
+                <motion.div className="mt-[-72px] lg:mt-[-85px] flex sm:flex-row flex-col font-extrabold text-[40px] sm:text-[65px] md:text-[75px]"
                     initial={{ opacity: 0, x: 100 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.5, duration: 2, ease: "easeInOut" }}
                 >
-                    <p className="text-gray-400">
+                    <p className="text-gray-400 ">
                         Discover Gadgets
                     </p>
                     <p className="text-white mt-[-18px] sm:mt-[0px] mx-auto sm:ml-[15px]">&</p>
                 </motion.div>
 
-                <motion.div className="mt-[-22px] lg:mt-[-15px] flex sm:flex-row flex-col font-extrabold text-[45px] sm:text-[65px] md:text-[75px]"
+                <motion.div className="mt-[-22px] lg:mt-[-15px] flex sm:flex-row flex-col font-extrabold text-[40px] sm:text-[65px] md:text-[75px]"
                     initial={{ opacity: 0, x: -100 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.5, duration: 2, ease: "easeInOut" }}
@@ -54,15 +58,21 @@ const HomePage = () => {
                     Publish Reviews
                 </motion.div>
 
-                <p className="px-[10px] text-sm md:text-md text-center font-bold text-gray-200 mt-[5px]">
+                <p className="px-[10px] text-sm md:text-md sm:block hidden text-center font-bold text-gray-200 mt-[5px]">
                     Discover the future of technology with our expert reviews and in-depth analyses.
                 </p>
-                <p className="px-[10px]  text-sm md:text-md text-center font-bold text-gray-200 ">
+                <p className="px-[10px] sm:block hidden text-sm md:text-md text-center font-bold text-gray-200 ">
                     TechVenture !! ultimate destination for the latest gadgets and their specifications.
                 </p>
 
-                <div onClick={() => { navigate("/searchprojects") }} className='w-[95%] md:w-[70%]  mt-[15px] flex justify-center mx-[5px] mb-[25px] p-[4px]'>
-                    <motion.div onClick={() => { navigate("/searchprojects") }} className='w-[85%] flex items-center p-[8px] border-2 border-white rounded-lg bg-white text-gray-800 font-medium'
+                
+                <p className="px-[10px] sm:hidden block text-[15px] mt-[25px] text-center font-bold text-gray-200 ">
+                    Discover the future of technology with our expert reviews and in-depth analyses.
+                    TechVenture !! ultimate destination for the latest gadgets and their specifications.
+                </p>
+
+                <div onClick={() => { navigate("/searchprojects") }} className='w-[95%] md:w-[70%] lg:w-[55%]  mt-[15px] flex justify-center mx-[5px] mb-[25px] p-[4px]'>
+                    <motion.div onClick={() => { navigate("/searchprojects") }} className='w-[90%] sm:w-[85%] flex items-center p-[8px] border-2 border-white rounded-lg bg-white text-gray-800 font-medium'
                         initial={{ opacity: 0, y: 50 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.5, duration: 2, ease: "easeInOut" }}
@@ -81,7 +91,7 @@ const HomePage = () => {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-[20px] gap-8">
                     <motion.div className="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
-                        style={{ scale, y }}
+                        style={{ scale, y,opacity:opacity_Cards }}
                     >
                         <h3 className="text-xl font-bold text-gray-800 mb-2">Our Mission</h3>
                         <p className="text-gray-600">
@@ -89,7 +99,7 @@ const HomePage = () => {
                         </p>
                     </motion.div>
                     <motion.div className="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
-                        style={{ scale, y }}
+                         style={{ scale, y,opacity:opacity_Cards }}
                     >
                         <h3 className="text-xl font-bold text-gray-800 mb-2">Our Vision</h3>
                         <p className="text-gray-600">
@@ -97,7 +107,7 @@ const HomePage = () => {
                         </p>
                     </motion.div>
                     <motion.div className="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
-                        style={{ scale, y }}
+                         style={{ scale, y,opacity:opacity_Cards }}
                     >
                         <h3 className="text-xl font-bold text-gray-800 mb-2">Our Values</h3>
                         <p className="text-gray-600">
@@ -105,7 +115,7 @@ const HomePage = () => {
                         </p>
                     </motion.div>
                     <motion.div className="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
-                        style={{ scale, y }}
+                        style={{ scale, y,opacity:opacity_Cards }}
                     >
                         <h3 className="text-xl font-bold text-gray-800 mb-2">Our Team</h3>
                         <p className="text-gray-600">
@@ -113,7 +123,7 @@ const HomePage = () => {
                         </p>
                     </motion.div>
                     <motion.div className="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
-                        style={{ scale, y }}
+                        style={{ scale, y,opacity:opacity_Cards }}
                     >
                         <h3 className="text-xl font-bold text-gray-800 mb-2">Our Services</h3>
                         <p className="text-gray-600">
@@ -121,7 +131,7 @@ const HomePage = () => {
                         </p>
                     </motion.div>
                     <motion.div className="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
-                        style={{ scale, y }}
+                       style={{ scale, y,opacity:opacity_Cards }}   
                     >
                         <h3 className="text-xl font-bold text-gray-800 mb-2">Contact Us</h3>
                         <p className="text-gray-600">

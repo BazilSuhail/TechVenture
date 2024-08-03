@@ -92,6 +92,7 @@ function SearchProjects() {
                     <p className='flex justify-center mx-auto text-lg text-red-600 font-medium'>No results found</p>
                 )
             )}
+            <div className='w-full h-[calc(100vh-150px)]'></div>
         </div>
     );
 }
