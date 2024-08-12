@@ -105,9 +105,9 @@ const Navbar = () => {
                                 className="flex h-full pb-12 flex-col mt-10"
                                 onClick={handleMenuToggle}
                             >
-                                <NavLink href={"/"} className="font-medium w-[85%] rounded-lg bg-gray-800 mx-auto py-[5px] text-[18px] text-center text-slate-300 mb-[15px] cursor-pointer">Home</NavLink>
-                                <NavLink href={"/techtoday"} className="font-medium w-[85%] rounded-lg bg-gray-800 mx-auto py-[5px] text-center text-[18px] text-slate-300 mb-[15px] cursor-pointer">Tech Today</NavLink>
-                                <NavLink href={"/products"} className="font-medium w-[85%] rounded-lg bg-gray-800 mx-auto py-[5px] text-center text-[18px] text-slate-300 mb-[15px] cursor-pointer">Gadgets</NavLink>
+                                <NavLink to="/" className="font-medium w-[85%] rounded-lg bg-gray-800 mx-auto py-[5px] text-[18px] text-center text-slate-300 mb-[15px] cursor-pointer">Home</NavLink>
+                                <NavLink to="/techtoday" className="font-medium w-[85%] rounded-lg bg-gray-800 mx-auto py-[5px] text-center text-[18px] text-slate-300 mb-[15px] cursor-pointer">Tech Today</NavLink>
+                                <NavLink to="/products" className="font-medium w-[85%] rounded-lg bg-gray-800 mx-auto py-[5px] text-center text-[18px] text-slate-300 mb-[15px] cursor-pointer">Gadgets</NavLink>
                                 <div className="mt-auto"></div>
                                 {user ? (
                                     <button className="font-medium w-[85%] rounded-lg bg-gray-800 mx-auto py-[5px] text-[18px] text-center text-slate-300 mb-[15px] cursor-pointer" onClick={handleLogout}><IoLogOutOutline className="text-[25px] mt-[3px] mr-[3px]" /><p>Logout</p></button>
