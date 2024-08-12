@@ -2,8 +2,48 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { IoIosSearch } from "react-icons/io";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion"; 
 import { FaStar } from 'react-icons/fa';
+
+const reviews = [
+    {
+        name: "Jane Doe",
+        review: "Texleath Industries has been an incredible partner. Their commitment to quality is evident in every product we receive. Highly recommended!",
+        email: "jane.doe@example.com",
+        rating: 5,
+    },
+    {
+        name: "John Smith",
+        review: "The attention to detail and customer service at Texleath Industries is second to none. I’m always impressed with their professionalism.",
+        email: "john.smith@example.com",
+        rating: 4,
+    },
+    {
+        name: "Emily Johnson",
+        review: "Exceptional quality and excellent service. Texleath Industries exceeds expectations every time!",
+        email: "emily.johnson@example.com",
+        rating: 3,
+    },
+    {
+        name: "Michael Brown",
+        review: "I've been consistently impressed with the products from Texleath Industries. Their attention to detail is unmatched.",
+        email: "michael.brown@example.com",
+        rating: 4,
+    },
+    {
+        name: "Sarah Wilson",
+        review: "Texleath Industries provides top-notch products and excellent customer support. I highly recommend them!",
+        email: "sarah.wilson@example.com",
+        rating: 5,
+    },
+    {
+        name: "David Lee",
+        review: "A fantastic company with exceptional quality. I’ve always been satisfied with their products and service.",
+        email: "david.lee@example.com",
+        rating: 5,
+    },
+];
+
 // Define the variants for the reveal animation
 const Sectionvariants = {
     hidden: { opacity: 0, },
@@ -14,7 +54,7 @@ const HomePage = () => {
 
     const { scrollYProgress } = useScroll();
     const scale = useTransform(scrollYProgress, [0.09, 0.15], [0.95, 1]);
-    const opacity_Cards = useTransform(scrollYProgress, [0.07, 0.1 ], [0.4, 1]);
+    const opacity_Cards = useTransform(scrollYProgress, [0.07, 0.1], [0.4, 1]);
     const x = useTransform(scrollYProgress, [0.33, 0.40], [-900, 0]);
     const opacity = useTransform(scrollYProgress, [0.33, 0.40], [0, 1]);
     const y = useTransform(scrollYProgress, [0.15, 0.18], [20, 0]);
@@ -65,7 +105,7 @@ const HomePage = () => {
                     TechVenture !! ultimate destination for the latest gadgets and their specifications.
                 </p>
 
-                
+
                 <p className="px-[10px] sm:hidden block text-[15px] mt-[25px] text-center font-bold text-gray-200 ">
                     Discover the future of technology with our expert reviews and in-depth analyses.
                     TechVenture !! ultimate destination for the latest gadgets and their specifications.
@@ -91,7 +131,7 @@ const HomePage = () => {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-[20px] gap-8">
                     <motion.div className="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
-                        style={{ scale, y,opacity:opacity_Cards }}
+                        style={{ scale, y, opacity: opacity_Cards }}
                     >
                         <h3 className="text-xl font-bold text-gray-800 mb-2">Our Mission</h3>
                         <p className="text-gray-600">
@@ -99,7 +139,7 @@ const HomePage = () => {
                         </p>
                     </motion.div>
                     <motion.div className="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
-                         style={{ scale, y,opacity:opacity_Cards }}
+                        style={{ scale, y, opacity: opacity_Cards }}
                     >
                         <h3 className="text-xl font-bold text-gray-800 mb-2">Our Vision</h3>
                         <p className="text-gray-600">
@@ -107,7 +147,7 @@ const HomePage = () => {
                         </p>
                     </motion.div>
                     <motion.div className="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
-                         style={{ scale, y,opacity:opacity_Cards }}
+                        style={{ scale, y, opacity: opacity_Cards }}
                     >
                         <h3 className="text-xl font-bold text-gray-800 mb-2">Our Values</h3>
                         <p className="text-gray-600">
@@ -115,7 +155,7 @@ const HomePage = () => {
                         </p>
                     </motion.div>
                     <motion.div className="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
-                        style={{ scale, y,opacity:opacity_Cards }}
+                        style={{ scale, y, opacity: opacity_Cards }}
                     >
                         <h3 className="text-xl font-bold text-gray-800 mb-2">Our Team</h3>
                         <p className="text-gray-600">
@@ -123,7 +163,7 @@ const HomePage = () => {
                         </p>
                     </motion.div>
                     <motion.div className="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
-                        style={{ scale, y,opacity:opacity_Cards }}
+                        style={{ scale, y, opacity: opacity_Cards }}
                     >
                         <h3 className="text-xl font-bold text-gray-800 mb-2">Our Services</h3>
                         <p className="text-gray-600">
@@ -131,7 +171,7 @@ const HomePage = () => {
                         </p>
                     </motion.div>
                     <motion.div className="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
-                       style={{ scale, y,opacity:opacity_Cards }}   
+                        style={{ scale, y, opacity: opacity_Cards }}
                     >
                         <h3 className="text-xl font-bold text-gray-800 mb-2">Contact Us</h3>
                         <p className="text-gray-600">
@@ -141,7 +181,7 @@ const HomePage = () => {
                 </div>
             </section>
 
-            <div className='w-[100%] bg-black py-[22px]'>
+            <section className='w-[100%] bg-black py-[22px]'>
                 <div className="slider" style={{ '--width': '120px', '--height': '52px', '--quantity': 10 }}>
                     <div className="list">
                         <div className="item" style={{ '--position': 1 }}><div className="bg-gray-800 text-white rounded-2xl text-center text-lg font-medium py-[4px]">Smartphones</div></div>
@@ -184,11 +224,11 @@ const HomePage = () => {
                         <div className="item" style={{ '--position': 10 }}><div className="bg-gray-800 text-white rounded-2xl text-center text-lg font-medium py-[4px]">Vivo V21</div></div>
                     </div>
                 </div>
-            </div>
+            </section>
 
             <section className="pb-10 bg-gray-900">
                 <div className="text-center mb-8">
-                    <h2 className="  text-2xl md:text-4xl font-extrabold w-[100%] text-black bg-gray-200 p-[15px]">Why Choose Us?</h2>
+                    <h2 className="  text-2xl md:text-4xl font-extrabold w-[100%] text-black bg-gray-200 p-[15px]">Why Trust Us?</h2>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 p-[20px] gap-8" id="mission-section">
                     <motion.div className=" p-6 bg-gray-700 text-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
@@ -218,83 +258,42 @@ const HomePage = () => {
                 </div>
             </section>
 
+            <section className='md:w-[90%] xl:w-[85%] w-[95%] mb-[45px] mx-auto mt-[35px]'>
+                <div className="container mx-auto px-6">
+                    <h2 className="text-2xl md:text-4xl xl:text-5xl font-bold mb-6 text-gray-700 text-center">
+                        Testimonials
+                    </h2>
+                    <p className="text-gray-800 text-center font-serif">Hear what our satisfied users have to say about TechVenture.</p>
+                    <div className='flex w-full h-2 sm:h-4 mx-auto justify-center mb-[25px] items-center'> 
+                        <div className='h-[3px] w-[89%] mx-auto bg-gray-300 '></div> 
+                    </div>
 
-            <section className="  py-[50px]">
-                <div className="text-center mb-[30px]">
-                    <h2 className="text-2xl md:text-6xl border-[3px] border-gray-900 mx-[25px] py-[15px]  rounded-[25px] font-extrabold text-gray-800">Testimonials</h2>
-                    <p className="text-gray-600">Hear what our satisfied users have to say about TechVenture.</p>
-                </div>
-                <div className="flex flex-wrap justify-around">
-                    <motion.div className="  w-[90%] md:w-[60%] my-[15px] p-4 bg-white shadow-lg rounded-lg"
-                        style={{ opacity, x }}
-                    >
-                        <h3 className="text-[35px] font-bold text-gray-800">Arshad Ali</h3>
-                        <h3 className="text-md font-bold text-gray-400">john@gmail.com</h3>
-                        <div className="flex my-[6px]">
-                            {[...Array(5)].map((_, index) => (
-                                <FaStar
-                                    size={25}
-                                    key={index}
-                                    className={`cursor-pointer ${index < 5 ? 'text-yellow-500' : 'text-gray-300'}`}
-                                />
-                            ))}
-                        </div>
-                        <p className="text-gray-600 font-medium text-center">"TechVenture's expert reviews have guided me through many tech purchases, ensuring I get the best value for my money. The detailed insights and comparisons make decision-making easy."</p>
-                    </motion.div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {reviews.map((review, index) => (
+                            <div key={index} className="bg-white p-6 rounded-lg shadow-lg">
+                                <div className='flex items-center'> 
+                                    <div className='flex flex-col'>
+                                        <p className="font-bold">{review.name}</p>
+                                        <p className="text-sm text-gray-600">{review.email}</p>
+                                    </div>
+                                </div>
 
-                    <motion.div className="  w-[90%] md:w-[60%] my-[15px] p-4 bg-white shadow-lg rounded-lg"
-                        style={{ opacity, x }}
-                    >
-                        <h3 className="text-[35px] font-bold text-gray-800">Fakhar Rashid</h3>
-                        <h3 className="text-md font-bold text-gray-400">jane.smith@example.com</h3>
-                        <div className="flex my-[6px]">
-                            {[...Array(4)].map((_, index) => (
-                                <FaStar
-                                    size={25}
-                                    key={index}
-                                    className={`cursor-pointer ${index < 4 ? 'text-yellow-500' : 'text-gray-300'}`}
-                                />
-                            ))}
-                        </div>
-                        <p className="text-gray-600 font-medium text-center">"The detailed specifications and user-friendly interface of TechVenture make shopping for gadgets a breeze. I've found exactly what I needed with their clear and comprehensive reviews."</p>
-                    </motion.div>
-
-                    <motion.div className="  w-[90%] md:w-[60%] my-[15px] p-4 bg-white shadow-lg rounded-lg"
-                        style={{ opacity, x }}
-                    >
-                        <h3 className="text-[35px] font-bold text-gray-800">M Rehman</h3>
-                        <h3 className="text-md font-bold text-gray-400">rbrown@example.com</h3>
-                        <div className="flex my-[6px]">
-                            {[...Array(3)].map((_, index) => (
-                                <FaStar
-                                    size={25}
-                                    key={index}
-                                    className={`cursor-pointer ${index < 3 ? 'text-yellow-500' : 'text-gray-300'}`}
-                                />
-                            ))}
-                        </div>
-                        <p className="text-gray-600 font-medium text-center">"TechVenture's expert reviews have guided me through many tech purchases, ensuring I get the best value for my money. Their recommendations have never disappointed."</p>
-                    </motion.div>
-
-                    <motion.div className="  w-[90%] md:w-[60%] my-[15px] p-4 bg-white shadow-lg rounded-lg"
-                        style={{ opacity, x }}
-                    >
-                        <h3 className="text-[35px] font-bold text-gray-800">Ahmad Asad</h3>
-                        <h3 className="text-md font-bold text-gray-400">emily.j@example.com</h3>
-                        <div className="flex my-[6px]">
-                            {[...Array(5)].map((_, index) => (
-                                <FaStar
-                                    size={25}
-                                    key={index}
-                                    className={`cursor-pointer ${index < 5 ? 'text-yellow-500' : 'text-gray-300'}`}
-                                />
-                            ))}
-                        </div>
-                        <p className="text-gray-600 font-medium text-center">"TechVenture keeps me updated with the latest tech trends. I highly recommend this site to all tech enthusiasts! Their detailed insights and reliable updates have been invaluable."</p>
-                    </motion.div>
-
+                                <div className="flex mt-2">
+                                    {Array.from({ length: 5 }, (_, i) => (
+                                        <FaStar
+                                            key={i}
+                                            size={18}
+                                            className={i < review.rating ? 'text-yellow-500' : 'text-gray-300'}
+                                        />
+                                    ))}
+                                </div>
+                                <p className="text-md text-red-950 font-serif  my-4">{review.review}</p>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </section>
+ 
 
             <section className="py-[50px] bg-gray-200 text-center">
                 <div>

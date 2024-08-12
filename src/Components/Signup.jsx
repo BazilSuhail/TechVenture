@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { supabase } from '../Config/Config';
 import { useNavigate } from 'react-router-dom';
 
+import { FaUserEdit } from "react-icons/fa";
+import { IoLockClosedOutline } from "react-icons/io5";
+import { IoMail } from "react-icons/io5";
+
 function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -40,31 +44,59 @@ function Signup() {
   };
 
   return (
-    <div className='flex items-center justify-center w-[100vw] h-[100vh]'>
-            <div className='border-2 border-gray-600 rounded-[25px] p-[25px] h-[480px] md:h-[510px] w-[350px] md:w-[590px] flex flex-col'>
-        <h2 className='text-white bg-black rounded-md w-[100%] p-[8px] text-center text-3xl'>Sign Up</h2>
+    <div className='flex flex-col items-center justify-center mt-10 md:mt-0 lg:mb-[-30px] h-screen'>
+      <form onSubmit={handleSignup} className='w-full sm:w-[520px] bg-white p-8 rounded-lg font-sans'>
+        <div className='text-gray-800 text-[28px] lg:text-[35px] text-center font-bold'>Starting Exploring Today</div>
+        <div className='text-gray-800 text-sm text-center font-medium'>Please enter your details to create an account</div>
+        <div className='h-[3px] bg-gray-400 w-[90%] mx-auto my-4'></div>
 
-        <div className='flex items-center mt-[20px] justify-center'>
-
-          <p className='text-lg md:text-xl font-medium '>Already Have An Account </p>
-          <p onClick={() => { navigate("/signin") }} className='cursor-pointer ml-[10px] underline font-bold text-2xl text-blue-800'>SignIN</p>
-
+        <div className='flex flex-col'>
+          <label className='text-gray-800 font-semibold'>Name</label>
+          <div className='flex items-center border border-gray-300 rounded-lg h-12 px-3 transition-colors duration-200 ease-in-out focus-within:border-blue-600'>
+            <FaUserEdit className='text-gray-800' size={23} />
+            <input type="text"
+              className="ml-2 border-none outline-none w-full h-full"
+              required
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+              placeholder="Enter Display Name" />
+          </div>
+        </div>
+        <div className='flex flex-col mt-4'>
+          <label className='text-gray-800 font-semibold'>Email</label>
+          <div className='flex items-center border border-gray-300 rounded-lg h-12 px-3 transition-colors duration-200 ease-in-out focus-within:border-blue-600'>
+            <IoMail className='text-gray-800' size={23} />
+            <input type="email"
+              className="ml-2 border-none outline-none w-full h-full"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your Email" />
+          </div>
         </div>
 
-        <form onSubmit={handleSignup} className='flex flex-col'>
-          <p className='text-xl md:text-2xl font-semibold mt-[8px] md:mt-[14px]'>Name:</p>
-          <input   type="text" placeholder="Enter Display Name" value={fullName} onChange={(e) => setFullName(e.target.value)} required className='text-lg border-2 border-gray-600 placeholder:text-gray-600 font-medium rounded-xl mt-[4px] md:mt-[8px] p-[8px]' />
-          
-          <p  className='text-xl md:text-2xl font-semibold mt-[5px]'>Email:</p>
-          <input  type="email" placeholder="Enter Email" value={email} onChange={(e) => setEmail(e.target.value)} required className='text-lg border-2 border-gray-600 placeholder:text-gray-600 font-medium rounded-xl mt-[4px] md:mt-[8px] p-[8px]' />
-          
-          <p  className='text-xl md:text-2xl font-semibold mt-[5px]'>Password:</p>
-          <input type="password" placeholder="Enter Password" value={password} onChange={(e) => setPassword(e.target.value)} required className='text-lg border-2 border-gray-600 placeholder:text-gray-600 font-medium rounded-xl mt-[4px] md:mt-[8px] p-[8px]' />
-          
-          <button className='mt-[15px] bg-gray-800 shadow-custom-light text-[25px] md:text-[30px] rounded-[30px] text-white py-[8px]' type="submit">Sign Up</button>
-        </form>
-      </div>
+        <div className='flex flex-col mt-4'>
+          <label className='text-gray-800 font-semibold'>Password</label>
+          <div className='flex items-center border border-gray-300 rounded-lg h-12 px-3 transition-colors duration-200 ease-in-out focus-within:border-blue-600'>
+            <IoLockClosedOutline className='text-gray-800' size={23} />
+            <input type="password"
+              className="ml-2 border-none outline-none w-full h-full"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your Password" />
+          </div>
+        </div>
+
+        <button className="bg-black text-white text-lg font-medium rounded-lg h-12 w-full mt-5 mb-2 cursor-pointer hover:bg-gray-800" type="submit">Sign Up</button>
+
+        <p className="text-center text-lg">
+          Already have an account?
+          <span className="text-blue-600 font-medium underline cursor-pointer ml-1" onClick={() => { navigate("/signin") }}>Sign In</span>
+        </p>
+      </form>
     </div>
+
   );
 }
 

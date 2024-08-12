@@ -36,11 +36,7 @@
          @apply bg-gray-700;
          /* track color */
      }
- }
-
- .khsbfjhsjdfh {
-     color: rgba(255, 255, 255, 0.655);
- }
+ } 
 
  .text-no-stroke {
      text-align: center;
@@ -54,9 +50,7 @@
      text-align: center;
      font-weight: 900;
      font-size: 60px;
- }
-
- /* styles.css */
+ } 
  /* styles.css */
 
  @keyframes gradientBackground {
@@ -71,51 +65,7 @@
      100% {
          background-position: 0% 50%;
      }
- }
-
- @keyframes blobAnimation {
-
-     0%,
-     100% {
-         transform: translate(0, 0);
-     }
-
-     10% {
-         transform: translate(-30px, -20px);
-     }
-
-     20% {
-         transform: translate(25px, -35px);
-     }
-
-     30% {
-         transform: translate(-20px, 25px);
-     }
-
-     40% {
-         transform: translate(35px, 20px);
-     }
-
-     50% {
-         transform: translate(-25px, -15px);
-     }
-
-     60% {
-         transform: translate(20px, 35px);
-     }
-
-     70% {
-         transform: translate(-35px, -25px);
-     }
-
-     80% {
-         transform: translate(25px, 20px);
-     }
-
-     90% {
-         transform: translate(-20px, -30px);
-     }
- }
+ } 
 
  .gradient-background {
      position: relative;
@@ -127,87 +77,6 @@
      animation: gradientBackground 10s ease-in-out infinite;
  }
 
- .blob {
-     position: absolute;
-     width: 200px;
-     height: 200px;
-     background: linear-gradient(270deg, #292929, #373737, #000000, #1c1b1b);
-     border-radius: 10%;
-     animation: gradientBackground 10s ease infinite, blobAnimation 8s ease-in-out infinite;
-     opacity: 0.3;
- }
-
- .blob:nth-child(1) {
-     top: 5%;
-     left: 10%;
-     width: 300px;
-     height: 300px;
-     filter: blur(60px);
-     animation-duration: 12s;
- }
-
- .blob:nth-child(2) {
-     top: 50%;
-     left: 10%;
-     width: 400px;
-     height: 400px;
-     filter: blur(40px);
-     animation-duration: 10s;
- }
-
- .blob:nth-child(3) {
-     top: 70%;
-     left: 40%;
-     width: 250px;
-     height: 250px;
-     filter: blur(20px);
-     animation-duration: 9s;
- }
-
- .blob:nth-child(4) {
-     top: 0%;
-     left: 50%;
-     width: 350px;
-     height: 350px;
-     filter: blur(25px);
-     animation-duration: 11s;
- }
-
- .blob:nth-child(5) {
-     top: 30%;
-     left: 55%;
-     width: 300px;
-     height: 300px;
-     filter: blur(35px);
-     animation-duration: 13s;
- }
-
- .blob:nth-child(6) {
-     top: 80%;
-     left: 10%;
-     width: 200px;
-     height: 200px;
-     filter: blur(15px);
-     animation-duration: 8s;
- }
-
- .blob:nth-child(7) {
-     top: 60%;
-     left: 75%;
-     width: 350px;
-     height: 350px;
-     filter: blur(28px);
-     animation-duration: 14s;
- }
-
- .blob:nth-child(8) {
-     top: 35%;
-     left: 85%;
-     width: 250px;
-     height: 250px;
-     filter: blur(20px);
-     animation-duration: 7s;
- }
 
 
  /* slider js*/

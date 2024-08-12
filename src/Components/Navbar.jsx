@@ -4,9 +4,7 @@ import { supabase } from '../Config/Config';
 import { FiX } from "react-icons/fi";
 import { CgMenuLeftAlt } from "react-icons/cg";
 import { IoLogOutOutline } from "react-icons/io5";
-import { CiHome } from "react-icons/ci";
-import { LuNewspaper } from "react-icons/lu";
-import { AiFillProduct } from "react-icons/ai";
+import { motion, AnimatePresence } from "framer-motion";
 import { FaUserEdit } from "react-icons/fa";
 import { IoIosSearch } from "react-icons/io";
 
@@ -42,7 +40,7 @@ const Navbar = () => {
         }
     };
 
-    const toggleMenu = () => {
+    const handleMenuToggle = () => {
         setIsOpen(!isOpen);
     };
 
@@ -54,7 +52,7 @@ const Navbar = () => {
             <div className="w-full h-[80px] fixed p-4 bg-black flex items-center justify-between z-50">
                 <div className="flex justify-between w-full items-center">
 
-                    <button className="xsx:hidden text-white" onClick={toggleMenu}>
+                    <button className="xsx:hidden text-white" onClick={handleMenuToggle}>
                         {isOpen ? <FiX size={24} /> : <CgMenuLeftAlt size={24} />}
                     </button>
 
@@ -84,6 +82,46 @@ const Navbar = () => {
                 </div>
             </div>
 
+
+            {/* Hamburger menu button */}
+            <div className="relative bg-black md:hidden">
+
+                {/* Full navbar for smaller screens */}
+                <AnimatePresence>
+                    {isOpen && (
+                        <motion.div
+                            initial={{ y: -100, height: 0 }}
+                            animate={{ y: 0, height: "100vh", transition: { duration: 0.8 } }}
+                            exit={{ y: -100, height: 0, transition: { duration: 0.5, delay: 0.3 } }}
+                            className="fixed inset-0 bg-black flex flex-col h-screen px-4 py-3 z-40"
+                            onClick={handleMenuToggle}
+                        >
+                            <div className='my-[25px]'></div>
+                            {/* Menu items */}
+                            <motion.div
+                                initial={{ x: -100, opacity: 0 }}
+                                animate={{ x: 0, opacity: 1, transition: { duration: 0.5, delay: 0.8 } }}
+                                exit={{ x: -100, opacity: 0, transition: { duration: 0.3 } }}
+                                className="flex h-full pb-12 flex-col mt-10"
+                                onClick={handleMenuToggle}
+                            >
+                                <NavLink href={"/"} className="font-medium w-[85%] rounded-lg bg-gray-800 mx-auto py-[5px] text-[18px] text-center text-slate-300 mb-[15px] cursor-pointer">Home</NavLink>
+                                <NavLink href={"/techtoday"} className="font-medium w-[85%] rounded-lg bg-gray-800 mx-auto py-[5px] text-center text-[18px] text-slate-300 mb-[15px] cursor-pointer">Tech Today</NavLink>
+                                <NavLink href={"/products"} className="font-medium w-[85%] rounded-lg bg-gray-800 mx-auto py-[5px] text-center text-[18px] text-slate-300 mb-[15px] cursor-pointer">Gadgets</NavLink>
+                                <div className="mt-auto"></div>
+                                {user ? (
+                                    <button className="font-medium w-[85%] rounded-lg bg-gray-800 mx-auto py-[5px] text-[18px] text-center text-slate-300 mb-[15px] cursor-pointer" onClick={handleLogout}><IoLogOutOutline className="text-[25px] mt-[3px] mr-[3px]" /><p>Logout</p></button>
+                                ) : (
+                                    <NavLink onClick={handleMenuToggle} to="/signup"  className="font-medium w-[85%] flex items-center py-3 px-3  rounded-lg bg-gray-900 mx-auto  text-[18px] text-center text-slate-300 mb-[15px] cursor-pointer"><IoLogOutOutline className="text-[28px] mr-[3px]" /><p>Get Started</p></NavLink>
+                                )}
+                            </motion.div>
+
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </div>
+            {/*
+            
             <div className={`fixed top-0 left-0 w-3/5 h-full bg-black z-40 transition-transform duration-900 transform ${isOpen ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'}`}>
                 <div className="flex flex-col items-baseline text-white">
                     <div className="flex h-[calc(100vh-75px)] flex-col items-baseline ml-[-55px] text-white">
@@ -104,6 +142,7 @@ const Navbar = () => {
                     </div>
                 </div>
             </div>
+            */}
         </nav>
     );
 };
