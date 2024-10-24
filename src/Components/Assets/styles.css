@@ -9,21 +9,18 @@
 
      &::-webkit-scrollbar-thumb {
          @apply bg-gray-900 rounded-[25px];
-         /* thumb color and rounded corners */
      }
 
      &::-webkit-scrollbar-track {
          @apply bg-gray-100;
-         /* track color */
      }
  }
 
- 
+
 
  .scrollbar-custom-white {
      @apply overflow-y-scroll;
 
-     /* Webkit */
      &::-webkit-scrollbar {
          width: 6px;
          height: 6px;
@@ -31,14 +28,12 @@
 
      &::-webkit-scrollbar-thumb {
          @apply bg-gray-300 rounded-[25px];
-         /* thumb color and rounded corners */
      }
 
      &::-webkit-scrollbar-track {
          @apply bg-gray-700;
-         /* track color */
      }
- } 
+ }
 
  .text-no-stroke {
      text-align: center;
@@ -52,7 +47,8 @@
      text-align: center;
      font-weight: 900;
      font-size: 60px;
- } 
+ }
+
  /* styles.css */
 
  @keyframes gradientBackground {
@@ -67,7 +63,7 @@
      100% {
          background-position: 0% 50%;
      }
- } 
+ }
 
  .gradient-background {
      position: relative;

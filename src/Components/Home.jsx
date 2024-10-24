@@ -1,9 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { IoIosSearch } from "react-icons/io";
+import { FaBullseye, FaLightbulb, FaBalanceScale, FaUsers, FaCog, FaEnvelope, FaStar } from 'react-icons/fa';
 
-import { motion, useScroll, useTransform } from "framer-motion"; 
-import { FaStar } from 'react-icons/fa';
+import { motion, useScroll, useTransform } from "framer-motion";
 
 const reviews = [
     {
@@ -54,7 +54,7 @@ const HomePage = () => {
 
     const { scrollYProgress } = useScroll();
     const scale = useTransform(scrollYProgress, [0.09, 0.15], [0.95, 1]);
-    const opacity_Cards = useTransform(scrollYProgress, [0.07, 0.1], [0.4, 1]);
+    const opacity_Cards = useTransform(scrollYProgress, [0.1, 0.12], [0.4, 1]);
     const x = useTransform(scrollYProgress, [0.33, 0.40], [-900, 0]);
     const opacity = useTransform(scrollYProgress, [0.33, 0.40], [0, 1]);
     const y = useTransform(scrollYProgress, [0.15, 0.18], [20, 0]);
@@ -111,13 +111,13 @@ const HomePage = () => {
                     TechVenture !! ultimate destination for the latest gadgets and their specifications.
                 </p>
 
-                <div onClick={() => { navigate("/searchprojects") }} className='w-[95%] md:w-[70%] lg:w-[55%]  mt-[15px] flex justify-center mx-[5px] mb-[25px] p-[4px]'>
-                    <motion.div onClick={() => { navigate("/searchprojects") }} className='w-[90%] sm:w-[85%] flex items-center p-[8px] border-2 border-white rounded-lg bg-white text-gray-800 font-medium'
+                <div onClick={() => { navigate("/searchprojects") }} className='w-[95%] mt-[18px] xl:mt-[65px] md:w-[70%] lg:w-[55%] flex justify-center mx-[5px] mb-[25px] p-[4px]'>
+                    <motion.div onClick={() => { navigate("/searchprojects") }} className='w-[80%] sm:w-[85%] flex items-center p-[8px] border-2 border-white rounded-[28px] text-gray-50 font-medium'
                         initial={{ opacity: 0, y: 50 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.5, duration: 2, ease: "easeInOut" }}
                     >
-                        <IoIosSearch onClick={() => { navigate("/searchprojects") }} className='text-gray-900 ml-[10px] mr-[25px]' size={28} />
+                        <IoIosSearch onClick={() => { navigate("/searchprojects") }} className='ml-[10px] mr-[25px]' size={28} />
                         <p onClick={() => { navigate("/searchprojects") }}>
                             Search Gadget By Name !!
                         </p>
@@ -130,55 +130,72 @@ const HomePage = () => {
                     <h2 className="text-2xl md:text-4xl font-extrabold bg-black text-white p-[15px] mx-auto w-[100%]">About Us</h2>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-[20px] gap-8">
-                    <motion.div className="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
-                        style={{ scale, y, opacity: opacity_Cards }}
-                    >
-                        <h3 className="text-xl font-bold text-gray-800 mb-2">Our Mission</h3>
-                        <p className="text-gray-600">
-                            Our mission is to provide reliable, up-to-date information on the latest gadgets and technology to help our users make informed decisions.
-                        </p>
-                    </motion.div>
-                    <motion.div className="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
-                        style={{ scale, y, opacity: opacity_Cards }}
-                    >
-                        <h3 className="text-xl font-bold text-gray-800 mb-2">Our Vision</h3>
-                        <p className="text-gray-600">
-                            We envision a world where technology enhances everyday life, and our goal is to be the leading source of tech reviews and insights.
-                        </p>
-                    </motion.div>
-                    <motion.div className="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
-                        style={{ scale, y, opacity: opacity_Cards }}
-                    >
-                        <h3 className="text-xl font-bold text-gray-800 mb-2">Our Values</h3>
-                        <p className="text-gray-600">
-                            Integrity, transparency, and excellence are at the core of everything we do. We strive to provide honest reviews and high-quality content.
-                        </p>
-                    </motion.div>
-                    <motion.div className="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
-                        style={{ scale, y, opacity: opacity_Cards }}
-                    >
-                        <h3 className="text-xl font-bold text-gray-800 mb-2">Our Team</h3>
-                        <p className="text-gray-600">
-                            Our team consists of experienced tech enthusiasts, writers, and researchers dedicated to bringing you the best information.
-                        </p>
-                    </motion.div>
-                    <motion.div className="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
-                        style={{ scale, y, opacity: opacity_Cards }}
-                    >
-                        <h3 className="text-xl font-bold text-gray-800 mb-2">Our Services</h3>
-                        <p className="text-gray-600">
-                            We offer a range of services including tech reviews, buyer guides, and the latest news in the technology sector.
-                        </p>
-                    </motion.div>
-                    <motion.div className="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
-                        style={{ scale, y, opacity: opacity_Cards }}
-                    >
-                        <h3 className="text-xl font-bold text-gray-800 mb-2">Contact Us</h3>
-                        <p className="text-gray-600">
-                            Have questions or feedback? Reach out to us anytime via our contact page or through our social media channels.
-                        </p>
-                    </motion.div>
+            <motion.div className="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
+                style={{ scale, y, opacity: opacity_Cards }}>
+                <div className="flex items-center space-x-2 text-gray-700 p-2 rounded-md mb-4">
+                    <FaBullseye className="text-gray-800 text-2xl" />
+                    <h3 className="text-xl font-bold">Our Mission</h3>
                 </div>
+                <p className="text-gray-600">
+                    Our mission is to provide reliable, up-to-date information on the latest gadgets and technology to help our users make informed decisions.
+                </p>
+            </motion.div>
+
+            <motion.div className="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
+                style={{ scale, y, opacity: opacity_Cards }}>
+                <div className="flex items-center space-x-2 text-gray-700 p-2 rounded-md mb-4">
+                    <FaLightbulb className="text-gray-800 text-2xl" />
+                    <h3 className="text-xl font-bold">Our Vision</h3>
+                </div>
+                <p className="text-gray-600">
+                    We envision a world where technology enhances everyday life, and our goal is to be the leading source of tech reviews and insights.
+                </p>
+            </motion.div>
+
+            <motion.div className="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
+                style={{ scale, y, opacity: opacity_Cards }}>
+                <div className="flex items-center space-x-2 text-gray-700 p-2 rounded-md mb-4">
+                    <FaBalanceScale className="text-gray-800 text-2xl" />
+                    <h3 className="text-xl font-bold">Our Values</h3>
+                </div>
+                <p className="text-gray-600">
+                    Integrity, transparency, and excellence are at the core of everything we do. We strive to provide honest reviews and high-quality content.
+                </p>
+            </motion.div>
+
+            <motion.div className="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
+                style={{ scale, y, opacity: opacity_Cards }}>
+                <div className="flex items-center space-x-2 text-gray-700 p-2 rounded-md mb-4">
+                    <FaUsers className="text-gray-800 text-2xl" />
+                    <h3 className="text-xl font-bold">Our Team</h3>
+                </div>
+                <p className="text-gray-600">
+                    Our team consists of experienced tech enthusiasts, writers, and researchers dedicated to bringing you the best information.
+                </p>
+            </motion.div>
+
+            <motion.div className="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
+                style={{ scale, y, opacity: opacity_Cards }}>
+                <div className="flex items-center space-x-2 text-gray-700 p-2 rounded-md mb-4">
+                    <FaCog className="text-gray-800 text-2xl" />
+                    <h3 className="text-xl font-bold">Our Services</h3>
+                </div>
+                <p className="text-gray-600">
+                    We offer a range of services including tech reviews, buyer guides, and the latest news in the technology sector.
+                </p>
+            </motion.div>
+
+            <motion.div className="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
+                style={{ scale, y, opacity: opacity_Cards }}>
+                <div className="flex items-center space-x-2 text-gray-700 p-2 rounded-md mb-4">
+                    <FaEnvelope className="text-gray-800 text-2xl" />
+                    <h3 className="text-xl font-bold">Contact Us</h3>
+                </div>
+                <p className="text-gray-600">
+                    Have questions or feedback? Reach out to us anytime via our contact page or through our social media channels.
+                </p>
+            </motion.div>
+        </div>
             </section>
 
             <section className='w-[100%] bg-black py-[22px]'>
@@ -264,14 +281,14 @@ const HomePage = () => {
                         Testimonials
                     </h2>
                     <p className="text-gray-800 text-center font-serif">Hear what our satisfied users have to say about TechVenture.</p>
-                    <div className='flex w-full h-2 sm:h-4 mx-auto justify-center mb-[25px] items-center'> 
-                        <div className='h-[3px] w-[89%] mx-auto bg-gray-300 '></div> 
+                    <div className='flex w-full h-2 sm:h-4 mx-auto justify-center mb-[25px] items-center'>
+                        <div className='h-[3px] w-[89%] mx-auto bg-gray-300 '></div>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                         {reviews.map((review, index) => (
                             <div key={index} className="bg-white p-6 rounded-lg shadow-lg">
-                                <div className='flex items-center'> 
+                                <div className='flex items-center'>
                                     <div className='flex flex-col'>
                                         <p className="font-bold">{review.name}</p>
                                         <p className="text-sm text-gray-600">{review.email}</p>
@@ -293,7 +310,7 @@ const HomePage = () => {
                     </div>
                 </div>
             </section>
- 
+
 
             <section className="py-[50px] bg-gray-200 text-center">
                 <div>
