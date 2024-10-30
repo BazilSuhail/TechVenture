@@ -62,9 +62,9 @@ function ClientProducts() {
       setFilteredProducts(filtered);
     };
 
-    filterProducts(); // Call filterProducts directly in the useEffect
+    filterProducts(); 
 
-  }, [selectedCategory, selectedSubcategory, products, subcategories]); // Include all dependencies used in filterProducts
+  }, [selectedCategory, selectedSubcategory, products, subcategories]);  
 
   const handleCategoryChange = (e) => {
     const categoryId = e.target.value;

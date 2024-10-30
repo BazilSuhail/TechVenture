@@ -3,8 +3,7 @@ import { supabase } from '../../Config/Config';
 import { useNavigate } from 'react-router-dom';
 import ProductData from './ProductData';
 import { IoIosSearch } from "react-icons/io";
-
-import { Bars } from 'react-loader-spinner'
+import { Bars } from 'react-loader-spinner';
 
 function SearchProjects() {
     const [searchTerm, setSearchTerm] = useState('');
@@ -44,24 +43,33 @@ function SearchProjects() {
         setSearched(true);
     };
 
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            handleSearch();
+        }
+    };
+
     const viewSpecifications = (productId) => {
         navigate(`/product-specifications/${productId}`);
     };
 
     return (
         <div className='pt-[85px]'>
-            <div className='w-[100%]  mt-[15px] flex justify-center mx-[5px] mb-[25px] p-[4px]'>
+            <div className='w-[100%] mt-[15px] flex justify-center mx-[5px] mb-[25px] p-[4px]'>
                 <input
                     type="text"
                     className='w-[85%] p-[8px] border-2 border-gray-600 rounded-lg placeholder:text-gray-600 font-medium'
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
+                    onKeyPress={handleKeyPress}
                     placeholder="Search Product !!"
                 />
-                <button className='text-gray-600 ml-[10px]' onClick={handleSearch}><IoIosSearch size={35} /></button>
+                <button className='text-gray-600 ml-[10px]' onClick={handleSearch}>
+                    <IoIosSearch size={35} />
+                </button>
             </div>
 
-            {loading &&
+            {loading && (
                 <div className='h-[calc(98vh-135px)] w-screen flex flex-col justify-center items-center'>
                     <Bars
                         height="50"
@@ -70,14 +78,17 @@ function SearchProjects() {
                         ariaLabel="bars-loading"
                         wrapperStyle={{}}
                         wrapperClass=""
-                        visible={true} />
+                        visible={true}
+                    />
                 </div>
-            }
-            {error && <p className='flex justify-center mx-auto text-lg text-red-600 font-medium'>Error: {error}</p>}
+            )}
+            {error && (
+                <p className='flex justify-center mx-auto text-lg text-red-600 font-medium'>Error: {error}</p>
+            )}
 
             {searched && searchTerm.trim() !== '' && (
                 products.length > 0 ? (
-                    <div className=' scrollbar-hide grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 w-[95%] mx-auto place-items-center gap-y-[25px]'>
+                    <div className='scrollbar-hide grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 w-[95%] mx-auto place-items-center gap-y-[25px]'>
                         {products.map((product) => (
                             <ProductData
                                 key={product.id}

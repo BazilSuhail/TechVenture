@@ -89,7 +89,7 @@ const LikedReviews = ({ reviews }) => {
     return (
         <div className='scrollbar-custom'>
             {reviews.map((review) => (
-                <div key={review.id} className='my-[15px] shadow-custom-card w-[85%] mx-auto rounded-lg p-[10px]' >
+                <div key={review.id} className='my-[15px] bg-white border border-gray-200 w-[85%] mx-auto rounded-lg p-[16px]' >
 
                     <div className='flex items-center'>
                         <div className='w-[45px] h-[45px]'>
@@ -106,7 +106,6 @@ const LikedReviews = ({ reviews }) => {
                                 </div>
                             )}
                         </div>
-
                         <div className='ml-[8px] text-xl font-medium'> {userNames[review.user_id]}</div>
                     </div>
 
@@ -121,20 +120,11 @@ const LikedReviews = ({ reviews }) => {
                             />
                         ))}
                     </div>
-
-
-                    <div className='flex items-center rounded-md py-[6px]'>
-                        {/*<div className='font-bold text-lg text-gray-600'>Product: </div> */}
-                        <p className='font-bold  text-white bg-gray-700  py-[2px] px-[10px] rounded-xl text-lg'>{products[review.product_id]}</p>
+                    <div className='flex scale-[0.8] items-center rounded-md py-[6px]'> 
+                        <p className='font-[700] ml-[-44px] md:ml-[-88px] text-white bg-gray-700  py-[2px] px-[10px] rounded-xl text-lg'>{products[review.product_id]}</p>
                     </div>
-
-                    <div className='mt-[4px] font-bold text-2xl text-black'>Review: </div>
-                    <p className='mt-[18px] border-2 border-gray-300 rounded-md w-[100%] p-[10px] font-bold pt-[10px] text-md text-gray-700'>{review.comment}</p>
-
-
-
-                    {/* Display other <p>Comment: {review.comment}</p> review details as 
-                        <p>Rating: {review.rating}</p> needed */}
+                    <div className='mt-[4px] font-[700] text-2xl text-black'>Review: </div>
+                    <p className='mt-[18px] border-2 border-gray-300 rounded-md w-[100%] p-[10px] break-words font-bold pt-[10px] text-md text-gray-700'>{review.comment}</p>
                 </div>
             ))}
         </div>

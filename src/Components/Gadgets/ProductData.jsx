@@ -17,7 +17,6 @@ function ProductData({ product, subcategories, viewSpecifications, showSubcatego
         <motion.div className='flex flex-col justify-center border-2 border-gray-400 rounded-lg h-[95%] w-[95%] p-[15px] m-[6px]'
             style={{ scale, opacity }}
         >
-
             <h3 className='px-[6px] py-[16px] border-2 mt-[8px] font-bold text-center text-2xl border-gray-300 rounded-lg'>{product.name}</h3>
             <p className='font-bold py-[25px] text-md text-gray-500'>{truncateDescription(product.description)}</p>
 
