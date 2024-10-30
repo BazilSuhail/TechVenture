@@ -42,7 +42,7 @@ const ReviewItem = ({ review, userId, handleLikeReview }) => {
     }, [review.user_id]);
 
     return (
-        <div key={review.id} className='my-[15px] shadow-custom-card w-[95%] md:w-[85%] mx-auto rounded-lg p-[10px]' >
+        <div key={review.id} className='my-[15px] bg-white border border-gray-300 w-[95%] md:w-[85%] mx-auto rounded-lg p-[10px]' >
             <div className='flex md:scale-[1] scale-[0.9] items-center'>
                 <div className='w-[45px] h-[45px]'>
                     {profileImage ? (

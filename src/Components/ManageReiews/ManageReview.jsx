@@ -104,7 +104,7 @@ function ManageReviews({ productId, onClose }) {
  
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-        <div className="relative bg-white rounded-[25px] shadow-lg w-[90vw] md:w-[80vw] lg:w-[75vw] xl:w-[70vw] h-[90vh] p-6 no-scrollbar overflow-y-auto">
+        <div className="relative bg-gray-100 rounded-[25px] shadow-lg w-[90vw] md:w-[80vw] lg:w-[75vw] xl:w-[70vw] h-[90vh] p-6 no-scrollbar overflow-y-auto">
             <button onClick={onClose} className="absolute top-4 right-4 mb-[55px] text-gray-600 hover:text-gray-900">
                 <MdCancel size={30} />
             </button>
@@ -124,7 +124,7 @@ function ManageReviews({ productId, onClose }) {
             ) : error ? (
                 <div className="text-red-600 text-center mt-6">Error: {error}</div>
             ) : (
-                <div>
+                <div className='mt-[55px]'>
                     {reviews.map((review) => (
                         <ReviewItem
                             key={review.id}

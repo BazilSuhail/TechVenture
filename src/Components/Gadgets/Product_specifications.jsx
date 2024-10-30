@@ -225,7 +225,7 @@ function ProductSpecifications() {
 
                 <div className='grid grid-cols-1 xsx:grid-cols-11'>
 
-                    <div className=' xsx:col-span-6 xsx:shadow-slider p-[5px] md:p-[15px] m-[5px] md:m-[20px] xsx:overflow-auto xsx:h-[calc(98vh-85px)] scrollbar-custom'>
+                    <div className=' xsx:col-span-6 xsx:shadow-slider p-[5px] md:p-[15px] m-[5px] md:m-[20px] xsx:overflow-auto xsx:h-[calc(98vh-85px)] no-scrollbar'>
                         <button onClick={handleBack}><IoArrowBackCircleOutline size={55} /></button>
                         {
                             productImage !== null ? (
@@ -291,7 +291,7 @@ function ProductSpecifications() {
 
                     </div>
 
-                    <div className='xsx:col-span-5 xsx:mt-[0px] mt-[35px] flex flex-col xsx:overflow-auto xsx:h-[calc(98vh-85px)] scrollbar-custom'>
+                    <div className='xsx:col-span-5 xsx:mt-[0px] mt-[35px] flex flex-col xsx:overflow-auto xsx:h-[calc(98vh-85px)] no-scrollbar'>
 
                         <div className='border-[1px] border-gray-700 xsx:mt-[45px] rounded-md w-[90%] mx-auto p-[10px]'>
                             <h3 className='text-2xl ml-[19px] text-custom-blue mb-[8px] font-bold '>Add Your Review</h3>
@@ -326,7 +326,7 @@ function ProductSpecifications() {
                             <div>
                                 {reviews.map((review) => (
                                     <div key={review.id}>
-                                        {review.user_id === userId && ( // Show only user's own reviews
+                                        {review.user_id === userId && (  
                                             <div className='py-[8px] p-[10px] shadow-custom-light rounded-xl w-[95%] overflow-x-auto scrollbar-hide  my-[15px] mx-auto' >
 
                                                 <p className='text-xl font-bold '>Review:</p>
