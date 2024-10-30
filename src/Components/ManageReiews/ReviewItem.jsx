@@ -10,14 +10,12 @@ const ReviewItem = ({ review, userId, handleLikeReview }) => {
     useEffect(() => {
         const fetchProfileData = async (userId) => {
             try {
-                const { data: imageUrl, error: imageError } = await supabase
-                    .storage
-                    .from('profile_images')
-                    .getPublicUrl(`${userId}.jpeg`);
-                if (imageError) throw imageError;
+                const { data: imageUrl, error: imageError } = await supabase.storage.from('profile_images').getPublicUrl(`${userId}.jpeg`);
 
-                setProfileImage(imageUrl.publicUrl);
-                // Validate if the URL returns an image
+                if (imageError) 
+                    throw imageError;
+
+                setProfileImage(imageUrl.publicUrl); 
                 const response = await fetch(imageUrl.publicUrl, { method: 'HEAD' });
 
                 if (response.ok && response.headers.get('Content-Type').includes('image')) {
@@ -44,9 +42,8 @@ const ReviewItem = ({ review, userId, handleLikeReview }) => {
     }, [review.user_id]);
 
     return (
-        <div key={review.id} className='my-[15px] shadow-custom-card w-[85%] mx-auto rounded-lg p-[10px]' >
-
-            <div className='flex items-center'>
+        <div key={review.id} className='my-[15px] shadow-custom-card w-[95%] md:w-[85%] mx-auto rounded-lg p-[10px]' >
+            <div className='flex md:scale-[1] scale-[0.9] items-center'>
                 <div className='w-[45px] h-[45px]'>
                     {profileImage ? (
                         <img src={profileImage} alt="User Profile" className='w-[100%] h-[100%]  rounded-[50%]' />
@@ -70,8 +67,8 @@ const ReviewItem = ({ review, userId, handleLikeReview }) => {
                     />
                 ))}
             </div>
-            <div className='mt-[4px] font-bold text-2xl text-black'>Review: </div>
-            <p className='mt-[18px] border-2  overflow-x-auto scrollbar-hide  border-gray-300 rounded-md w-[100%] p-[10px] font-bold pt-[10px] text-md text-gray-700'>{review.comment}</p>
+            <div className='mt-[4px] font-bold text-2xl text-black'>Review: </div> 
+            <p className='mt-[18px] border-2 break-words border-gray-300 rounded-md p-[10px] font-bold pt-[10px] text-md text-gray-700'>{review.comment}</p>
 
             <div className='flex justify-between my-[8px]'>
                 <div className='flex items-center px-[8px] ml-auto md:px-[12px] py-[5px] '>

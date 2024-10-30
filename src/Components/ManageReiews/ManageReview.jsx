@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { supabase } from '../../Config/Config';
-import { IoArrowBackCircleOutline } from "react-icons/io5";
+import { useState, useEffect } from 'react'; 
+import { supabase } from '../../Config/Config'; 
 import ReviewItem from './ReviewItem';
-import { Bars } from 'react-loader-spinner';
+import { Bars } from 'react-loader-spinner'; 
+import { MdCancel } from 'react-icons/md';
 
-function ManageReviews() {
-    const { productId } = useParams();
-    const navigate = useNavigate();
+function ManageReviews({ productId, onClose }) { 
     const [reviews, setReviews] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -16,6 +13,7 @@ function ManageReviews() {
     useEffect(() => {
         const fetchReviews = async () => {
             try {
+                console.log(productId);
                 const { data, error } = await supabase.auth.getUser();
                 if (error) throw error;
                 if (!data || !data.user) throw new Error('User not logged in');
@@ -103,14 +101,16 @@ function ManageReviews() {
             alert('Error liking review: ' + error.message);
         }
     };
-
-    const handleBack = () => {
-        navigate(-1);
-    };
+ 
     return (
-        <div className='h-full w-full pt-[85px]'>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="relative bg-white rounded-[25px] shadow-lg w-[90vw] md:w-[80vw] lg:w-[75vw] xl:w-[70vw] h-[90vh] p-6 no-scrollbar overflow-y-auto">
+            <button onClick={onClose} className="absolute top-4 right-4 mb-[55px] text-gray-600 hover:text-gray-900">
+                <MdCancel size={30} />
+            </button>
+
             {loading ? (
-                <div className='h-[calc(98vh-95px)] w-screen flex flex-col justify-center items-center'>
+                <div className="flex justify-center items-center h-full">
                     <Bars
                         height="50"
                         width="50"
@@ -118,27 +118,25 @@ function ManageReviews() {
                         ariaLabel="bars-loading"
                         wrapperStyle={{}}
                         wrapperClass=""
-                        visible={true} />
+                        visible={true}
+                    />
                 </div>
-            ) :
-                error ? (
-                    <div>Error: {error}</div>
-                ) : (
-                    <div>
-
-                        <button onClick={handleBack}><IoArrowBackCircleOutline size={55} /></button>
-                        {reviews.map((review) => (
-                            <ReviewItem
-                                key={review.id}
-                                review={review}
-                                userId={userId}
-                                handleLikeReview={handleLikeReview}
-                            />
-                        ))}
-                    </div>
-                )}
-        </div >
-
+            ) : error ? (
+                <div className="text-red-600 text-center mt-6">Error: {error}</div>
+            ) : (
+                <div>
+                    {reviews.map((review) => (
+                        <ReviewItem
+                            key={review.id}
+                            review={review}
+                            userId={userId}
+                            handleLikeReview={handleLikeReview}
+                        />
+                    ))}
+                </div>
+            )}
+        </div>
+    </div>
     );
 }
 

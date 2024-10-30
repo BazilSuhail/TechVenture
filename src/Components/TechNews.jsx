@@ -13,9 +13,10 @@ const TechNews = () => {
         const fetchNews = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get('/.netlify/functions/fetchNews', {
+                const response = await axios.get('https://newsapi.org/v2/everything', {
                     params: {
                         q: 'technology OR tech gadgets',
+                        apiKey: 'baecc57aed4f42d39ae3e7b9b3be99a5',
                         pageSize: 30
                     }
                 });
@@ -26,7 +27,6 @@ const TechNews = () => {
                 setLoading(false);
             }
         };
-        
 
         fetchNews();
     }, []);

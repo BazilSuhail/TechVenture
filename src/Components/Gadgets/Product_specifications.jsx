@@ -5,10 +5,17 @@ import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { FaStar } from 'react-icons/fa';
 import { AiFillLike } from "react-icons/ai";
 import { Bars } from 'react-loader-spinner';
+import ManageReviews from '../ManageReiews/ManageReview';
 
 
 function ProductSpecifications() {
     const { productId } = useParams();
+
+    
+    
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedProductId, setSelectedProductId] = useState(null);
+
     const navigate = useNavigate();
     const [specifications, setSpecifications] = useState([]);
     const [reviews, setReviews] = useState([]);
@@ -179,9 +186,21 @@ function ProductSpecifications() {
         }
     };
 
-    const handleReadReviews = () => {
-        navigate(`/manage-reviews/${productId}`);
+    /*const handleReadReviews = () => {
+        //navigate(`/manage-reviews/${productId}`);
+
     };
+*/
+    const handleReadReviews = () => { 
+        setSelectedProductId(productId);
+        setModalVisible(true);
+      };
+    
+      const closeModal = () => {
+        setModalVisible(false);
+        setSelectedProductId(null);
+      };
+    
 
     const handleBack = () => {
         navigate(-1);
@@ -331,14 +350,13 @@ function ProductSpecifications() {
                                 ))}
                             </div>
                         </div>
-
-
-
-
                     </div>
 
                 </div>
             )}
+            {modalVisible && selectedProductId && (
+            <ManageReviews onClose={closeModal} productId={selectedProductId} />
+          )}
         </div >
 
     );
