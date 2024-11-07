@@ -70,7 +70,7 @@ function SearchProjects() {
             </div>
 
             {loading && (
-                <div className='h-[calc(98vh-135px)] w-screen flex flex-col justify-center items-center'>
+                <div className='h-[calc(98vh-135px)] scale-[0.9] w-screen flex flex-col justify-center items-center'>
                     <Bars
                         height="50"
                         width="50"

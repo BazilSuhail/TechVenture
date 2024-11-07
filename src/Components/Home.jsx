@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { IoIosRocket, IoIosSearch, IoLogoDribbble } from "react-icons/io";
 import { FaBullseye, FaLightbulb, FaBalanceScale, FaUsers, FaCog, FaEnvelope, FaStar } from 'react-icons/fa';
@@ -60,6 +60,10 @@ const HomePage = () => {
     const opacity = useTransform(scrollYProgress, [0.33, 0.40], [0, 1]);
     const y = useTransform(scrollYProgress, [0.15, 0.18], [20, 0]);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        window.scrollTo(0, 0); 
+      }, []);
 
     return (
         <div className="pt-[80px] bg-gray-100 ">
@@ -189,7 +193,7 @@ const HomePage = () => {
                 </div>
             </section>
 
-            <section className='w-[100%] bg-black py-[22px]'>
+            <section className=' w-[100%] bg-black py-[55px]'>
                 <div className="slider" style={{ '--width': '120px', '--height': '52px', '--quantity': 10 }}>
                     <div className="list">
                         <div className="item" style={{ '--position': 1 }}><div className="bg-gray-800 text-white rounded-2xl text-center text-lg font-medium py-[4px]">Smartphones</div></div>
@@ -234,12 +238,12 @@ const HomePage = () => {
                 </div>
             </section>
 
-            <section className="pb-10 bg-black">
-                <div className="text-center mb-8">
-                    <h2 className="  text-2xl md:text-4xl font-extrabold w-[100%] text-gray-50 p-[15px]">Why Trust Us?</h2>
+            <section className="pb-10 xl:px-[65px] bg-black">
+                <div className="text- mb-[6px]">
+                    <h2 className="  text-2xl md:text-[35px] font-[700] w-[100%] text-gray-200 p-[15px]">Why Trust Us?</h2>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 p-[20px] gap-8" id="mission-section">
-                    <motion.div className="p-6 bg-gray-700 flex items-center text-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
+                    <motion.div className="p-6 bg-gray-800 flex items-center text-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
                         style={{ opacity, x }}
                     >
                         <IoLogoDribbble size={28} className="mr-4" />
@@ -249,7 +253,7 @@ const HomePage = () => {
                         </div>
                     </motion.div>
 
-                    <motion.div className="p-6 bg-gray-700 flex items-center text-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
+                    <motion.div className="p-6 bg-gray-800 flex items-center text-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
                         style={{ opacity, x }}
                     >
                         <IoIosRocket size={28} className="mr-4" />
@@ -259,7 +263,7 @@ const HomePage = () => {
                         </div>
                     </motion.div>
 
-                    <motion.div className="p-6 bg-gray-700 flex items-center text-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
+                    <motion.div className="p-6 bg-gray-800 flex items-center text-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
                         style={{ opacity, x: x * -1 }}
                     >
                         <MdOutlineDevices size={28} className="mr-4" />
@@ -269,7 +273,7 @@ const HomePage = () => {
                         </div>
                     </motion.div>
 
-                    <motion.div className="p-6 bg-gray-700 flex items-center text-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
+                    <motion.div className="p-6 bg-gray-800 flex items-center text-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
                         style={{ opacity, x }}
                     >
                         <MdSupportAgent size={28} className="mr-4" />

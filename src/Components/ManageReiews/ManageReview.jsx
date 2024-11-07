@@ -110,7 +110,7 @@ function ManageReviews({ productId, onClose }) {
             </button>
 
             {loading ? (
-                <div className="flex justify-center items-center h-full">
+                <div className="flex scale-[0.9] justify-center items-center h-full">
                     <Bars
                         height="50"
                         width="50"

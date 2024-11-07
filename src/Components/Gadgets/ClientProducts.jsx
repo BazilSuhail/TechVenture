@@ -16,8 +16,12 @@ function ClientProducts() {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedSubcategory, setSelectedSubcategory] = useState('');
-  const [loading, setLoading] = useState(true); // Initialize loading state
+  const [loading, setLoading] = useState(true); 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0); 
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -82,9 +86,9 @@ function ClientProducts() {
   };
   // px-4 lg:hover:bg-gray-400 whitespace-nowrap hover:text-white font-bold transition duration-200 rounded-md cursor-pointer ${selectedCategory === category.id ? 'bg-black text-white' : 'bg-gray-300'}
   return (
-    <div className='h-full overflow-x-hidden w-full pt-[85px] '>
+    <div className='h-full overflow-x-hidden min-h-screen w-full pt-[85px] '>
       {loading ? (
-        <div className='h-[calc(98vh-95px)] w-screen flex flex-col justify-center items-center'> 
+        <div className='h-[calc(98vh-95px)] scale-[0.9] w-screen flex flex-col justify-center items-center'> 
         <Bars
           height="50"
           width="50"

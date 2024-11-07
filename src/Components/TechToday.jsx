@@ -179,7 +179,7 @@ const TechToday = () => {
                 <Bars height="50" width="50" color="#363636" ariaLabel="loading" visible />
             </div>
         ) : (
-            <div className="px-6 md:px-12">
+            <div className="">
             <h1 className="text-center text-3xl md:text-4xl font-bold mb-8 text-gray-800">Catchout Latest News</h1>
         
             {/* Top 5 Most Liked Products */}
@@ -189,12 +189,12 @@ const TechToday = () => {
                     {topLikedProducts.map(product => (
                         <div 
                             key={product.id} 
-                            className="bg-white p-5 rounded-xl w-[320px] shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl"
+                            className="bg-white p-5 flex flex-col rounded-xl w-[320px] shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl"
                         >
                             <h3 className="text-center text-xl font-semibold text-gray-800">{product.name}</h3>
                             <p className="mt-3 text-sm text-gray-600">{truncateDescription(product.description)}</p>
-                            <p className="text-center text-gray-800 font-bold mt-3">${product.price.toFixed(2)}</p>
-                            <div className="flex justify-between items-center mt-4">
+                            <p className="text-center text-gray-800 font-bold">${product.price.toFixed(2)}</p>
+                            <div className="flex  justify-between items-center mt-auto">
                                 <div className="flex items-center text-gray-600">
                                     <span className="text-blue-600 font-semibold">{product.likes}</span>
                                     <span className="ml-1">Likes</span>

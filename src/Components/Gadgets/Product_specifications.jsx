@@ -207,7 +207,7 @@ function ProductSpecifications() {
     };
 
     return (
-        <div className='min-h-screen no-scrollbar w-full pt-[84px]'>
+        <div className='min-h-screen no-scrollbar w-full pt-[45px]'>
             {loading ? (
                 <div className='h-screen w-full flex flex-col justify-center items-center'>
                     <Bars
@@ -223,7 +223,7 @@ function ProductSpecifications() {
                 <div>Error: {error}</div>
             ) : (
 
-                <div className='grid grid-cols-1 xsx:grid-cols-11'>
+                <div className='xl:scale-[0.9] grid grid-cols-1 xsx:grid-cols-11'>
 
                     <div className=' xsx:col-span-6 xsx:shadow-slider p-[5px] md:p-[15px] m-[5px] md:m-[20px] xsx:overflow-auto xsx:h-[calc(98vh-85px)] no-scrollbar'>
                         <button onClick={handleBack}><IoArrowBackCircleOutline size={55} /></button>
@@ -255,7 +255,7 @@ function ProductSpecifications() {
                         <div className='w-[100%] h-[2px] bg-gray-400 mt-[28px]'></div>
 
                         <div className='flex justify-between my-[25px]'>
-                            <div className='flex items-center ml-[25px] px-[8px] md:px-[12px] py-[5px] shadow-custom-light rounded-lg'>
+                            <div className='flex scale-[0.8] items-center ml-[25px] px-[8px] md:px-[12px] py-[5px] shadow-custom-light rounded-lg'>
                                 <button onClick={handleLikeProduct} className='text-[32px] md:text-[40px]'>
                                     <AiFillLike className={likedByUser ? 'text-blue-600' : 'text-gray-200'} />
                                 </button>
