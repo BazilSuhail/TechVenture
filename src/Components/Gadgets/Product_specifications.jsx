@@ -11,10 +11,10 @@ import ManageReviews from '../ManageReiews/ManageReview';
 function ProductSpecifications() {
     const { productId } = useParams();
 
-    
-    
-  const [modalVisible, setModalVisible] = useState(false);
-  const [selectedProductId, setSelectedProductId] = useState(null);
+
+
+    const [modalVisible, setModalVisible] = useState(false);
+    const [selectedProductId, setSelectedProductId] = useState(null);
 
     const navigate = useNavigate();
     const [specifications, setSpecifications] = useState([]);
@@ -185,22 +185,17 @@ function ProductSpecifications() {
             alert('Error liking product: ' + error.message);
         }
     };
-
-    /*const handleReadReviews = () => {
-        //navigate(`/manage-reviews/${productId}`);
-
-    };
-*/
-    const handleReadReviews = () => { 
+ 
+    const handleReadReviews = () => {
         setSelectedProductId(productId);
         setModalVisible(true);
-      };
-    
-      const closeModal = () => {
+    };
+
+    const closeModal = () => {
         setModalVisible(false);
         setSelectedProductId(null);
-      };
-    
+    };
+
 
     const handleBack = () => {
         navigate(-1);
@@ -223,9 +218,8 @@ function ProductSpecifications() {
                 <div>Error: {error}</div>
             ) : (
 
-                <div className='xl:scale-[0.9] grid grid-cols-1 xsx:grid-cols-11'>
-
-                    <div className=' xsx:col-span-6 xsx:shadow-slider p-[5px] md:p-[15px] m-[5px] md:m-[20px] xsx:overflow-auto xsx:h-[calc(98vh-85px)] no-scrollbar'>
+                <div className='xl:scale-[0.95] grid grid-cols-1 xsx:grid-cols-11'>
+                    <div className=' xsx:col-span-6 xsx:shadow-slider p-[5px] md:p-[15px] m-[5px] md:m-[20px] xsx:overflow-auto  no-scrollbar'>
                         <button onClick={handleBack}><IoArrowBackCircleOutline size={55} /></button>
                         {
                             productImage !== null ? (
@@ -291,34 +285,36 @@ function ProductSpecifications() {
 
                     </div>
 
-                    <div className='xsx:col-span-5 xsx:mt-[0px] mt-[35px] flex flex-col xsx:overflow-auto xsx:h-[calc(98vh-85px)] no-scrollbar'>
+                    <div className='xsx:px-0 px-[15px] xsx:col-span-5 xsx:mt-[0px] mt-[35px] flex flex-col xsx:overflow-auto xsx:h-[calc(98vh-85px)] no-scrollbar'>
 
-                        <div className='border-[1px] border-gray-700 xsx:mt-[45px] rounded-md w-[90%] mx-auto p-[10px]'>
-                            <h3 className='text-2xl ml-[19px] text-custom-blue mb-[8px] font-bold '>Add Your Review</h3>
+                        <div className='xsx:mt-[45px] p-[10px]'>
+                            <h3 className='text-2xl text-custom-blue mb-[8px] font-bold '>Add Your Review</h3>
                             <form onSubmit={handleAddReview} className="flex flex-col space-y-4">
                                 <textarea
                                     value={comment}
                                     onChange={(e) => setComment(e.target.value)}
                                     placeholder="Write your review..."
                                     required
-                                    className="p-2 border-2 border-gray-600 w-[95%] h-[150px] mx-auto text-md font-medium  rounded"
+                                    className="p-[15px] bg-gray-100 w-full h-[180px] mx-auto text-md font-medium rounded-[12px] focus:outline-none"
                                 />
 
-                                <div className="flex items-center  ml-[19px]">
-                                    <label className="mr-[10px] text-xl font-semibold">Rating:</label>
-                                    {[...Array(5)].map((_, index) => (
-                                        <FaStar
-                                            size={25}
-                                            key={index}
-                                            className={`cursor-pointer ${index < rating ? 'text-yellow-500' : 'text-gray-300'}`}
-                                            onClick={() => handleStarClick(index)}
-                                        />
-                                    ))}
-                                </div>
+                                <div className='flex items-center mt-[15px] justify-between'>
+                                    <div className="scale-[1.05] flex items-center">
+                                        <label className="mr-[10px] text-xl font-semibold">Rating:</label>
+                                        {[...Array(5)].map((_, index) => (
+                                            <FaStar
+                                                size={25}
+                                                key={index}
+                                                className={`cursor-pointer ${index < rating ? 'text-yellow-500' : 'text-gray-300'}`}
+                                                onClick={() => handleStarClick(index)}
+                                            />
+                                        ))}
+                                    </div>
 
-                                <button type="submit" className="bg-gray-700 text-lg w-[150px] mt-[-15px] ml-auto mb-[5px] hover:bg-gray-400 text-white py-[4px] rounded-xl">
-                                    Submit Review
-                                </button>
+                                    <button type="submit" className="bg-gray-700 text-lg w-[150px] hover:bg-gray-400 text-white py-[4px] rounded-xl">
+                                        Submit Review
+                                    </button>
+                                </div>
                             </form>
                         </div>
                         <div className=' w-[90%] mx-auto'>
@@ -326,7 +322,7 @@ function ProductSpecifications() {
                             <div>
                                 {reviews.map((review) => (
                                     <div key={review.id}>
-                                        {review.user_id === userId && (  
+                                        {review.user_id === userId && (
                                             <div className='py-[8px] p-[10px] shadow-custom-light rounded-xl w-[95%] overflow-x-auto scrollbar-hide  my-[15px] mx-auto' >
 
                                                 <p className='text-xl font-bold '>Review:</p>
@@ -355,8 +351,8 @@ function ProductSpecifications() {
                 </div>
             )}
             {modalVisible && selectedProductId && (
-            <ManageReviews onClose={closeModal} productId={selectedProductId} />
-          )}
+                <ManageReviews onClose={closeModal} productId={selectedProductId} />
+            )}
         </div >
 
     );

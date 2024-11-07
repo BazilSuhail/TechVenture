@@ -1,26 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../Config/Config';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 import { Bars } from 'react-loader-spinner';
-import TechNews from './TechNews';
-
-import { FaStar } from 'react-icons/fa';
+import { FaRegCalendarPlus, FaStar } from 'react-icons/fa';
 import { AiOutlineLike, AiOutlineCalendar } from 'react-icons/ai';
 
 
 const TechToday = () => {
     const [topLikedProducts, setTopLikedProducts] = useState([]);
-    const [recentlyCreatedProducts, setRecentlyCreatedProducts] = useState([]);
-    const [topLikedReviews, setTopLikedReviews] = useState([]);
+    const [recentlyCreatedProducts, setRecentlyCreatedProducts] = useState([]); 
     const [recentlyCreatedReviews, setRecentlyCreatedReviews] = useState([]);
     const [userNames, setUserNames] = useState({});
-    const [productNames, setProductNames] = useState({});
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchAllData = async () => {
-            try {
-                // Fetch top 5 most liked products
+            try { 
                 const fetchTopLikedProducts = async () => {
                     const { data: products, error } = await supabase
                         .from('products')
@@ -64,21 +59,7 @@ const TechToday = () => {
 
                     setRecentlyCreatedProducts(createdProducts);
                 };
-
-                // Fetch top 5 liked reviews
-                const fetchTopLikedReviews = async () => {
-                    const { data: likedReviews, error: likedReviewsError } = await supabase
-                        .from('product_reviews')
-                        .select('*')
-                        .order('likes', { ascending: false })
-                        .limit(5);
-
-                    if (likedReviewsError) throw likedReviewsError;
-
-                    setTopLikedReviews(likedReviews);
-
-                    fetchUserNamesAndProductNames(likedReviews);
-                };
+ 
 
                 // Fetch top 5 recently created reviews
                 const fetchRecentlyCreatedReviews = async () => {
@@ -98,7 +79,6 @@ const TechToday = () => {
                 // Fetch user names and product names based on user IDs and product IDs in reviews
                 const fetchUserNamesAndProductNames = async (reviews) => {
                     const userIds = reviews.map((review) => review.user_id);
-                    const productIds = reviews.map((review) => review.product_id);
 
                     const usersData = await Promise.all(
                         userIds.map(async (userId) => {
@@ -117,44 +97,17 @@ const TechToday = () => {
                         })
                     );
 
-                    const productsData = await Promise.all(
-                        productIds.map(async (productId) => {
-                            const { data: productData, error } = await supabase
-                                .from('products')
-                                .select('name')
-                                .eq('id', productId)
-                                .single();
-
-                            if (error) {
-                                console.error('Error fetching product data:', error.message);
-                                return null;
-                            }
-
-                            return { productId, productName: productData.name };
-                        })
-                    );
-
                     const userNamesMap = usersData.reduce((acc, curr) => {
                         if (curr) {
                             acc[curr.userId] = curr.userName;
                         }
                         return acc;
-                    }, {});
-
-                    const productNamesMap = productsData.reduce((acc, curr) => {
-                        if (curr) {
-                            acc[curr.productId] = curr.productName;
-                        }
-                        return acc;
-                    }, {});
-
+                    }, {}); 
                     setUserNames((prevNames) => ({ ...prevNames, ...userNamesMap }));
-                    setProductNames((prevNames) => ({ ...prevNames, ...productNamesMap }));
                 };
 
                 await fetchTopLikedProducts();
-                await fetchRecentlyCreatedProducts();
-                await fetchTopLikedReviews();
+                await fetchRecentlyCreatedProducts(); 
                 await fetchRecentlyCreatedReviews();
 
                 setLoading(false);
@@ -174,132 +127,103 @@ const TechToday = () => {
 
     return (
         <div className="overflow-x-hidden min-h-screen bg-white pt-[85px] text-gray-800">
-        {loading ? (
-            <div className='flex justify-center items-center h-[calc(100vh-95px)]'>
-                <Bars height="50" width="50" color="#363636" ariaLabel="loading" visible />
-            </div>
-        ) : (
-            <div className="">
-            <h1 className="text-center text-3xl md:text-4xl font-bold mb-8 text-gray-800">Catchout Latest News</h1>
-        
-            {/* Top 5 Most Liked Products */}
-            <section className="mb-16 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg p-6">
-                <h2 className="text-center text-2xl md:text-3xl font-bold mb-6 text-gray-700">Top 5 Most Liked Products</h2>
-                <div className="flex overflow-x-auto gap-6 scrollbar-hide">
-                    {topLikedProducts.map(product => (
-                        <div 
-                            key={product.id} 
-                            className="bg-white p-5 flex flex-col rounded-xl w-[320px] shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl"
-                        >
-                            <h3 className="text-center text-xl font-semibold text-gray-800">{product.name}</h3>
-                            <p className="mt-3 text-sm text-gray-600">{truncateDescription(product.description)}</p>
-                            <p className="text-center text-gray-800 font-bold">${product.price.toFixed(2)}</p>
-                            <div className="flex  justify-between items-center mt-auto">
-                                <div className="flex items-center text-gray-600">
-                                    <span className="text-blue-600 font-semibold">{product.likes}</span>
-                                    <span className="ml-1">Likes</span>
-                                </div>
-                                <Link to={`/product-specifications/${product.id}`} className="text-white bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded-lg font-semibold transition">
-                                    Review
-                                </Link>
-                            </div>
-                        </div>
-                    ))}
+            {loading ? (
+                <div className='flex justify-center items-center h-[calc(100vh-95px)]'>
+                    <Bars height="50" width="50" color="#363636" ariaLabel="loading" visible />
                 </div>
-            </section>
-        
-            {/* Recently Launched Gadgets */}
-            <section className="mb-16 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg p-6">
-                <h2 className="text-center text-2xl md:text-3xl font-bold mb-6 text-gray-700">Recently Launched Gadgets</h2>
-                <div className="flex overflow-x-auto gap-6 scrollbar-hide">
-                    {recentlyCreatedProducts.map(product => (
-                        <div 
-                            key={product.id} 
-                            className="bg-white p-5 rounded-xl w-[320px] shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl"
-                        >
-                            <h3 className="text-center text-xl font-semibold text-gray-800">{product.name}</h3>
-                            <p className="mt-3 text-sm text-gray-600">{truncateDescription(product.description)}</p>
-                            <p className="text-center text-gray-800 font-bold mt-3">${product.price.toFixed(2)}</p>
-                            <div className="flex justify-between items-center mt-4">
-                                <div className="text-gray-500">
-                                    {new Date(product.created_at).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })}
+            ) : (
+                <div className="">
+                    <h1 className="text-center text-3xl md:text-4xl font-bold mb-8 text-gray-800">Catchout Latest News</h1>
+
+                    {/* Top 5 Most Liked Products */}
+                    <section className='bg-black  py-[15px] px-[2px]  md:px-[15px]] text-white'>
+                        <div className="text-[24px] my-[28px] md:text-[28px] underline text-center font-[700] ">Top 5 Most Liked Products</div>
+                        <div className="my-[15px] flex overflow-x-auto scrollbar-hide">
+                            {topLikedProducts.map((product) => (
+                                <div key={product.id} className='flex flex-col justify-center bg-gray-800 rounded-xl mr-[25px] h-[375px] w-[390px] p-[8px] m-[6px]'>
+                                    <h3 className='px-[6px] py-[16px] w-full bg-gray-600 font-[500] text-center text-[22px] rounded-[12px]'>{product.name}</h3>
+                                    <p className='font-bold px-[4px] mt-[10px] h-[38%] text-md text-gray-300'>{truncateDescription(product.description)}</p>
+
+                                    <div className='flex justify-between items-center'>
+                                        <div className='flex items-center bg-gray-200 w-[95px] rounded-lg'>
+                                            <div className='px-[15px] bg-blue-800 py-[6px] text-white rounded-lg'><AiOutlineLike size={18} /></div>
+                                            <p className='text-[19px] font-[700] text-blue-900 ml-[12px]'>{product.likes}</p>
+                                        </div>
+                                        <div className='flex my-[5px] justify-between'> <p></p>
+                                            <p className='text-lg align-baseline font-[600] text-blue-200'><span className='text-blue-300'>$</span><span className='underline'>{product.price.toFixed(2)}</span></p>
+                                        </div>
+                                    </div>
+                                    <Link to={`/product-specifications/${product.id}`} className='bg-gray-900  text-center mx-auto mt-[15px] w-[360px] text-white rounded-lg p-[10px] font-bold hover:bg-gray-500 transition duration-[200ms]' >
+                                        Review Gadget
+                                    </Link>
                                 </div>
-                                <Link to={`/product-specifications/${product.id}`} className="text-white bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded-lg font-semibold transition">
-                                    Review
-                                </Link>
-                            </div>
+                            ))}
                         </div>
-                    ))}
-                </div>
-            </section>
-        
-            {/* Most Liked Reviews */}
-            <section className="mb-16 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg p-6">
-                <h2 className="text-center text-2xl md:text-3xl font-bold mb-6 text-gray-700">Most Liked Reviews</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {topLikedReviews.slice(0, 6).map(review => (
-                        <div 
-                            key={review.id} 
-                            className="bg-white p-5 rounded-xl shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl"
-                        >
-                            <div className="flex items-center mb-4">
-                                <div className="w-10 h-10 rounded-full bg-blue-200 flex items-center justify-center font-semibold text-gray-800">
-                                    {userNames[review.user_id]?.charAt(0)}
+                    </section>
+
+                    <section className=' bg-gray-200 py-[15px] px-[2px]  md:px-[15px] text-black'>
+                        <div className="text-[24px] my-[28px] md:text-[28px] underline text-center font-[700] ">Recently Launched Gadgets</div>
+                        <div className="my-[15px] flex overflow-x-auto scrollbar-hide">
+                            {recentlyCreatedProducts.map((product) => (
+                                <div key={product.id} className='flex flex-col justify-center   bg-white rounded-lg mr-[25px] h-[375px] w-[390px] py-[12px] px-[15px] m-[6px]'>
+                                    <h3 className='px-[6px] py-[12px] bg-[#373232] text-white font-[600] text-center text-[22px] rounded-[12px]'>{product.name}</h3>
+                                    <p className='font-[500] mt-[10px] h-[38%] text-md text-[#373232]'>{truncateDescription(product.description)}</p>
+
+                                    <div className='flex justify-between items-center'>
+                                        <div className='flex items-center bg-gray-200 w-[170px] rounded-lg'>
+                                            <div className='px-[15px] bg-blue-800 py-[6px] text-white rounded-lg'><FaRegCalendarPlus size={18} /></div>
+                                            <p className='text-[17px] font-[600] ml-[8px]'>{new Date(product.created_at).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+                                        </div>
+                                        <div className='flex my-[5px] justify-between'> <p></p>
+                                            <p className='text-lg align-baseline font-[700] text-blue-600'><span className='text-blue-800'>$</span><span className='underline'>{product.price.toFixed(2)}</span></p>
+                                        </div>
+                                    </div>
+
+                                    <Link to={`/product-specifications/${product.id}`} className='bg-[#373232] text-center mx-auto mt-[15px] w-[360px] text-white rounded-lg p-[10px] font-bold hover:bg-gray-500 transition duration-[200ms]' >
+                                        Review Gadget
+                                    </Link>
                                 </div>
-                                <div className="ml-3 text-gray-800">{userNames[review.user_id]}</div>
-                            </div>
-                            <div className="flex items-center mb-3">
-                                <span className="text-gray-600 mr-2">Rating:</span>
-                                {Array.from({ length: 5 }, (_, index) => (
-                                    <FaStar key={index} className={index < review.rating ? 'text-yellow-400' : 'text-gray-300'} />
-                                ))}
-                            </div>
-                            <p className="text-gray-700 mb-4">{review.comment}</p>
-                            <div className="flex items-center justify-end text-gray-500">
-                                <AiOutlineLike className="mr-2" />
-                                <span>{review.likes}</span>
-                            </div>
+                            ))}
                         </div>
-                    ))}
-                </div>
-            </section>
-        
-            {/* Recently Published Reviews */}
-            <section className="mb-16 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg p-6">
-                <h2 className="text-center text-2xl md:text-3xl font-bold mb-6 text-gray-700">Recently Published Reviews</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {recentlyCreatedReviews.slice(0, 6).map(review => (
-                        <div 
-                            key={review.id} 
-                            className="bg-white p-5 rounded-xl shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl"
-                        >
-                            <div className="flex items-center mb-4">
-                                <div className="w-10 h-10 rounded-full bg-blue-200 flex items-center justify-center font-semibold text-gray-800">
-                                    {userNames[review.user_id]?.charAt(0)}
+                    </section>
+
+
+                    {/* Recently Published Reviews */}
+                    <section className="mb-16 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg p-6">
+                        <h2 className="text-center text-2xl md:text-3xl font-bold mb-6 text-gray-700">Recently Published Reviews</h2>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {recentlyCreatedReviews.slice(0, 6).map(review => (
+                                <div
+                                    key={review.id}
+                                    className="bg-white p-5 rounded-xl shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl"
+                                >
+                                    <div className="flex items-center mb-4">
+                                        <div className="w-10 h-10 rounded-full bg-blue-200 flex items-center justify-center font-semibold text-gray-800">
+                                            {userNames[review.user_id]?.charAt(0)}
+                                        </div>
+                                        <div className="ml-3 text-gray-800">{userNames[review.user_id]}</div>
+                                    </div>
+                                    <div className="flex items-center mb-3">
+                                        <span className="text-gray-600 mr-2">Rating:</span>
+                                        {Array.from({ length: 5 }, (_, index) => (
+                                            <FaStar key={index} className={index < review.rating ? 'text-yellow-400' : 'text-gray-300'} />
+                                        ))}
+                                    </div>
+                                    <p className="text-gray-700 mb-4">{review.comment}</p>
+                                    <div className="flex items-center justify-end text-gray-500">
+                                        <AiOutlineCalendar className="mr-2" />
+                                        <span>
+                                            {new Date(review.created_at).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })}
+                                        </span>
+                                    </div>
                                 </div>
-                                <div className="ml-3 text-gray-800">{userNames[review.user_id]}</div>
-                            </div>
-                            <div className="flex items-center mb-3">
-                                <span className="text-gray-600 mr-2">Rating:</span>
-                                {Array.from({ length: 5 }, (_, index) => (
-                                    <FaStar key={index} className={index < review.rating ? 'text-yellow-400' : 'text-gray-300'} />
-                                ))}
-                            </div>
-                            <p className="text-gray-700 mb-4">{review.comment}</p>
-                            <div className="flex items-center justify-end text-gray-500">
-                                <AiOutlineCalendar className="mr-2" />
-                                <span>
-                                    {new Date(review.created_at).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })}
-                                </span>
-                            </div>
+                            ))}
                         </div>
-                    ))}
+                    </section>
                 </div>
-            </section>
+
+            )}
         </div>
-        
-        )}
-    </div>
     );
 };
 export default TechToday;

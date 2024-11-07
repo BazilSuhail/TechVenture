@@ -65,23 +65,7 @@ const faqs = [
     {
         question: "What is your return policy?",
         answer: "We accept returns within 30 days of purchase, provided the items are in their original condition. Please refer to our return policy page for detailed instructions on how to process returns."
-    },
-    {
-        question: "How can I contact customer support?",
-        answer: "You can contact our customer support team via email at support@texleath.com or through our contact form on the website. We are available to assist you with any inquiries or issues."
-    },
-    {
-        question: "Can I customize my order?",
-        answer: "Yes, we offer customization options for bulk orders. Please contact our sales team to discuss your requirements and get a quote."
-    },
-    {
-        question: "What materials are used in your clothing?",
-        answer: "We use high-quality materials including cotton, polyester, and blends designed for durability, comfort, and style. Specific material details are provided in the product descriptions on our website."
-    },
-    {
-        question: "Do you have a physical store?",
-        answer: "Currently, we operate primarily online. However, we do participate in trade shows and events where you can experience our products in person. Check our website for upcoming events and locations."
-    }
+    } 
 ];
 
 
@@ -94,12 +78,11 @@ const Sectionvariants = {
 const HomePage = () => {
 
     const [openIndex, setOpenIndex] = useState(null);
-    const { scrollYProgress } = useScroll();
-    const scale = useTransform(scrollYProgress, [0.15, 0.2], [0.95, 1]);
-    const opacity_Cards = useTransform(scrollYProgress, [0.20, 0.21], [0.4, 1]);
-    const x = useTransform(scrollYProgress, [0.33, 0.40], [-900, 0]);
-    const opacity = useTransform(scrollYProgress, [0.33, 0.40], [0, 1]);
-    const y = useTransform(scrollYProgress, [0.15, 0.18], [20, 0]);
+    const { scrollYProgress } = useScroll(); 
+    const y = useTransform(scrollYProgress, [0.1, 0.17], [800, 0]);
+    const opacity_Cards = useTransform(scrollYProgress, [0.08, 0.15], [0.4, 1]);
+    const x = useTransform(scrollYProgress, [0.30, 0.38], [-900, 0]);
+    const opacity = useTransform(scrollYProgress, [0.30, 0.38], [0, 1]);
     const navigate = useNavigate();
 
 
@@ -169,7 +152,7 @@ const HomePage = () => {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-[20px] gap-8">
                     <motion.div className="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
-                        style={{ scale, y, opacity: opacity_Cards }}>
+                        style={{   y, opacity: opacity_Cards }}>
                         <div className="flex items-center space-x-2 text-gray-700 p-2 rounded-md mb-4">
                             <div className="w-[35px] h-[35px] rounded-full bg-gray-800 text-white flex items-center justify-center"> <FaBullseye size={24} /></div>
                             <h3 className="text-xl font-bold">Our Mission</h3>
@@ -180,7 +163,7 @@ const HomePage = () => {
                     </motion.div>
 
                     <motion.div className="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
-                        style={{ scale, y, opacity: opacity_Cards }}>
+                        style={{   y, opacity: opacity_Cards }}>
                         <div className="flex items-center space-x-2 text-gray-700 p-2 rounded-md mb-4">
                             <div className="w-[35px] h-[35px] rounded-full bg-gray-800 text-white flex items-center justify-center"> <FaLightbulb size={24} /></div>
 
@@ -192,7 +175,7 @@ const HomePage = () => {
                     </motion.div>
 
                     <motion.div className="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
-                        style={{ scale, y, opacity: opacity_Cards }}>
+                        style={{   y, opacity: opacity_Cards }}>
                         <div className="flex items-center space-x-2 text-gray-700 p-2 rounded-md mb-4">
                             <div className="w-[35px] h-[35px] rounded-full bg-gray-800 text-white flex items-center justify-center"> <FaBalanceScale size={24} /></div>
 
@@ -204,7 +187,7 @@ const HomePage = () => {
                     </motion.div>
 
                     <motion.div className="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
-                        style={{ scale, y, opacity: opacity_Cards }}>
+                        style={{   y, opacity: opacity_Cards }}>
                         <div className="flex items-center space-x-2 text-gray-700 p-2 rounded-md mb-4">
                             <div className="w-[35px] h-[35px] rounded-full bg-gray-800 text-white flex items-center justify-center"> <FaUsers size={24} /></div>
                             <h3 className="text-xl font-bold">Our Team</h3>
@@ -215,7 +198,7 @@ const HomePage = () => {
                     </motion.div>
 
                     <motion.div className="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
-                        style={{ scale, y, opacity: opacity_Cards }}>
+                        style={{   y, opacity: opacity_Cards }}>
                         <div className="flex items-center space-x-2 text-gray-700 p-2 rounded-md mb-4">
                             <div className="w-[35px] h-[35px] rounded-full bg-gray-800 text-white flex items-center justify-center"> <FaCog size={24} /></div>
                             <h3 className="text-xl font-bold">Our Services</h3>
@@ -226,7 +209,7 @@ const HomePage = () => {
                     </motion.div>
 
                     <motion.div className="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
-                        style={{ scale, y, opacity: opacity_Cards }}>
+                        style={{   y, opacity: opacity_Cards }}>
                         <div className="flex items-center space-x-2 text-gray-700 p-2 rounded-md mb-4">
                             <div className="w-[35px] h-[35px] rounded-full bg-gray-800 text-white flex items-center justify-center"> <FaEnvelope size={18} /></div>
                             <h3 className="text-xl font-bold">Contact Us</h3>
