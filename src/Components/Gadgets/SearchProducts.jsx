@@ -54,8 +54,8 @@ function SearchProjects() {
     };
 
     return (
-        <div className='pt-[85px]'>
-            <div className='w-[100%] mt-[15px] flex justify-center mx-[5px] mb-[25px] p-[4px]'>
+        <div className='pt-[85px] min-h-screen w-full overflow-x-hidden'>
+            <div className='w-full mt-[15px] flex justify-center mx-[5px] mb-[25px] p-[4px]'>
                 <input
                     type="text"
                     className='w-[85%] p-[8px] border-2 border-gray-600 rounded-lg placeholder:text-gray-600 font-medium'
@@ -70,7 +70,7 @@ function SearchProjects() {
             </div>
 
             {loading && (
-                <div className='h-[calc(98vh-135px)] scale-[0.9] w-screen flex flex-col justify-center items-center'>
+                <div className='h-[calc(98vh-135px)] scale-[0.9] w-full flex flex-col justify-center items-center'>
                     <Bars
                         height="50"
                         width="50"
@@ -83,7 +83,7 @@ function SearchProjects() {
                 </div>
             )}
             {error && (
-                <p className='flex justify-center mx-auto text-lg text-red-600 font-medium'>Error: {error}</p>
+                <p className='flex justify-center mx-auto text-lg text-red-600 font-medium'>{error}</p>
             )}
 
             {searched && searchTerm.trim() !== '' && (
@@ -102,8 +102,7 @@ function SearchProjects() {
                 ) : (
                     <p className='flex justify-center mx-auto text-lg text-red-600 font-medium'>No results found</p>
                 )
-            )}
-            <div className='w-full h-[calc(100vh-150px)]'></div>
+            )} 
         </div>
     );
 }
