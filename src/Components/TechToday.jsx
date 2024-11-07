@@ -3,19 +3,19 @@ import { supabase } from '../Config/Config';
 import { Link } from 'react-router-dom';
 import { Bars } from 'react-loader-spinner';
 import { FaRegCalendarPlus, FaStar } from 'react-icons/fa';
-import { AiOutlineLike, AiOutlineCalendar } from 'react-icons/ai';
+import { AiOutlineLike } from 'react-icons/ai';
 
 
 const TechToday = () => {
     const [topLikedProducts, setTopLikedProducts] = useState([]);
-    const [recentlyCreatedProducts, setRecentlyCreatedProducts] = useState([]); 
+    const [recentlyCreatedProducts, setRecentlyCreatedProducts] = useState([]);
     const [recentlyCreatedReviews, setRecentlyCreatedReviews] = useState([]);
     const [userNames, setUserNames] = useState({});
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchAllData = async () => {
-            try { 
+            try {
                 const fetchTopLikedProducts = async () => {
                     const { data: products, error } = await supabase
                         .from('products')
@@ -59,7 +59,7 @@ const TechToday = () => {
 
                     setRecentlyCreatedProducts(createdProducts);
                 };
- 
+
 
                 // Fetch top 5 recently created reviews
                 const fetchRecentlyCreatedReviews = async () => {
@@ -102,12 +102,12 @@ const TechToday = () => {
                             acc[curr.userId] = curr.userName;
                         }
                         return acc;
-                    }, {}); 
+                    }, {});
                     setUserNames((prevNames) => ({ ...prevNames, ...userNamesMap }));
                 };
 
                 await fetchTopLikedProducts();
-                await fetchRecentlyCreatedProducts(); 
+                await fetchRecentlyCreatedProducts();
                 await fetchRecentlyCreatedReviews();
 
                 setLoading(false);
@@ -189,7 +189,7 @@ const TechToday = () => {
 
 
                     {/* Recently Published Reviews */}
-                    <section className="mb-16 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg p-6">
+                    <section className="mb-16 bg-white rounded-lg p-6">
                         <h2 className="text-center text-2xl md:text-3xl font-bold mb-6 text-gray-700">Recently Published Reviews</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {recentlyCreatedReviews.slice(0, 6).map(review => (
@@ -197,25 +197,28 @@ const TechToday = () => {
                                     key={review.id}
                                     className="bg-white p-5 rounded-xl shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl"
                                 >
-                                    <div className="flex items-center mb-4">
-                                        <div className="w-10 h-10 rounded-full bg-blue-200 flex items-center justify-center font-semibold text-gray-800">
+                                  <div className='flex items-start justify-between'>
+                                  <div className="flex items-center mb-4">
+                                        <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center font-semibold text-gray-800">
                                             {userNames[review.user_id]?.charAt(0)}
                                         </div>
-                                        <div className="ml-3 text-gray-800">{userNames[review.user_id]}</div>
+                                        <div className='ml-3 flex flex-col'>
+                                            <div className="text-gray-800">{userNames[review.user_id]}</div>
+                                            <div className='flex items-center'>
+                                                {Array.from({ length: 5 }, (_, index) => (
+                                                    <FaStar key={index} className={index < review.rating ? 'text-yellow-400' : 'text-gray-300'} />
+                                                ))}
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div className="flex items-center mb-3">
-                                        <span className="text-gray-600 mr-2">Rating:</span>
-                                        {Array.from({ length: 5 }, (_, index) => (
-                                            <FaStar key={index} className={index < review.rating ? 'text-yellow-400' : 'text-gray-300'} />
-                                        ))}
+                                    <div className=' scale-[0.76] flex items-center bg-gray-200 w-[200px] rounded-lg'>
+                                        <div className='px-[15px] bg-gray-500 py-[6px] text-white rounded-lg'><FaRegCalendarPlus size={18} /></div>
+                                        <p className='text-[17px] font-[600] ml-[12px]'>{new Date(review.created_at).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
                                     </div>
-                                    <p className="text-gray-700 mb-4">{review.comment}</p>
-                                    <div className="flex items-center justify-end text-gray-500">
-                                        <AiOutlineCalendar className="mr-2" />
-                                        <span>
-                                            {new Date(review.created_at).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })}
-                                        </span>
-                                    </div>
+                                  </div>
+
+                                    <p className="text-gray-700 font-serif mb-4">{review.comment}</p>
+                                                                   
                                 </div>
                             ))}
                         </div>

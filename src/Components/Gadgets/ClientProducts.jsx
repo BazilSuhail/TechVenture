@@ -4,8 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import ProductData from './ProductData';
 import { IoIosSearch } from "react-icons/io";
 
-
-
 import { Bars } from 'react-loader-spinner'
 
 function ClientProducts() {
@@ -16,11 +14,11 @@ function ClientProducts() {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedSubcategory, setSelectedSubcategory] = useState('');
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    window.scrollTo(0, 0); 
+    window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
@@ -46,11 +44,11 @@ function ClientProducts() {
     };
 
     fetchData();
-  }, []); // Dependency array empty because fetchData does not depend on any state
+  }, []);
 
   useEffect(() => {
     const filterProducts = () => {
-      let filtered = [...products]; // Create a copy to avoid mutating state directly
+      let filtered = [...products];
 
       if (selectedCategory) {
         filtered = filtered.filter(product => {
@@ -66,9 +64,9 @@ function ClientProducts() {
       setFilteredProducts(filtered);
     };
 
-    filterProducts(); 
+    filterProducts();
 
-  }, [selectedCategory, selectedSubcategory, products, subcategories]);  
+  }, [selectedCategory, selectedSubcategory, products, subcategories]);
 
   const handleCategoryChange = (e) => {
     const categoryId = e.target.value;
@@ -84,20 +82,20 @@ function ClientProducts() {
   const viewSpecifications = (productId) => {
     navigate(`/product-specifications/${productId}`);
   };
-  // px-4 lg:hover:bg-gray-400 whitespace-nowrap hover:text-white font-bold transition duration-200 rounded-md cursor-pointer ${selectedCategory === category.id ? 'bg-black text-white' : 'bg-gray-300'}
+
   return (
-    <div className='h-full overflow-x-hidden min-h-screen w-full pt-[85px] '>
+    <div className='h-full overflow-x-hidden bg-gray-100 min-h-screen w-full pt-[85px] '>
       {loading ? (
-        <div className='h-[calc(98vh-95px)] scale-[0.9] w-screen flex flex-col justify-center items-center'> 
-        <Bars
-          height="50"
-          width="50"
-          color="#363636"
-          ariaLabel="bars-loading"
-          wrapperStyle={{}}
-          wrapperClass=""
-          visible={true} />
-      </div>
+        <div className='h-[calc(98vh-95px)] scale-[0.9] w-screen flex flex-col justify-center items-center'>
+          <Bars
+            height="50"
+            width="50"
+            color="#363636"
+            ariaLabel="bars-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true} />
+        </div>
       ) : (
         <div className='scrollbar-custom overflow-x-hidden'>
 
@@ -107,26 +105,25 @@ function ClientProducts() {
           </div>
 
           <div className=' my-[14px] md:my-[30px] '>
-
-            <div className="scrollbar-hide flex font-bold mx-[15px] rounded-lg overflow-x-auto xsx:justify-center space-x-2 py-[8px]">
-              <div onClick={() => handleCategoryChange({ target: { value: '' } })} className={`px-4 py-[6px] whitespace-nowrap rounded-md cursor-pointer ${!selectedCategory ? 'bg-black text-white' : 'bg-gray-300'}`}>
+            <div className="scrollbar-hide flex font-[600] mx-[15px] rounded-lg overflow-x-auto xsx:justify-center space-x-2 py-[8px]">
+              <div onClick={() => handleCategoryChange({ target: { value: '' } })} className={`px-4 py-[6px] whitespace-nowrap rounded-md cursor-pointer ${!selectedCategory ? 'bg-black text-white' : 'bg-[#aeaeae5d]'}`}>
                 All Categories
               </div>
               {categories.map(category => (
-                <div key={category.id} onClick={() => handleCategoryChange({ target: { value: category.id } })} className={`px-4 lg:hover:bg-gray-400 whitespace-nowrap py-[6px] hover:text-white font-bold transition duration-200 rounded-md cursor-pointer ${selectedCategory === category.id ? 'bg-black text-white' : 'bg-gray-300'}`}>
+                <div key={category.id} onClick={() => handleCategoryChange({ target: { value: category.id } })} className={`px-4 whitespace-nowrap py-[6px] font-bold transition duration-200 rounded-md cursor-pointer ${selectedCategory === category.id ? 'bg-black text-white' : 'bg-[#aeaeae5d]'}`}>
                   {category.name}
                 </div>
               ))}
             </div>
 
-            <div className="scrollbar-hide flex mx-[5px] my-[10px] rounded-lg py-[6px] overflow-x-auto  space-x-2 ">
-              <div onClick={() => handleSubcategoryChange({ target: { value: '' } })} className={`px-4 hover:bg-gray-400 hover:text-white font-bold transition duration-200  whitespace-nowrap flex items-center rounded-md cursor-pointer ${!selectedSubcategory ? 'bg-black text-white' : 'bg-gray-300'}`}>
+            <div className="scrollbar-hide flex mx-[10px] xl:mx-[45px] my-[10px] rounded-[25px] py-[6px] overflow-x-auto  space-x-2 ">
+              <div onClick={() => handleSubcategoryChange({ target: { value: '' } })} className={`px-4 transition duration-200 font-bold whitespace-nowrap flex items-center rounded-md cursor-pointer ${!selectedSubcategory ? 'bg-black text-white' : 'bg-[#aeaeae5d]'}`}>
                 All Sub-Categories
               </div>
 
               {subcategories.filter(subcategory => !selectedCategory || subcategory.category_id === selectedCategory).map(subcategory => (
                 <div key={subcategory.id} onClick={() => handleSubcategoryChange({ target: { value: subcategory.id } })}
-                  className={`px-4 lg:hover:bg-gray-400 lg:hover:text-white hover:bg-gray-400 font-bold transition duration-200 whitespace-nowrap flex items-center py-2 rounded-md cursor-pointer ${selectedSubcategory === subcategory.id ? 'bg-black text-white' : 'bg-gray-200'}`}>
+                  className={`px-4 font-[600] transition duration-200 whitespace-nowrap flex items-center py-2 rounded-md cursor-pointer ${selectedSubcategory === subcategory.id ? 'bg-black text-white' : 'bg-[#aeaeae5d]'}`}>
                   {subcategory.name}
                 </div>
               ))}

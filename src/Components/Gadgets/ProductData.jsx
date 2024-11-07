@@ -2,19 +2,16 @@ import React from 'react';
 import { motion, useScroll, useTransform } from "framer-motion";
 
 function ProductData({ product, subcategories, viewSpecifications, showSubcategory }) {
-
-
     const { scrollYProgress } = useScroll();
     const scale = useTransform(scrollYProgress, [0.02, 0.08], [0.95, 1]);
     const opacity = useTransform(scrollYProgress, [0.02, 0.08], [0.8, 1]);
 
-
     const truncateDescription = (description) => {
-        return description.length > 50 ? description.slice(0, 50) + '...' : description;
+        return description.length > 50 ? description.slice(0, 75) + '...' : description;
     };
 
     return (
-        <motion.div className='flex flex-col justify-center border-2 border-gray-400 rounded-lg h-[95%] w-[95%] p-[15px] m-[6px]'
+        <motion.div className='flex flex-col justify-center border bg-white  rounded-lg h-[95%] w-full p-[28px] m-[6px]'
             style={{ scale, opacity }}
         >
             <h3 className='px-[6px] py-[16px] border-2 mt-[8px] font-bold text-center text-2xl border-gray-300 rounded-lg'>{product.name}</h3>
@@ -22,8 +19,8 @@ function ProductData({ product, subcategories, viewSpecifications, showSubcatego
 
             {showSubcategory && (
                 <div className='flex justify-between items-center mb-[30px]'>
-                    <p className='text-white bg-black rounded-lg py-[5px] px-[10px]'>{subcategories.find(subcategory => subcategory.id === product.subcategory_id)?.name}</p>
-                    <p className='text-xl font-extrabold text-gray-800'>${product.price}</p>
+                    <p className='text-white font-[600] scale-[0.85] ml-[-12px] bg-black rounded-[25px] py-[5px] px-[10px]'>{subcategories.find(subcategory => subcategory.id === product.subcategory_id)?.name}</p>
+                    <p className='text-xl font-[700] text-gray-800'>${product.price}</p>
                 </div>
             )
             }
@@ -32,21 +29,4 @@ function ProductData({ product, subcategories, viewSpecifications, showSubcatego
     );
 }
 
-export default ProductData;
-/*{loadingImage ? (
-                <div>Loading Image...</div>
-            ) : (
-                <div>
-                    {imageUrl ? (
-                        <img src={imageUrl} alt="Product" className='mx-auto w-[250px] h-[250px] rounded-lg' />
-                    ) : (
-                        <div className='w-[250px] mx-auto flex flex-col items-center justify-center rounded-lg bg-gray-400 h-[250px]'>
-                            <div className='w-[200px] flex flex-col items-center justify-center rounded-lg bg-gray-300 h-[200px]'>
-                                <div className='w-[150px] flex flex-col items-center justify-center rounded-lg bg-gray-200 h-[150px]'>
-                                    <div className='w-[90px] flex flex-col items-center justify-center rounded-lg bg-gray-50 h-[90px]'></div>
-                                </div>
-                            </div>
-                        </div>
-                    )}
-                </div>
-            )} */
+export default ProductData; 
