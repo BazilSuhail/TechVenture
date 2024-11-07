@@ -209,7 +209,7 @@ function ProductSpecifications() {
     return (
         <div className='min-h-screen no-scrollbar w-full pt-[84px]'>
             {loading ? (
-                <div className='h-screen w-screen flex flex-col justify-center items-center'>
+                <div className='h-screen w-full flex flex-col justify-center items-center'>
                     <Bars
                         height="50"
                         width="50"
