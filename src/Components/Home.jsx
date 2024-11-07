@@ -1,9 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IoIosRocket, IoIosSearch, IoLogoDribbble } from "react-icons/io";
-import { FaBullseye, FaLightbulb, FaBalanceScale, FaUsers, FaCog, FaEnvelope, FaStar } from 'react-icons/fa';
+import { FaBullseye, FaLightbulb, FaBalanceScale, FaUsers, FaCog, FaEnvelope, FaStar, FaChevronUp, FaChevronDown, FaQuestionCircle } from 'react-icons/fa';
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { MdOutlineDevices, MdSupportAgent } from "react-icons/md";
 
 const reviews = [
@@ -45,6 +45,46 @@ const reviews = [
     },
 ];
 
+const faqs = [
+    {
+        question: "What types of clothing does Texleath Industries offer?",
+        answer: "Texleath Industries specializes in exporting men's clothing, including categories such as sportswear, fitness wear, safety gear, and many more. We are experts in manufacturing and have a strong network in the e-commerce business."
+    },
+    {
+        question: "How can I place an order?",
+        answer: "You can place an order through our website by selecting the desired products and following the checkout process. For bulk or custom orders, please contact our sales team directly."
+    },
+    {
+        question: "What are the payment options available?",
+        answer: "We offer various payment options including credit/debit cards, PayPal, and bank transfers. All transactions are securely processed."
+    },
+    {
+        question: "Do you offer international shipping?",
+        answer: "Yes, we offer international shipping. Please review our shipping policies or contact our support team for more information on shipping rates and delivery times."
+    },
+    {
+        question: "What is your return policy?",
+        answer: "We accept returns within 30 days of purchase, provided the items are in their original condition. Please refer to our return policy page for detailed instructions on how to process returns."
+    },
+    {
+        question: "How can I contact customer support?",
+        answer: "You can contact our customer support team via email at support@texleath.com or through our contact form on the website. We are available to assist you with any inquiries or issues."
+    },
+    {
+        question: "Can I customize my order?",
+        answer: "Yes, we offer customization options for bulk orders. Please contact our sales team to discuss your requirements and get a quote."
+    },
+    {
+        question: "What materials are used in your clothing?",
+        answer: "We use high-quality materials including cotton, polyester, and blends designed for durability, comfort, and style. Specific material details are provided in the product descriptions on our website."
+    },
+    {
+        question: "Do you have a physical store?",
+        answer: "Currently, we operate primarily online. However, we do participate in trade shows and events where you can experience our products in person. Check our website for upcoming events and locations."
+    }
+];
+
+
 // Define the variants for the reveal animation
 const Sectionvariants = {
     hidden: { opacity: 0, },
@@ -53,17 +93,22 @@ const Sectionvariants = {
 
 const HomePage = () => {
 
+    const [openIndex, setOpenIndex] = useState(null);
     const { scrollYProgress } = useScroll();
-    const scale = useTransform(scrollYProgress, [0.09, 0.15], [0.95, 1]);
-    const opacity_Cards = useTransform(scrollYProgress, [0.1, 0.12], [0.4, 1]);
+    const scale = useTransform(scrollYProgress, [0.15, 0.2], [0.95, 1]);
+    const opacity_Cards = useTransform(scrollYProgress, [0.20, 0.21], [0.4, 1]);
     const x = useTransform(scrollYProgress, [0.33, 0.40], [-900, 0]);
     const opacity = useTransform(scrollYProgress, [0.33, 0.40], [0, 1]);
     const y = useTransform(scrollYProgress, [0.15, 0.18], [20, 0]);
     const navigate = useNavigate();
 
+
+    const handleToggle = (index) => {
+        setOpenIndex(openIndex === index ? null : index);
+    };
     useEffect(() => {
-        window.scrollTo(0, 0); 
-      }, []);
+        window.scrollTo(0, 0);
+    }, []);
 
     return (
         <div className="pt-[80px] bg-gray-100 ">
@@ -183,7 +228,7 @@ const HomePage = () => {
                     <motion.div className="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
                         style={{ scale, y, opacity: opacity_Cards }}>
                         <div className="flex items-center space-x-2 text-gray-700 p-2 rounded-md mb-4">
-                        <div className="w-[35px] h-[35px] rounded-full bg-gray-800 text-white flex items-center justify-center"> <FaEnvelope size={18} /></div>
+                            <div className="w-[35px] h-[35px] rounded-full bg-gray-800 text-white flex items-center justify-center"> <FaEnvelope size={18} /></div>
                             <h3 className="text-xl font-bold">Contact Us</h3>
                         </div>
                         <p className="text-gray-600">
@@ -264,7 +309,7 @@ const HomePage = () => {
                     </motion.div>
 
                     <motion.div className="p-6 bg-gray-800 flex items-center text-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
-                        style={{ opacity, x: x * -1 }}
+                        style={{ opacity, x }}
                     >
                         <MdOutlineDevices size={28} className="mr-4" />
                         <div>
@@ -322,6 +367,52 @@ const HomePage = () => {
                 </div>
             </section>
 
+            <section className='xl:px-[150px] mt-[115px] px-[15px] flex flex-col lg:px-[35px]'>
+                <h1 className='text-2xl md:text-3xl flex items-center font-bold mx-auto text-gray-700'>
+                    <FaQuestionCircle className='inline mr-2' />
+                    Frequently Asked Questions
+                </h1>
+                <p className='text-[17px] text-center xl:px-[220px] mt-[25px] text-gray-800  font-[500] font-serif mb-6'>
+                    Welcome to the FAQ section of TechVenture. Here you'll find answers to common questions about our catalog, products, and reviews. If you have any other inquiries, feel free to reach out to our customer support team.
+                </p>
+
+                <div className='h-[3px] w-full mb-[25px] mx-auto bg-gray-300 '></div>
+
+                <div>
+                    {faqs.map((faq, index) => (
+                        <div key={index} className='mb-4'>
+                            <button
+                                className='w-full text-left text-lg font-semibold text-gray-800 py-[15px] px-4 bg-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 flex items-center justify-between'
+                                onClick={() => handleToggle(index)}
+                                type='button'
+                            >
+                                <span>{faq.question}</span>
+                                <motion.div
+                                    initial={{ scale: 1.2 }}
+                                    animate={{ scale: openIndex === index ? 0.8 : 1.2 }}
+                                    transition={{ duration: 0.5 }}
+                                    className='text-gray-800'
+                                >
+                                    {openIndex === index ? <FaChevronUp /> : <FaChevronDown />}
+                                </motion.div>
+                            </button>
+                            <AnimatePresence>
+                                {openIndex === index && (
+                                    <motion.div
+                                        initial={{ opacity: 0, height: 0 }}
+                                        animate={{ opacity: 1, height: 'auto' }}
+                                        exit={{ opacity: 0, height: 0 }}
+                                        transition={{ duration: 0.3 }}
+                                        className='mt-2 px-4'
+                                    >
+                                        <p className='text-gray-700'>{faq.answer}</p>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </div>
+                    ))}
+                </div>
+            </section>
 
             <section className="py-[50px] bg-gray-200 text-center">
                 <div>
