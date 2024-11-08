@@ -13,7 +13,10 @@ function SearchProjects() {
     const [searched, setSearched] = useState(false);
     const navigate = useNavigate();
 
+
     useEffect(() => {
+        
+        window.scrollTo(0, 0);
         const fetchProducts = async () => {
             setLoading(true);
             setError(null);

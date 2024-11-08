@@ -16,8 +16,8 @@ const TechToday = () => {
     const [totalPages, setTotalPages] = useState(1);
 
     const [news, setNews] = useState([]);
-    const apiKsey = '30a4d5cf784316939a5ae900de320e47';
-    const apiKey = '30a4d5csf784316939a5ae900de320e47';
+    const apiKey = '30a4d5cf784316939a5ae900de320e47';
+    //const apiKeys = '30a4d5csf784316939a5ae900de320e47';
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -34,7 +34,7 @@ const TechToday = () => {
                 if (data && data.news && data.news.length > 0) {
                     setNews(data.news);
                     setTotalPages(Math.max(1, Math.ceil(data.news.length / 6)));
-                } else { 
+                } else {
                     setNews([]);
                     setTotalPages(1);
                     console.warn("No news data available");

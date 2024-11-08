@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { supabase } from '../Config/Config';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,15 +14,17 @@ function Signup() {
   console.log(error);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+}, []);
+
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
       const signUpResult = await supabase.auth.signUp({ email, password });
       if (signUpResult.error) {
         throw signUpResult.error;
-      }
-
-      // Fetch the user details from Supabase
+      } 
       const { data: userData, error: userError } = await supabase.auth.getUser();
       if (userError) throw userError;
 

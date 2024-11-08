@@ -65,7 +65,6 @@ const Navbar = () => {
                     <div className="text-white font-serif text-2xl px-[8px] xsx:mr-[105px] lg:mr-[185px] xl:mr-[145px] py-[2px] rounded-xl">TechVenture</div>
                     <NavLink to="/searchprojects" className="xsx:hidden block text-white"><IoIosSearch size={30} /></NavLink>
 
-
                     {user ? (
                         <details className="text-white cursor-pointer xsx:block hidden">
                             <summary className="text-white list-none mr-[10px] text-md p-[10px] hover:bg-white hover:text-black border-2 border-white rounded-full"><FaUserEdit className="text-[25px]" /></summary>
@@ -104,11 +103,11 @@ const Navbar = () => {
                                 <NavLink to="/" className="font-medium w-[85%] rounded-lg bg-gray-800 mx-auto py-[5px] text-[18px] text-center text-slate-300 mb-[15px] cursor-pointer">Home</NavLink>
                                 <NavLink to="/techtoday" className="font-medium w-[85%] rounded-lg bg-gray-800 mx-auto py-[5px] text-center text-[18px] text-slate-300 mb-[15px] cursor-pointer">Tech Today</NavLink>
                                 <NavLink to="/products" className="font-medium w-[85%] rounded-lg bg-gray-800 mx-auto py-[5px] text-center text-[18px] text-slate-300 mb-[15px] cursor-pointer">Gadgets</NavLink>
-                                <div className="mt-auto"></div>
+                                
                                 {user ? (
-                                    <button className="font-medium w-[85%] rounded-lg bg-gray-800 mx-auto py-[5px] text-[18px] text-center text-slate-300 mb-[15px] cursor-pointer" onClick={handleLogout}><IoLogOutOutline className="text-[25px] mt-[3px] mr-[3px]" /><p>Logout</p></button>
+                                    <button className="font-medium w-[85%] mt-auto flex justify-center rounded-lg mx-auto py-[10px] text-[18px] text-center text-slate-300 mb-[15px] bg-red-900 cursor-pointer" onClick={handleLogout}><IoLogOutOutline className="text-[25px] mt-[3px] mr-[3px]" /><p>Logout</p></button>
                                 ) : (
-                                    <NavLink onClick={handleMenuToggle} to="/signup"  className="font-medium w-[85%] flex items-center py-3 px-3  rounded-lg bg-gray-900 mx-auto  text-[18px] text-center text-slate-300 mb-[15px] cursor-pointer"><IoLogOutOutline className="text-[28px] mr-[3px]" /><p>Get Started</p></NavLink>
+                                    <NavLink onClick={handleMenuToggle} to="/signin"  className="font-medium w-[85%] flex items-center py-[10px] justify-center rounded-lg mt-auto border border-gray-700 mx-auto  text-[18px] text-center text-slate-300 mb-[15px] cursor-pointer"><IoLogOutOutline className="text-[28px] mr-[3px]" /><p>Get Started</p></NavLink>
                                 )}
                             </motion.div>
 

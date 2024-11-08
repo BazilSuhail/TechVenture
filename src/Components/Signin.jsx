@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { supabase } from '../Config/Config';
 import { useNavigate } from 'react-router-dom';
  
@@ -10,7 +10,9 @@ const Signin = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
     const navigate = useNavigate();
-
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     const handleSignin = async (e) => {
         e.preventDefault();
         try {

@@ -16,13 +16,10 @@ function ClientProducts() {
   const [selectedSubcategory, setSelectedSubcategory] = useState('');
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
+ 
   useEffect(() => {
     const fetchData = async () => {
+      window.scrollTo(0, 0);
       try {
         const { data: categoriesData, error: categoriesError } = await supabase.from('categories').select('*');
         const { data: subcategoriesData, error: subcategoriesError } = await supabase.from('subcategories').select('*');
