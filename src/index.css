@@ -21,3 +21,25 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #525252;
 }
+
+.gradient-background {
+  position: relative;
+  overflow: hidden; 
+  background: linear-gradient(270deg, #000000, #444444e8, #2f2d2dd7, #000000);
+  background-size: 800% 800%;
+  animation: gradientBackground 10s ease-in-out infinite;
+}
+
+@keyframes gradientBackground {
+  0% {
+      background-position: 0% 50%;
+  }
+
+  50% {
+      background-position: 100% 50%;
+  }
+
+  100% {
+      background-position: 0% 50%;
+  }
+}

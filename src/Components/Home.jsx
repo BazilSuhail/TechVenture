@@ -65,22 +65,17 @@ const faqs = [
     {
         question: "What is your return policy?",
         answer: "We accept returns within 30 days of purchase, provided the items are in their original condition. Please refer to our return policy page for detailed instructions on how to process returns."
-    } 
+    }
 ];
 
-
-// Define the variants for the reveal animation
-const Sectionvariants = {
-    hidden: { opacity: 0, },
-    visible: { opacity: 1, transition: { duration: 0.5 } }
-};
 
 const HomePage = () => {
 
     const [openIndex, setOpenIndex] = useState(null);
-    const { scrollYProgress } = useScroll(); 
+    const { scrollYProgress } = useScroll();
     const y = useTransform(scrollYProgress, [0.1, 0.17], [800, 0]);
-    const opacity_Cards = useTransform(scrollYProgress, [0.08, 0.15], [0.4, 1]);
+    const yOpposite = useTransform(scrollYProgress, [0.15, 0.17], [-800, 0]);
+    const opacity_Cards = useTransform(scrollYProgress, [0.08, 0.15], [0, 1]);
     const x = useTransform(scrollYProgress, [0.30, 0.38], [-900, 0]);
     const opacity = useTransform(scrollYProgress, [0.30, 0.38], [0, 1]);
     const navigate = useNavigate();
@@ -94,12 +89,8 @@ const HomePage = () => {
     }, []);
 
     return (
-        <div className="pt-[80px] bg-gray-100 ">
-            <motion.section className="  h-[100vh] w-full flex flex-col justify-center items-center text-white shadow-lg gradient-background"
-                initial="hidden"
-                animate="visible"
-                variants={Sectionvariants}
-            >
+        <div className="pt-[80px] w-full overflow-x-hidden bg-gray-100 ">
+            <section className="h-screen z-40 w-screen flex flex-col justify-center items-center gradient-background">
                 <motion.div className="mt-[-72px] lg:mt-[-85px] flex sm:flex-row flex-col font-extrabold text-[40px] sm:text-[65px] md:text-[75px]"
                     initial={{ opacity: 0, x: 100 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -111,7 +102,7 @@ const HomePage = () => {
                     <p className="text-white mt-[-18px] sm:mt-[0px] mx-auto sm:ml-[15px]">&</p>
                 </motion.div>
 
-                <motion.div className="mt-[-22px] lg:mt-[-15px] flex sm:flex-row flex-col font-extrabold text-[40px] sm:text-[65px] md:text-[75px]"
+                <motion.div className="mt-[-22px] lg:mt-[-15px] text-white flex sm:flex-row flex-col font-extrabold text-[40px] sm:text-[65px] md:text-[75px]"
                     initial={{ opacity: 0, x: -100 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.5, duration: 2, ease: "easeInOut" }}
@@ -144,15 +135,13 @@ const HomePage = () => {
                         </p>
                     </motion.div>
                 </div>
-            </motion.section>
+            </section>
 
-            <section className="pb-10 bg-gray-100">
-                <div className="text-center mb-8">
-                    <h2 className="text-2xl md:text-4xl font-extrabold bg-black text-white p-[15px] mx-auto w-[100%]">About Us</h2>
-                </div>
+            <section className="pb-10 z-30 bg-gray-100">
+                <h2 className="text-2xl md:text-4xl mb-8 font-[700] text-center bg-black text-white p-[15px] mx-auto w-[100%]">About Us</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-[20px] gap-8">
                     <motion.div className="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
-                        style={{   y, opacity: opacity_Cards }}>
+                        style={{ y: yOpposite, opacity: opacity_Cards }}>
                         <div className="flex items-center space-x-2 text-gray-700 p-2 rounded-md mb-4">
                             <div className="w-[35px] h-[35px] rounded-full bg-gray-800 text-white flex items-center justify-center"> <FaBullseye size={24} /></div>
                             <h3 className="text-xl font-bold">Our Mission</h3>
@@ -163,7 +152,7 @@ const HomePage = () => {
                     </motion.div>
 
                     <motion.div className="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
-                        style={{   y, opacity: opacity_Cards }}>
+                        style={{ y: yOpposite, opacity: opacity_Cards }}>
                         <div className="flex items-center space-x-2 text-gray-700 p-2 rounded-md mb-4">
                             <div className="w-[35px] h-[35px] rounded-full bg-gray-800 text-white flex items-center justify-center"> <FaLightbulb size={24} /></div>
 
@@ -175,7 +164,7 @@ const HomePage = () => {
                     </motion.div>
 
                     <motion.div className="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
-                        style={{   y, opacity: opacity_Cards }}>
+                        style={{ y: yOpposite, opacity: opacity_Cards }}>
                         <div className="flex items-center space-x-2 text-gray-700 p-2 rounded-md mb-4">
                             <div className="w-[35px] h-[35px] rounded-full bg-gray-800 text-white flex items-center justify-center"> <FaBalanceScale size={24} /></div>
 
@@ -187,7 +176,7 @@ const HomePage = () => {
                     </motion.div>
 
                     <motion.div className="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
-                        style={{   y, opacity: opacity_Cards }}>
+                        style={{ y, opacity: opacity_Cards }}>
                         <div className="flex items-center space-x-2 text-gray-700 p-2 rounded-md mb-4">
                             <div className="w-[35px] h-[35px] rounded-full bg-gray-800 text-white flex items-center justify-center"> <FaUsers size={24} /></div>
                             <h3 className="text-xl font-bold">Our Team</h3>
@@ -198,7 +187,7 @@ const HomePage = () => {
                     </motion.div>
 
                     <motion.div className="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
-                        style={{   y, opacity: opacity_Cards }}>
+                        style={{ y, opacity: opacity_Cards }}>
                         <div className="flex items-center space-x-2 text-gray-700 p-2 rounded-md mb-4">
                             <div className="w-[35px] h-[35px] rounded-full bg-gray-800 text-white flex items-center justify-center"> <FaCog size={24} /></div>
                             <h3 className="text-xl font-bold">Our Services</h3>
@@ -209,7 +198,7 @@ const HomePage = () => {
                     </motion.div>
 
                     <motion.div className="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
-                        style={{   y, opacity: opacity_Cards }}>
+                        style={{ y, opacity: opacity_Cards }}>
                         <div className="flex items-center space-x-2 text-gray-700 p-2 rounded-md mb-4">
                             <div className="w-[35px] h-[35px] rounded-full bg-gray-800 text-white flex items-center justify-center"> <FaEnvelope size={18} /></div>
                             <h3 className="text-xl font-bold">Contact Us</h3>

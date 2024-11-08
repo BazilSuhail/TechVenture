@@ -48,7 +48,7 @@ const Navbar = () => {
     const activeLinkStyles = "bg-white text-black";
 
     return (
-        <nav>
+        <nav className="z-50">
             <div className="w-full h-[80px] fixed p-4 bg-black flex items-center justify-between z-50">
                 <div className="flex justify-between w-full items-center">
 
