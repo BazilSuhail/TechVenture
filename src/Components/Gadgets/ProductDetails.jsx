@@ -215,10 +215,10 @@ function ProductSpecifications() {
                         visible={true} />
                 </div>
             ) : error ? (
-                <div className='mt-[15px] bg-red-200 p-3 text-red-700 rounded-lg '>{error}</div>
+                <div className='text-center w-[250px] mx-auto bg-red-200 p-3 text-red-700 rounded-lg mt-[85px]'>{error}</div>
             ) : (
 
-                <div className='xl:scale-[0.95] grid grid-cols-1 m-[15px] xsx:grid-cols-11'>
+                <div className='xl:scale-[0.9] grid grid-cols-1 m-[15px] xsx:grid-cols-11'>
                     <div className=' xsx:col-span-6 xsx:shadow-slider p-[5px] md:p-[15px] m-[5px] md:m-[20px] xsx:overflow-auto  no-scrollbar'>
                         <button className='bg-gray-600 hover:bg-gray-900 duration-150 p-[5px] text-white rounded-lg ' onClick={handleBack}><IoArrowBack size={32} /></button>
                         {

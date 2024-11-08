@@ -73,7 +73,7 @@ function SearchProjects() {
             </div>
 
             {loading && (
-                <div className='h-[calc(98vh-135px)] scale-[0.9] w-full flex flex-col justify-center items-center'>
+                <div className='min-h-screen scale-[0.9] w-full flex flex-col justify-center items-center'>
                     <Bars
                         height="50"
                         width="50"
@@ -86,7 +86,7 @@ function SearchProjects() {
                 </div>
             )}
             {error && (
-                <p className='flex justify-center mx-auto text-lg text-red-600 font-medium'>{error}</p>
+                <div className='text-center w-[250px] mx-auto bg-red-200 p-3 text-red-700 rounded-lg mt-[85px]'>{error}</div>
             )}
 
             {!searched && !loading && !error && (
@@ -97,8 +97,7 @@ function SearchProjects() {
                     <p className='text-[22px] bg-white z-50 mt-[-20px] font-medium'>Search the Catalog Now</p>
                     <p className='text-[12px] text-gray-509'>Find the products you're looking for</p>
                 </div>
-            )}
-
+            )} 
 
             {searched && searchTerm.trim() !== '' && (
                 products.length > 0 ? (

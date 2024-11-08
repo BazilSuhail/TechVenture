@@ -16,7 +16,7 @@ function ClientProducts() {
   const [selectedSubcategory, setSelectedSubcategory] = useState('');
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
- 
+
   useEffect(() => {
     const fetchData = async () => {
       window.scrollTo(0, 0);

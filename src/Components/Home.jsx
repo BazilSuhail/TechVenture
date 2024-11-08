@@ -388,7 +388,7 @@ const HomePage = () => {
                 </div>
             </section>
 
-            <section className="py-[50px] bg-gray-200 text-center">
+            <section className="py-[50px]  text-center">
                 <div>
                     <h2 className="  text-2xl md:text-4xl font-extrabold text-gray-800">Get Started</h2>
                     <p className="text-gray-600 pt-[15px] font-bold mb-[20px]">Ready to dive into the world of gadgets? Use our search feature to find your next tech companion.</p>

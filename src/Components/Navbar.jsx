@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { supabase } from '../Config/Config';
-import { FiX } from "react-icons/fi";
+import { FiSettings, FiX } from "react-icons/fi";
 import { CgMenuLeftAlt } from "react-icons/cg";
 import { IoLogOutOutline } from "react-icons/io5";
 import { motion, AnimatePresence } from "framer-motion";
@@ -11,7 +11,12 @@ import { IoIosSearch } from "react-icons/io";
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [user, setUser] = useState(null);
+    const [activeDropdown, setActiveDropdown] = useState(false);
     const navigate = useNavigate();
+
+    const toggleDropdown = () => {
+        setActiveDropdown(!activeDropdown); // Toggle specific dropdown
+    };
 
     useEffect(() => {
         const checkUser = async () => {
@@ -64,15 +69,31 @@ const Navbar = () => {
 
                     <div className="text-white font-serif text-2xl px-[8px] xsx:mr-[105px] lg:mr-[185px] xl:mr-[145px] py-[2px] rounded-xl">TechVenture</div>
                     <NavLink to="/searchprojects" className="xsx:hidden block text-white"><IoIosSearch size={30} /></NavLink>
-
-                    {user ? (
-                        <details className="text-white cursor-pointer xsx:block hidden">
+                    {/*
+ <details className="text-white cursor-pointer xsx:block hidden">
                             <summary className="text-white list-none mr-[10px] text-md p-[10px] hover:bg-white hover:text-black border-2 border-white rounded-full"><FaUserEdit className="text-[25px]" /></summary>
                             <div className="absolute mt-[20px] ml-[-165px] p-[8px] w-[210px] list-none bg-white border-4 rounded-xl shadow-custom-slider text-black">
                                 <button className="text-red cursor-pointer-500 w-[100%] text-[22px] px-[12px] py-[6px] font-medium flex items-center hover:bg-red-700 hover:text-white rounded-xl border-2 border-white" onClick={handleLogout}><IoLogOutOutline className="text-[29px] mt-[4px] mr-[3px]" /><p>Logout</p></button>
                                 <NavLink to="/profile" className="text-black-500 w-[100%] text-[22px] px-[12px] py-[6px] font-medium flex items-center hover:bg-gray-800 hover:text-white rounded-xl border-2 border-white"><FaUserEdit className="text-[28px] mt-[4px] mr-[6px]" /><p>My Profile</p></NavLink>
                             </div>
                         </details>
+*/}
+                    {user ? (
+                        <>
+                            <button onClick={() => toggleDropdown()} className="text-white list-none mr-[10px] text-md p-[10px] hover:bg-white hover:text-black border-2 border-white rounded-full">
+                                <FaUserEdit className="text-[25px]" />
+                            </button>
+                            {activeDropdown &&
+                                <div onClick={() => toggleDropdown()} className="absolute right-10 mt-[150px] w-[180px] bg-white border border-gray-200 rounded-md shadow-lg z-10">
+                                    <NavLink to="/profile" className="flex text-[17px] items-center w-full text-left px-4 py-2 text-gray-800 font-[600] hover:bg-gray-200 hover:text-gray-800">
+                                        <FiSettings size={17} className="mr-2" /> My Profile
+                                    </NavLink>
+                                    <button onClick={handleLogout} className="flex items-center w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-200 font-[600] hover:text-red-800">
+                                        <IoLogOutOutline className="mr-2" /> Logout
+                                    </button>
+                                </div>
+                            }
+                        </>
 
                     ) : (
                         <NavLink to="/signin" className="text-white xsx:flex hidden text-lg px-[8px] py-[2px] font-medium items-center hover:bg-white hover:text-black rounded-xl border-2 border-white" onClick={handleLogout}><IoLogOutOutline className="text-[25px] mt-[3px] mr-[3px]" /><p>Register</p></NavLink>
@@ -103,12 +124,12 @@ const Navbar = () => {
                                 <NavLink to="/" className="font-medium w-[85%] rounded-lg bg-gray-800 mx-auto py-[5px] text-[18px] text-center text-slate-300 mb-[15px] cursor-pointer">Home</NavLink>
                                 <NavLink to="/techtoday" className="font-medium w-[85%] rounded-lg bg-gray-800 mx-auto py-[5px] text-center text-[18px] text-slate-300 mb-[15px] cursor-pointer">Tech Today</NavLink>
                                 <NavLink to="/products" className="font-medium w-[85%] rounded-lg bg-gray-800 mx-auto py-[5px] text-center text-[18px] text-slate-300 mb-[15px] cursor-pointer">Gadgets</NavLink>
-                                <NavLink to="/profile" className="font-medium w-[85%] rounded-lg bg-[#313030] mx-auto py-[5px] text-center text-[18px] text-white mb-[15px] cursor-pointer">Profile</NavLink> 
-                               
+                                <NavLink to="/profile" className="font-medium w-[85%] rounded-lg bg-[#313030] mx-auto py-[5px] text-center text-[18px] text-white mb-[15px] cursor-pointer">Profile</NavLink>
+
                                 {user ? (
                                     <button className="font-medium w-[85%] mt-auto flex items-center rounded-lg mx-auto justify-center py-[10px] text-[18px] text-center text-slate-300 mb-[15px] bg-red-900 cursor-pointer" onClick={handleLogout}><IoLogOutOutline className="text-[25px] mt-[3px] mr-[3px]" /><p>Logout</p></button>
                                 ) : (
-                                    <NavLink onClick={handleMenuToggle} to="/signin"  className="font-medium w-[85%] flex items-center py-[10px] justify-center rounded-lg mt-auto border border-gray-700 mx-auto  text-[18px] text-center text-slate-300 mb-[15px] cursor-pointer"><IoLogOutOutline className="text-[28px] mr-[3px]" /><p>Get Started</p></NavLink>
+                                    <NavLink onClick={handleMenuToggle} to="/signin" className="font-medium w-[85%] flex items-center py-[10px] justify-center rounded-lg mt-auto border border-gray-700 mx-auto  text-[18px] text-center text-slate-300 mb-[15px] cursor-pointer"><IoLogOutOutline className="text-[28px] mr-[3px]" /><p>Get Started</p></NavLink>
                                 )}
                             </motion.div>
 
@@ -116,7 +137,7 @@ const Navbar = () => {
                     )}
                 </AnimatePresence>
             </div>
-            
+
         </nav>
     );
 };
