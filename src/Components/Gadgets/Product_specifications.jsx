@@ -185,7 +185,7 @@ function ProductSpecifications() {
             alert('Error liking product: ' + error.message);
         }
     };
- 
+
     const handleReadReviews = () => {
         setSelectedProductId(productId);
         setModalVisible(true);
@@ -218,7 +218,7 @@ function ProductSpecifications() {
                 <div>Error: {error}</div>
             ) : (
 
-                <div className='xl:scale-[0.95] grid grid-cols-1 xsx:grid-cols-11'>
+                <div className='xl:scale-[0.95] grid grid-cols-1 m-[15px] xsx:grid-cols-11'>
                     <div className=' xsx:col-span-6 xsx:shadow-slider p-[5px] md:p-[15px] m-[5px] md:m-[20px] xsx:overflow-auto  no-scrollbar'>
                         <button onClick={handleBack}><IoArrowBackCircleOutline size={55} /></button>
                         {
@@ -248,7 +248,7 @@ function ProductSpecifications() {
 
                         <div className='w-[100%] h-[2px] bg-gray-400 mt-[28px]'></div>
 
-                        <div className='flex justify-between my-[25px]'>
+                        <div className='flex justify-between mx-[-20px] my-[25px]'>
                             <div className='flex scale-[0.8] items-center ml-[25px] px-[8px] md:px-[12px] py-[5px] shadow-custom-light rounded-lg'>
                                 <button onClick={handleLikeProduct} className='text-[32px] md:text-[40px]'>
                                     <AiFillLike className={likedByUser ? 'text-blue-600' : 'text-gray-200'} />
@@ -257,15 +257,15 @@ function ProductSpecifications() {
                                 <div className='font-bold text-lg md:text-xl ml-[10px]'>Likes: </div>
                                 <p className='bg-gray-800 rounded-md px-[10px] text-xl md:text-2xl ml-[7px] xsx:ml-[15px] text-white'> {likes} </p>
                             </div>
-                            <button className='md:mr-[25px] mr-[15px] hover:bg-black bg-gray-800 text-white px-[16px] text-md md:text-lg xsx:text-2xl rounded-3xl ' onClick={handleReadReviews}>
+                            <button className='md:mr-[25px] scale-[0.85] mr-[15px] hover:bg-black bg-gray-800 text-white px-[18px] text-[15px] xsx:text-[20px] rounded-[25px] ' onClick={handleReadReviews}>
                                 Read Reviews
                             </button>
                         </div>
 
                         <h2 className='ml-[15px] md:ml-[0px] md:text-3xl md:mb-[25px] text-2xl text-custom-blue mb-[8px] font-bold '>Sepcifications Details</h2>
-                        <div className='my-[8px] flex flex-col w-[95%] mx-auto p-[15px] justify-center overflow-y-auto shadow-custom-light rounded-xl'>
 
-                            <table className="w-[100%] text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                        <div className='rounded-[18px] overflow-hidden'>
+                            <table className="w-full rounded-[28px] text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                                 <thead className="text-md text-gray-200 uppercase bg-gray-700">
                                     <tr className='text-center'>
                                         <th scope="col" className="px-6 py-3 whitespace-nowrap">Name</th>
@@ -285,9 +285,8 @@ function ProductSpecifications() {
 
                     </div>
 
-                    <div className='xsx:px-0 px-[15px] xsx:col-span-5 xsx:mt-[0px] mt-[35px] flex flex-col xsx:overflow-auto xsx:h-[calc(98vh-85px)] no-scrollbar'>
-
-                        <div className='xsx:mt-[45px] p-[10px]'>
+                    <div className='xsx:px-0 px-[15px] xsx:col-span-5 xsx:mt-[0px] mt-[35px] flex flex-col xsx:overflow-y-auto min-h-screen no-scrollbar'>
+                        <div className='xsx:mt-[45px]'>
                             <h3 className='text-2xl text-custom-blue mb-[8px] font-bold '>Add Your Review</h3>
                             <form onSubmit={handleAddReview} className="flex flex-col space-y-4">
                                 <textarea
@@ -298,8 +297,8 @@ function ProductSpecifications() {
                                     className="p-[15px] bg-gray-100 w-full h-[180px] mx-auto text-md font-medium rounded-[12px] focus:outline-none"
                                 />
 
-                                <div className='flex items-center mt-[15px] justify-between'>
-                                    <div className="scale-[1.05] flex items-center">
+                                <div className='flex items-center  mt-[15px] justify-between'>
+                                    <div className="flex items-center">
                                         <label className="mr-[10px] text-xl font-semibold">Rating:</label>
                                         {[...Array(5)].map((_, index) => (
                                             <FaStar
@@ -317,16 +316,14 @@ function ProductSpecifications() {
                                 </div>
                             </form>
                         </div>
-                        <div className=' w-[90%] mx-auto'>
-                            <h2 className='ml-[15px] md:ml-[0px] md:text-3xl text-2xl text-custom-blue mb-[8px] mt-[20px] font-bold '>My Reviews</h2>
+                        
+                        <div className='w-full mt-[15px] mx-auto'>
+                            <h2 className='md:text-[20px] text-[17px] underline text-custom-blue mb-[8px] mt-[20px] font-bold '>Your Reviews</h2>
                             <div>
                                 {reviews.map((review) => (
                                     <div key={review.id}>
                                         {review.user_id === userId && (
-                                            <div className='py-[8px] p-[10px] shadow-custom-light rounded-xl w-[95%] overflow-x-auto scrollbar-hide  my-[15px] mx-auto' >
-
-                                                <p className='text-xl font-bold '>Review:</p>
-                                                <p className='font-serif text-lg'> {review.comment}</p>
+                                            <div className='py-[8px] px-[10px] bg-gray-100 rounded-xl  scrollbar-hide  my-[15px] mx-auto' >
                                                 <div className='pl-auto flex'>
                                                     {Array.from({ length: 5 }, (_, index) => (
                                                         <FaStar
@@ -336,10 +333,10 @@ function ProductSpecifications() {
                                                         />
                                                     ))}
                                                 </div>
-
+                                                <p className='font-[550] text-gray-600 text-[16px] mt-[8px] break-words'>{review.comment}</p>
                                             </div>
                                         )}
-                                        {review.user_id !== userId && ( // Hide other users' reviews
+                                        {review.user_id !== userId && (
                                             <></>
                                         )}
                                     </div>

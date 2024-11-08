@@ -210,7 +210,7 @@ function MyProfile() {
     return (
         <div className='h-full bg-gray-100 w-full py-[84px]'>
             {loading ? (
-                <div className='h-[calc(98vh-95px)] scale-[0.9] w-full flex flex-col justify-center items-center'>
+                <div className='min-h-screen scale-[0.9] w-full flex flex-col justify-center items-center'>
                     <Bars
                         height="50"
                         width="50"

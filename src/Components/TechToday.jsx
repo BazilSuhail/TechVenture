@@ -28,7 +28,7 @@ const TechToday = () => {
 
                 const data = await response.json();
                 setNews(data.data);
-                setTotalPages(Math.ceil(data.data.length / 6));
+                setTotalPages(Math.max(1, Math.ceil(data.data.length / 6)));
             } catch (error) {
                 console.error("Error fetching news:", error);
             }
@@ -148,9 +148,9 @@ const TechToday = () => {
         return description.length > 50 ? description.slice(0, 50) + '...' : description;
     };
 
-
-
-    const displayedNews = news.slice((currentPage - 1) * 6, currentPage * 6);
+    const displayedNews = news.length > 0
+    ? news.slice((currentPage - 1) * 6, currentPage * 6)
+    : [];
 
     const goToNextPage = () => setCurrentPage((prev) => Math.min(prev + 1, totalPages));
     const goToPrevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
@@ -164,52 +164,56 @@ const TechToday = () => {
                 </div>
             ) : (
                 <div className="">
-                    <h1 className="text-center mt-[45px] mb-[-25px] text-3xl md:text-4xl font-bold  text-gray-800">Catchout Latest News</h1>
-                    <section className="scale-[0.9] container mx-auto px-6 py-8">
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                            {displayedNews.map((article) => (
-                                <div key={article.url} className="bg-white h-[520px] flex flex-col rounded-lg shadow-lg overflow-hidden">
-                                    <img
-                                        src={article.image || 'https://via.placeholder.com/150'}
-                                        alt={article.title}
-                                        className="w-full h-56 object-cover"
-                                    />
-                                    <div className="p-6">
-                                        <h3 className="text-2xl font-semibold mb-2">{article.title}</h3>
-                                        <p className="text-gray-600 mb-4">{article.description.length > 200 ? article.description.slice(0, 200) + '...' : article.description}</p>
-                                        <Link to={article.url} target="_blank" className="text-blue-500 text-[18px] mt-auto font-[600] hover:underline">
-                                            Read More
-                                        </Link>
+                    <h1 className="text-center mt-[45px] mb-[-25px] text-3xl md:text-4xl font-bold  text-gray-800">Catchout Tech Latest News</h1>
+                    {displayedNews ?
+                        <section className="scale-[0.9] container mx-auto px-6 py-8">
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                                {displayedNews.map((article) => (
+                                    <div key={article.url} className="bg-white h-[520px] flex flex-col rounded-lg shadow-lg overflow-hidden">
+                                        <img
+                                            src={article.image || 'https://via.placeholder.com/150'}
+                                            alt={article.title}
+                                            className="w-full h-56 object-cover"
+                                        />
+                                        <div className="p-6">
+                                            <h3 className="text-2xl font-semibold mb-2">{article.title}</h3>
+                                            <p className="text-gray-600 mb-4">{article.description.length > 200 ? article.description.slice(0, 200) + '...' : article.description}</p>
+                                            <Link to={article.url} target="_blank" className="text-blue-500 text-[18px] mt-auto font-[600] hover:underline">
+                                                Read More
+                                            </Link>
+                                        </div>
                                     </div>
+                                ))}
+                            </div>
+
+                            {/* Pagination Controls */}
+                            <div className="xl:scale-[1.2] flex justify-center items-center mt-8 space-x-4">
+                                <div onClick={goToPrevPage} className={`cursor-pointer ${currentPage === 1 && 'opacity-50 pointer-events-none'}`}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                    </svg>
                                 </div>
-                            ))}
-                        </div>
-
-                        {/* Pagination Controls */}
-                        <div className="xl:scale-[1.2] flex justify-center items-center mt-8 space-x-4">
-                            <div onClick={goToPrevPage} className={`cursor-pointer ${currentPage === 1 && 'opacity-50 pointer-events-none'}`}>
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                                </svg>
+                                {[...Array(totalPages)].map((_, index) => (
+                                    <button
+                                        key={index + 1}
+                                        onClick={() => handlePageClick(index + 1)}
+                                        className={`px-3 py-1 rounded-md font-semibold ${currentPage === index + 1 ? 'bg-gray-600 text-white' : 'bg-gray-200 text-gray-800'}`}
+                                    >
+                                        {index + 1}
+                                    </button>
+                                ))}
+                                <div onClick={goToNextPage} className={`cursor-pointer ${currentPage === totalPages && 'opacity-50 pointer-events-none'}`}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </div>
                             </div>
-                            {[...Array(totalPages)].map((_, index) => (
-                                <button
-                                    key={index + 1}
-                                    onClick={() => handlePageClick(index + 1)}
-                                    className={`px-3 py-1 rounded-md font-semibold ${currentPage === index + 1 ? 'bg-gray-600 text-white' : 'bg-gray-200 text-gray-800'}`}
-                                >
-                                    {index + 1}
-                                </button>
-                            ))}
-                            <div onClick={goToNextPage} className={`cursor-pointer ${currentPage === totalPages && 'opacity-50 pointer-events-none'}`}>
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                </svg>
-                            </div>
-                        </div>
-                    </section>
+                        </section>
+                        : <p classname="text-green-600 text-[18px]">No Latest News Found ...</p>
+                    }
 
-                    <section className="grid md:scale-[0.88] scale-[0.95] overflow-hidden md:grid-cols-2 grid-cols-1 lg:grid-cols-4 place-content-center my-[28px]" >
+
+                    <section className="grid md:scale-[0.88] scale-[0.82] overflow-hidden md:grid-cols-2 grid-cols-1 lg:grid-cols-4 place-content-center my-[28px]" >
                         <div className="flex items-center justify-center mx-auto  text-gray-800 py-[30px] ">
                             <div className='text-[80px] md:text-[55px] mr-[12px] font-mono font-[500]'>1500+</div>
                             <div className="text-center mt-[5px] rounded-lg font-[600] text-gray-500 text-lg">Catalog<div>Gadgets</div></div>
@@ -303,13 +307,13 @@ const TechToday = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className=' scale-[0.76] flex items-center bg-gray-200 w-[200px] rounded-lg'>
+                                        <div className=' scale-[0.76] flex items-center bg-gray-200 w-[220px] rounded-lg'>
                                             <div className='px-[15px] bg-gray-500 py-[6px] text-white rounded-lg'><FaRegCalendarPlus size={18} /></div>
                                             <p className='text-[17px] font-[600] ml-[12px]'>{new Date(review.created_at).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
                                         </div>
                                     </div>
 
-                                    <p className="text-gray-700 font-serif mb-4">{review.comment}</p>
+                                    <p className="text-gray-700 break-words font-sans mb-4">{review.comment}</p>
 
                                 </div>
                             ))}

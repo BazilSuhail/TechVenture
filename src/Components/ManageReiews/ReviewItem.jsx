@@ -54,19 +54,19 @@ const ReviewItem = ({ review, userId, handleLikeReview }) => {
                         </div>
                     )}
                 </div>
-                <div className='ml-[8px] text-xl font-medium'>  {userName} </div>
+                <div className='ml-[8px] text-gray-700 text-xl font-medium'>{userName} </div>
             </div>
 
-            <div className='my-[10px] flex'>
-                <div className='text-lg text-gray-500 font-medium mr-[10px]'>Rating:</div>
+            <div className='my-[10px] flex'> 
                 {Array.from({ length: 5 }, (_, index) => (
                     <FaStar
-                        size={25}
+                        size={22}
                         key={index}
                         className={index < review.rating ? 'text-yellow-500' : 'text-gray-300'}
                     />
                 ))}
             </div>
+
             <div className='mt-[4px] font-bold text-2xl text-black'>Review: </div> 
             <p className='mt-[18px] border-2 break-words border-gray-300 rounded-md p-[10px] font-bold pt-[10px] text-md text-gray-700'>{review.comment}</p>
 
