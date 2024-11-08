@@ -88,6 +88,12 @@ const LikedReviews = ({ reviews }) => {
 
     return (
         <div className='scrollbar-custom'>
+            {reviews.length === 0 &&
+                <div className=' flex justify-center lg:mt-[95px] items-center'>
+                    <img className='mix-blend-multiply z-30' src="https://www.shutterstock.com/image-vector/like-icon-dislike-thumbs-down-260nw-1506167246.jpg" alt="" />
+                    <div className='bg-gray-100 absolute opacity-100 font-[600] pb-[65px] z-50 text-[15px] mt-[205px]'> No Review Liked till now ...</div>
+                </div>
+            }
             {reviews.map((review) => (
                 <div key={review.id} className='my-[15px] bg-white border border-gray-200 w-[85%] mx-auto rounded-lg p-[16px]' >
 

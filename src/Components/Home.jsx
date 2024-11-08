@@ -73,8 +73,8 @@ const HomePage = () => {
 
     const [openIndex, setOpenIndex] = useState(null);
     const { scrollYProgress } = useScroll();
-    const y = useTransform(scrollYProgress, [0.1, 0.17], [800, 0]);
-    const yOpposite = useTransform(scrollYProgress, [0.15, 0.17], [-800, 0]);
+    const y = useTransform(scrollYProgress, [0.09, 0.15], [800, 0]);
+    const yOpposite = useTransform(scrollYProgress, [0.09, 0.15], [-800, 0]);
     const opacity_Cards = useTransform(scrollYProgress, [0.08, 0.15], [0, 1]);
     const x = useTransform(scrollYProgress, [0.30, 0.38], [-900, 0]);
     const opacity = useTransform(scrollYProgress, [0.30, 0.38], [0, 1]);

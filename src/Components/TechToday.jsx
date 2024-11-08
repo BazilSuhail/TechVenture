@@ -16,8 +16,8 @@ const TechToday = () => {
     const [totalPages, setTotalPages] = useState(1);
 
     const [news, setNews] = useState([]);
-    const apiKey = '30a4d5cf784316939a5ae900de320e47';
-    //const apiKeys = '30a4d5csf784316939a5ae900de320e47';
+    //const sapiKey = '1330f7f3382c28ce768d06b7be4097a7';
+    const apiKey = '1330f7f3382c28ce768d06b7be4097a7';
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -27,13 +27,14 @@ const TechToday = () => {
                     `https://api.mediastack.com/v1/news?access_key=${apiKey}&categories=technology`
                 );
 
-                const data = await response.json();
-                setNews(data.data);
-                //setTotalPages(Math.max(1, Math.ceil(data.data.length / 6)));
+                const data = await response.json();  
+                    console.log(data.data);
+                    console.log("Length is "+data.data.length); 
 
-                if (data && data.news && data.news.length > 0) {
-                    setNews(data.news);
-                    setTotalPages(Math.max(1, Math.ceil(data.news.length / 6)));
+                if (data.data.length > 0) {
+                    setNews(data.data);
+                    //console.log("Length is "+data.data.length);
+                    setTotalPages(Math.ceil(data.data.length / 6));
                 } else {
                     setNews([]);
                     setTotalPages(1);
@@ -167,7 +168,7 @@ const TechToday = () => {
     const handlePageClick = (pageNum) => setCurrentPage(pageNum);
 
     return (
-        <div className="overflow-x-hidden min-h-screen bg-white pt-[85px] text-gray-800">
+        <div className="overflow-x-hidden min-h-screen bg-gray-100 pt-[85px] text-gray-800">
             {loading ? (
                 <div className='flex justify-center items-center h-[calc(100vh-95px)]'>
                     <Bars height="50" width="50" color="#363636" ariaLabel="loading" visible />
@@ -188,8 +189,8 @@ const TechToday = () => {
                                         <div className="p-6">
                                             <h3 className="text-2xl font-semibold mb-2">{article.title}</h3>
                                             <p className="text-gray-600 mb-4">{article.description.length > 200 ? article.description.slice(0, 200) + '...' : article.description}</p>
-                                            <Link to={article.url} target="_blank" className="text-blue-500 text-[18px] mt-auto font-[600] hover:underline">
-                                                Read More
+                                            <Link to={article.url} target="_blank" className="text-blue-600 underline text-[18px] mt-auto font-[600] underline-offset-2">
+                                                Read More..
                                             </Link>
                                         </div>
                                     </div>
@@ -268,7 +269,7 @@ const TechToday = () => {
                         </div>
                     </section>
 
-                    <section className=' bg-gray-200 py-[15px] px-[2px]  md:px-[15px] text-black'>
+                    <section className='py-[15px] px-[2px]  md:px-[15px] text-black'>
                         <div className="text-[24px] my-[28px] md:text-[28px] underline text-center font-[700] ">Recently Launched Gadgets</div>
                         <div className="my-[15px] flex overflow-x-auto scrollbar-hide">
                             {recentlyCreatedProducts.map((product) => (
@@ -295,7 +296,7 @@ const TechToday = () => {
                     </section>
 
                     {/* Recently Published Reviews */}
-                    <section className="mb-16 bg-white rounded-lg p-6">
+                    <section className="mb-16 rounded-lg p-6">
                         <h2 className="text-center text-2xl md:text-3xl font-bold mb-6 text-gray-700">Recently Published Reviews</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {recentlyCreatedReviews.slice(0, 6).map(review => (

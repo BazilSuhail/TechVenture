@@ -16,7 +16,7 @@ function Signup() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-}, []);
+  }, []);
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -24,7 +24,7 @@ function Signup() {
       const signUpResult = await supabase.auth.signUp({ email, password });
       if (signUpResult.error) {
         throw signUpResult.error;
-      } 
+      }
       const { data: userData, error: userError } = await supabase.auth.getUser();
       if (userError) throw userError;
 
@@ -66,7 +66,7 @@ function Signup() {
         </div>
         <div className='flex flex-col mt-4'>
           <label className='text-gray-800 font-semibold'>Email</label>
-          <div className='flex items-center border border-gray-300 rounded-lg h-12 px-3 transition-colors duration-200 ease-in-out focus-within:border-blue-600'>
+          <div className={`flex items-center border ${error ? 'border-red-600  border-[3px]' : 'border-gray-300'}  rounded-lg h-12 px-3 transition-colors duration-200 ease-in-out focus-within:border-blue-600`}>
             <IoMail className='text-gray-800' size={23} />
             <input type="email"
               className="ml-2 border-none outline-none w-full h-full"
@@ -76,6 +76,8 @@ function Signup() {
               placeholder="Enter your Email" />
           </div>
         </div>
+        
+        {error && <div className='text-red-600 mt-[15px] text-[15px] font-[600]'>* A user is already registered with this email address</div>}
 
         <div className='flex flex-col mt-4'>
           <label className='text-gray-800 font-semibold'>Password</label>

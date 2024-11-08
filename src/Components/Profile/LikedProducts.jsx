@@ -10,13 +10,19 @@ const LikedProducts = ({ products }) => {
 
     return (
         <div className='no-scrollbar'>
+            {products.length === 0 &&
+                <div className=' flex justify-center lg:mt-[95px] items-center'>
+                    <img className='mix-blend-multiply z-30' src="https://www.shutterstock.com/image-vector/like-icon-dislike-thumbs-down-260nw-1506167246.jpg" alt="" />
+                    <div className='bg-gray-100 absolute opacity-100 font-[600] pb-[65px] z-50 text-[15px] mt-[205px]'> No Products are in you Favourites</div>
+                </div>
+            }
             {products.map((product) => (
-                <div key={product.id}  className='flex justify-between bg-white rounded-xl mx-auto my-[20px] items-center p-[8px] w-[95%]'> 
+                <div key={product.id} className='flex justify-between bg-white rounded-xl mx-auto my-[20px] items-center p-[8px] w-[95%]'>
                     <p className='text-md ld:text-xl ml-[12px] font-medium m-[6px] border-2 border-gray-400 p-[5px] rounded-xl'>{product.name}</p>
                     <button onClick={() => viewSpecifications(product.id)}
-                    className='text-md ld:text-xl ml-[12px] font-medium m-[6px] hover:text-gray-900 hover:bg-gray-200 bg-gray-900 text-white px-[12px] py-[4px] rounded-xl'>
+                        className='text-md ld:text-xl ml-[12px] font-medium m-[6px] hover:text-gray-900 hover:bg-gray-200 bg-gray-900 text-white px-[12px] py-[4px] rounded-xl'>
                         Review
-                    </button> 
+                    </button>
                 </div>
             ))}
         </div>
