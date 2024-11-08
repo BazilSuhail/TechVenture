@@ -9,7 +9,7 @@ const AdminDashboard = lazy(() => import("./Components/Admin/AdminDashboard"));
 const Addspecification = lazy(() => import("./Components/Admin/Addspecification"));
 const Signup = lazy(() => import("./Components/Signup"));
 const ClientProducts = lazy(() => import("./Components/Gadgets/ClientProducts"));
-const ProductSpecifications = lazy(() => import("./Components/Gadgets/Product_specifications"));
+const ProductSpecifications = lazy(() => import("./Components/Gadgets/ProductDetails"));
 const ManageReview = lazy(() => import("./Components/ManageReiews/ManageReview"));
 const SearchProjects = lazy(() => import("./Components/Gadgets/SearchProducts"));
 const HomePage = lazy(() => import("./Components/Home"));

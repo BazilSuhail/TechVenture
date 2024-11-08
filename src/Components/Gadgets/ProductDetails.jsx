@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '../../Config/Config';
-import { IoArrowBackCircleOutline } from "react-icons/io5";
+import { IoArrowBack } from "react-icons/io5";
 import { FaStar } from 'react-icons/fa';
 import { AiFillLike } from "react-icons/ai";
 import { Bars } from 'react-loader-spinner';
 import ManageReviews from '../ManageReiews/ManageReview';
 
-
 function ProductSpecifications() {
     const { productId } = useParams();
-
-
-
     const [modalVisible, setModalVisible] = useState(false);
     const [selectedProductId, setSelectedProductId] = useState(null);
 
@@ -215,12 +211,12 @@ function ProductSpecifications() {
                         visible={true} />
                 </div>
             ) : error ? (
-                <div>Error: {error}</div>
+                <div className='mt-[15px] bg-red-200 p-3 text-red-700 rounded-lg '>{error}</div>
             ) : (
 
                 <div className='xl:scale-[0.95] grid grid-cols-1 m-[15px] xsx:grid-cols-11'>
                     <div className=' xsx:col-span-6 xsx:shadow-slider p-[5px] md:p-[15px] m-[5px] md:m-[20px] xsx:overflow-auto  no-scrollbar'>
-                        <button onClick={handleBack}><IoArrowBackCircleOutline size={55} /></button>
+                        <button className='bg-gray-600 hover:bg-gray-900 duration-150 p-[5px] text-white rounded-lg ' onClick={handleBack}><IoArrowBack size={32} /></button>
                         {
                             productImage !== null ? (
                                 <div>
@@ -257,7 +253,7 @@ function ProductSpecifications() {
                                 <div className='font-bold text-lg md:text-xl ml-[10px]'>Likes: </div>
                                 <p className='bg-gray-800 rounded-md px-[10px] text-xl md:text-2xl ml-[7px] xsx:ml-[15px] text-white'> {likes} </p>
                             </div>
-                            <button className='md:mr-[25px] scale-[0.85] mr-[15px] hover:bg-black bg-gray-800 text-white px-[18px] text-[15px] xsx:text-[20px] rounded-[25px] ' onClick={handleReadReviews}>
+                            <button className='md:mr-[25px] scale-[0.85] mr-[15px] hover:bg-gray-400 bg-gray-800 text-white px-[18px] text-[15px] xsx:text-[20px] rounded-[25px] ' onClick={handleReadReviews}>
                                 Read Reviews
                             </button>
                         </div>

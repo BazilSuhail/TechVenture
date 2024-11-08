@@ -3,6 +3,7 @@ import { supabase } from '../../Config/Config';
 import ReviewItem from './ReviewItem';
 import { Bars } from 'react-loader-spinner';
 import { MdCancel } from 'react-icons/md';
+import noComments from "../../noComments.webp";
 
 function ManageReviews({ productId, onClose }) {
     const [reviews, setReviews] = useState([]);
@@ -127,7 +128,7 @@ function ManageReviews({ productId, onClose }) {
                     <div className='mt-[55px]'>
                         {reviews.length === 0 &&
                             <div className='w-full flex flex-col scale-[0.55] mx-auto contrast justify-center items-center '>
-                            <img className='grayscale  contrast-75' src="https://texleath.netlify.app/static/media/noComments.f902aa804f655a2efa74.webp" alt="" />
+                            <img className='grayscale  contrast-75' src={noComments} alt="" />
                            <p className='text-gray-400 font-[600] text-[32px]'>No Review Made Till Now</p>
                             </div>
                         }

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../../Config/Config';
 import { useNavigate } from 'react-router-dom';
-import ProductData from './ProductData';
+import ProductData from './ItemData';
 import { IoIosSearch } from "react-icons/io";
-import { Bars } from 'react-loader-spinner';
-import { FiSearch } from 'react-icons/fi';
+import { Bars } from 'react-loader-spinner'; 
 
 function SearchProjects() {
     const [searchTerm, setSearchTerm] = useState('');
