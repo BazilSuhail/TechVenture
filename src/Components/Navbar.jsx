@@ -82,11 +82,7 @@ const Navbar = () => {
                 </div>
             </div>
 
-
-            {/* Hamburger menu button */}
             <div className="relative bg-black md:hidden">
-
-                {/* Full navbar for smaller screens */}
                 <AnimatePresence>
                     {isOpen && (
                         <motion.div
@@ -120,29 +116,7 @@ const Navbar = () => {
                     )}
                 </AnimatePresence>
             </div>
-            {/*
             
-            <div className={`fixed top-0 left-0 w-3/5 h-full bg-black z-40 transition-transform duration-900 transform ${isOpen ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'}`}>
-                <div className="flex flex-col items-baseline text-white">
-                    <div className="flex h-[calc(100vh-75px)] flex-col items-baseline ml-[-55px] text-white">
-                        <NavLink to="/" className="mb-[75px]">Home</NavLink>
-                        <NavLink to="/" onClick={toggleMenu} className={({ isActive }) => `${linkStyles} ${isActive ? activeLinkStyles : ""}`}><CiHome className="text-[25px] mt-[1px] mr-[4px]" />Home</NavLink>
-                        <NavLink to="/techtoday" onClick={toggleMenu} className={({ isActive }) => `${linkStyles} ${isActive ? activeLinkStyles : ""}`}><LuNewspaper className="text-[25px] mt-[1px] mr-[4px]" />TechToday</NavLink>
-                        <NavLink to="/products" onClick={toggleMenu} className={({ isActive }) => `${linkStyles} ${isActive ? activeLinkStyles : ""}`}><AiFillProduct className="text-[25px] mt-[1px] mr-[4px]" />Gadgets</NavLink>
-
-                        <NavLink to="/profile" onClick={toggleMenu} className="text-white  text-lgl mt-[19px] px-[10px] py-[2px] flex items-center font-bold hover:bg-white border-2 border-white hover:text-black rounded-xl"><FaUserEdit className="text-[30px] mt-[1px] mr-[9px]" /><p>View Profile</p></NavLink>
-                    </div>
-                    <div className="ml-[-5px] flex">
-                        <div className="w-[15px]"></div>
-                        {user ? (
-                            <button className="text-white text-xl px-[8px] py-[2px] font-medium flex items-center hover:bg-red-700 hover:text-white rounded-xl border-2 border-white" onClick={handleLogout}><IoLogOutOutline className="text-[25px] mt-[3px] mr-[3px]" /><p>Logout</p></button>
-                        ) : (
-                            <NavLink onClick={toggleMenu} to="/signup" className="text-white text-xl px-[8px] py-[2px] font-medium flex items-center hover:bg-white hover:text-black rounded-xl border-2 border-white"><IoLogOutOutline className="text-[25px] mt-[3px] mr-[3px]" /><p>Get Started</p></NavLink>
-                        )}
-                    </div>
-                </div>
-            </div>
-            */}
         </nav>
     );
 };

@@ -84,6 +84,7 @@ const HomePage = () => {
     const handleToggle = (index) => {
         setOpenIndex(openIndex === index ? null : index);
     };
+    
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
@@ -137,8 +138,9 @@ const HomePage = () => {
                 </div>
             </section>
 
-            <section className="pb-10 z-30 bg-gray-100">
-                <h2 className="text-2xl md:text-4xl mb-8 font-[700] text-center bg-black text-white p-[15px] mx-auto w-[100%]">About Us</h2>
+            <h2 className="text-2xl absolute z-40 md:text-4xl font-[700] text-center bg-black text-white p-[15px] mx-auto w-[100%]">About Us</h2>
+
+            <section className="pb-10 mt-[110px] z-30 bg-gray-100">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-[20px] gap-8">
                     <motion.div className="p-6 bg-white rounded-lg shadow-md transform transition duration-300 hover:scale-105"
                         style={{ y: yOpposite, opacity: opacity_Cards }}>

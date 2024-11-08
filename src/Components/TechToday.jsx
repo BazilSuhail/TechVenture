@@ -12,6 +12,30 @@ const TechToday = () => {
     const [recentlyCreatedReviews, setRecentlyCreatedReviews] = useState([]);
     const [userNames, setUserNames] = useState({});
     const [loading, setLoading] = useState(true);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+
+    const [news, setNews] = useState([]);
+    const apiKey = '4c7f3fdf61354093781abc799622ac9e';
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        const fetchNews = async () => {
+            try {
+                const response = await fetch(
+                    `https://api.mediastack.com/v1/news?access_key=${apiKey}&categories=technology`
+                );
+
+                const data = await response.json();
+                setNews(data.data);
+                setTotalPages(Math.ceil(data.data.length / 6));
+            } catch (error) {
+                console.error("Error fetching news:", error);
+            }
+        };
+
+        fetchNews();
+    }, [apiKey]);
 
     useEffect(() => {
         const fetchAllData = async () => {
@@ -120,10 +144,17 @@ const TechToday = () => {
         fetchAllData();
     }, []);
 
-
     const truncateDescription = (description) => {
         return description.length > 50 ? description.slice(0, 50) + '...' : description;
     };
+
+
+
+    const displayedNews = news.slice((currentPage - 1) * 6, currentPage * 6);
+
+    const goToNextPage = () => setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+    const goToPrevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
+    const handlePageClick = (pageNum) => setCurrentPage(pageNum);
 
     return (
         <div className="overflow-x-hidden min-h-screen bg-white pt-[85px] text-gray-800">
@@ -133,7 +164,69 @@ const TechToday = () => {
                 </div>
             ) : (
                 <div className="">
-                    <h1 className="text-center text-3xl md:text-4xl font-bold mb-8 text-gray-800">Catchout Latest News</h1>
+                    <h1 className="text-center mt-[45px] mb-[-25px] text-3xl md:text-4xl font-bold  text-gray-800">Catchout Latest News</h1>
+                    <section className="scale-[0.9] container mx-auto px-6 py-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {displayedNews.map((article) => (
+                                <div key={article.url} className="bg-white h-[520px] flex flex-col rounded-lg shadow-lg overflow-hidden">
+                                    <img
+                                        src={article.image || 'https://via.placeholder.com/150'}
+                                        alt={article.title}
+                                        className="w-full h-56 object-cover"
+                                    />
+                                    <div className="p-6">
+                                        <h3 className="text-2xl font-semibold mb-2">{article.title}</h3>
+                                        <p className="text-gray-600 mb-4">{article.description.length > 200 ? article.description.slice(0, 200) + '...' : article.description}</p>
+                                        <Link to={article.url} target="_blank" className="text-blue-500 text-[18px] mt-auto font-[600] hover:underline">
+                                            Read More
+                                        </Link>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Pagination Controls */}
+                        <div className="xl:scale-[1.2] flex justify-center items-center mt-8 space-x-4">
+                            <div onClick={goToPrevPage} className={`cursor-pointer ${currentPage === 1 && 'opacity-50 pointer-events-none'}`}>
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                </svg>
+                            </div>
+                            {[...Array(totalPages)].map((_, index) => (
+                                <button
+                                    key={index + 1}
+                                    onClick={() => handlePageClick(index + 1)}
+                                    className={`px-3 py-1 rounded-md font-semibold ${currentPage === index + 1 ? 'bg-gray-600 text-white' : 'bg-gray-200 text-gray-800'}`}
+                                >
+                                    {index + 1}
+                                </button>
+                            ))}
+                            <div onClick={goToNextPage} className={`cursor-pointer ${currentPage === totalPages && 'opacity-50 pointer-events-none'}`}>
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                </svg>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section className="grid md:scale-[0.88] scale-[0.95] overflow-hidden md:grid-cols-2 grid-cols-1 lg:grid-cols-4 place-content-center my-[28px]" >
+                        <div className="flex items-center justify-center mx-auto  text-gray-800 py-[30px] ">
+                            <div className='text-[80px] md:text-[55px] mr-[12px] font-mono font-[500]'>1500+</div>
+                            <div className="text-center mt-[5px] rounded-lg font-[600] text-gray-500 text-lg">Catalog<div>Gadgets</div></div>
+                        </div>
+                        <div className="flex items-center justify-center mx-auto text-gray-700 py-[30px] ">
+                            <div className='text-[80px] md:text-[55px] mr-[12px] font-mono font-[500]'>1000</div>
+                            <div className="text-center mt-[5px] rounded-lg font-[600] text-gray-500 text-lg">120 <div>Categories</div></div>
+                        </div>
+                        <div className="flex items-center justify-center mx-auto  text-gray-700 py-[30px] ">
+                            <div className='text-[80px] md:text-[55px] mr-[12px] font-mono font-[500]'>2500+</div>
+                            <div className="text-center mt-[5px] rounded-lg font-[600] text-gray-500 text-lg">Expert<div>Reviewers</div></div>
+                        </div>
+                        <div className="flex items-center justify-center mx-auto  text-gray-700 py-[30px] ">
+                            <div className='text-[80px] md:text-[55px] mr-[12px] font-mono font-[500]'>150,000</div>
+                            <div className="text-center mt-[5px] rounded-lg font-[600] text-gray-500 text-lg">Reviews <div>Made</div></div>
+                        </div>
+                    </section>
 
                     {/* Top 5 Most Liked Products */}
                     <section className='bg-black  py-[15px] px-[2px]  md:px-[15px]] text-white'>
@@ -187,7 +280,6 @@ const TechToday = () => {
                         </div>
                     </section>
 
-
                     {/* Recently Published Reviews */}
                     <section className="mb-16 bg-white rounded-lg p-6">
                         <h2 className="text-center text-2xl md:text-3xl font-bold mb-6 text-gray-700">Recently Published Reviews</h2>
@@ -197,28 +289,28 @@ const TechToday = () => {
                                     key={review.id}
                                     className="bg-white p-5 rounded-xl shadow-lg transform transition hover:-translate-y-1 hover:shadow-xl"
                                 >
-                                  <div className='flex items-start justify-between'>
-                                  <div className="flex items-center mb-4">
-                                        <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center font-semibold text-gray-800">
-                                            {userNames[review.user_id]?.charAt(0)}
-                                        </div>
-                                        <div className='ml-3 flex flex-col'>
-                                            <div className="text-gray-800">{userNames[review.user_id]}</div>
-                                            <div className='flex items-center'>
-                                                {Array.from({ length: 5 }, (_, index) => (
-                                                    <FaStar key={index} className={index < review.rating ? 'text-yellow-400' : 'text-gray-300'} />
-                                                ))}
+                                    <div className='flex items-start justify-between'>
+                                        <div className="flex items-center mb-4">
+                                            <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center font-semibold text-gray-800">
+                                                {userNames[review.user_id]?.charAt(0)}
+                                            </div>
+                                            <div className='ml-3 flex flex-col'>
+                                                <div className="text-gray-800">{userNames[review.user_id]}</div>
+                                                <div className='flex items-center'>
+                                                    {Array.from({ length: 5 }, (_, index) => (
+                                                        <FaStar key={index} className={index < review.rating ? 'text-yellow-400' : 'text-gray-300'} />
+                                                    ))}
+                                                </div>
                                             </div>
                                         </div>
+                                        <div className=' scale-[0.76] flex items-center bg-gray-200 w-[200px] rounded-lg'>
+                                            <div className='px-[15px] bg-gray-500 py-[6px] text-white rounded-lg'><FaRegCalendarPlus size={18} /></div>
+                                            <p className='text-[17px] font-[600] ml-[12px]'>{new Date(review.created_at).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+                                        </div>
                                     </div>
-                                    <div className=' scale-[0.76] flex items-center bg-gray-200 w-[200px] rounded-lg'>
-                                        <div className='px-[15px] bg-gray-500 py-[6px] text-white rounded-lg'><FaRegCalendarPlus size={18} /></div>
-                                        <p className='text-[17px] font-[600] ml-[12px]'>{new Date(review.created_at).toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
-                                    </div>
-                                  </div>
 
                                     <p className="text-gray-700 font-serif mb-4">{review.comment}</p>
-                                                                   
+
                                 </div>
                             ))}
                         </div>
@@ -230,25 +322,3 @@ const TechToday = () => {
     );
 };
 export default TechToday;
-
-
-/*
-
-
- <TechNews />
-                    <section className='w-[100%] mt-[25px] '>
-                        <div className="slider" style={{ '--width': '420px', '--height': '132px', '--quantity': 9 }}>
-                            <div className="list">
-                                <div className="techtoday" style={{ '--position': 1 }}><div className='text-black text-stroke '>ULTIMATE</div></div>
-                                <div className="techtoday" style={{ '--position': 2 }}><div className='text-no-stroke text-stroke '>DESTINATION</div></div>
-                                <div className="techtoday" style={{ '--position': 3 }}><div className='text-black text-stroke '>FOR LATEST</div></div>
-                                <div className="techtoday" style={{ '--position': 4 }}><div className='text-no-stroke  text-stroke'>GADGETS</div></div>
-                                <div className="techtoday" style={{ '--position': 5 }}><div className='text-black text-stroke'>AND</div></div>
-                                <div className="techtoday" style={{ '--position': 6 }}><div className=' text-no-stroke text-stroke '>IN DEPTH</div></div>
-                                <div className="techtoday" style={{ '--position': 7 }}><div className='text-black text-stroke '>ANALYSIS</div></div>
-                                <div className="techtoday" style={{ '--position': 8 }}><div className='text-no-stroke text-stroke '> WITH </div></div>
-                                <div className="techtoday" style={{ '--position': 9 }}><div className='text-stroke text-black'> REVIEWS</div></div>
-                            </div>
-                        </div>
-                    </section>
-*/
