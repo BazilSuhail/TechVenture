@@ -16,7 +16,8 @@ const TechToday = () => {
     const [totalPages, setTotalPages] = useState(1);
 
     const [news, setNews] = useState([]);
-    const apiKey = '4c7f3fdf61354093781abc799622ac9e';
+    const apiKsey = '30a4d5cf784316939a5ae900de320e47';
+    const apiKey = '30a4d5csf784316939a5ae900de320e47';
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -28,7 +29,16 @@ const TechToday = () => {
 
                 const data = await response.json();
                 setNews(data.data);
-                setTotalPages(Math.max(1, Math.ceil(data.data.length / 6)));
+                //setTotalPages(Math.max(1, Math.ceil(data.data.length / 6)));
+
+                if (data && data.news && data.news.length > 0) {
+                    setNews(data.news);
+                    setTotalPages(Math.max(1, Math.ceil(data.news.length / 6)));
+                } else { 
+                    setNews([]);
+                    setTotalPages(1);
+                    console.warn("No news data available");
+                }
             } catch (error) {
                 console.error("Error fetching news:", error);
             }
@@ -149,8 +159,8 @@ const TechToday = () => {
     };
 
     const displayedNews = news.length > 0
-    ? news.slice((currentPage - 1) * 6, currentPage * 6)
-    : [];
+        ? news.slice((currentPage - 1) * 6, currentPage * 6)
+        : [];
 
     const goToNextPage = () => setCurrentPage((prev) => Math.min(prev + 1, totalPages));
     const goToPrevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
@@ -213,7 +223,7 @@ const TechToday = () => {
                     }
 
 
-                    <section className="grid md:scale-[0.88] scale-[0.82] overflow-hidden md:grid-cols-2 grid-cols-1 lg:grid-cols-4 place-content-center my-[28px]" >
+                    <section className="grid md:scale-[0.88] mt-[-15px] scale-[0.82] overflow-hidden md:grid-cols-2 grid-cols-1 lg:grid-cols-4 place-content-center my-[28px]" >
                         <div className="flex items-center justify-center mx-auto  text-gray-800 py-[30px] ">
                             <div className='text-[80px] md:text-[55px] mr-[12px] font-mono font-[500]'>1500+</div>
                             <div className="text-center mt-[5px] rounded-lg font-[600] text-gray-500 text-lg">Catalog<div>Gadgets</div></div>

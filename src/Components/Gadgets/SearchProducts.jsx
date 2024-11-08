@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import ProductData from './ProductData';
 import { IoIosSearch } from "react-icons/io";
 import { Bars } from 'react-loader-spinner';
+import { FiSearch } from 'react-icons/fi';
 
 function SearchProjects() {
     const [searchTerm, setSearchTerm] = useState('');
@@ -54,7 +55,7 @@ function SearchProjects() {
     };
 
     return (
-        <div className='pt-[85px] min-h-screen w-full overflow-x-hidden'>
+        <div className='pt-[85px] bg-white min-h-screen w-full overflow-x-hidden'>
             <div className='w-full mt-[15px] flex justify-center mx-[5px] mb-[25px] p-[4px]'>
                 <input
                     type="text"
@@ -86,9 +87,20 @@ function SearchProjects() {
                 <p className='flex justify-center mx-auto text-lg text-red-600 font-medium'>{error}</p>
             )}
 
+            {!searched && !loading && !error && (
+                <div className='flex xl:scale-[1.2] flex-col items-center justify-center h-[calc(98vh-135px)] text-gray-600'>
+                    <div className=' w-[255px] h-[255px] rounded-full overflow-hidden filter'>
+                        <img className='w-full h-full grayscale' src="https://img.freepik.com/free-vector/search-concept-landing-page_52683-18927.jpg?t=st=1731061761~exp=1731065361~hmac=7c6b67cc5a6009237a08bbdf6f548c7c1e0820c7aed9dedac070ba990e1f9d90&w=740" alt="" />
+                    </div>
+                    <p className='text-[22px] bg-white z-50 mt-[-20px] font-medium'>Search the Catalog Now</p>
+                    <p className='text-[12px] text-gray-509'>Find the products you're looking for</p>
+                </div>
+            )}
+
+
             {searched && searchTerm.trim() !== '' && (
                 products.length > 0 ? (
-                    <div className='scrollbar-hide grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 w-[95%] mx-auto place-items-center gap-y-[25px]'>
+                    <div className='scrollbar-hide grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 w-[95%] mx-auto place-items-center gap-[25px]'>
                         {products.map((product) => (
                             <ProductData
                                 key={product.id}
@@ -100,9 +112,14 @@ function SearchProjects() {
                         ))}
                     </div>
                 ) : (
-                    <p className='flex justify-center mx-auto text-lg text-red-600 font-medium'>No results found</p>
+                    <div className='flex xl:scale-[1.2] flex-col items-center justify-center h-[calc(98vh-135px)] text-gray-600'>
+                        <div className=' w-[255px] h-[255px] rounded-full overflow-hidden filter'>
+                            <img className='w-full h-full' src="https://img.freepik.com/free-vector/search-concept-landing-page_52683-18927.jpg?t=st=1731061761~exp=1731065361~hmac=7c6b67cc5a6009237a08bbdf6f548c7c1e0820c7aed9dedac070ba990e1f9d90&w=740" alt="" />
+                        </div>
+                        <p className='text-[18px] bg-white text-red-600 z-50 mt-[-20px] font-medium'>No Results Found</p> 
+                    </div>
                 )
-            )} 
+            )}
         </div>
     );
 }

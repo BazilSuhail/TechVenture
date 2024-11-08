@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react'; 
-import { supabase } from '../../Config/Config'; 
+import { useState, useEffect } from 'react';
+import { supabase } from '../../Config/Config';
 import ReviewItem from './ReviewItem';
-import { Bars } from 'react-loader-spinner'; 
+import { Bars } from 'react-loader-spinner';
 import { MdCancel } from 'react-icons/md';
 
-function ManageReviews({ productId, onClose }) { 
+function ManageReviews({ productId, onClose }) {
     const [reviews, setReviews] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -101,42 +101,48 @@ function ManageReviews({ productId, onClose }) {
             alert('Error liking review: ' + error.message);
         }
     };
- 
+
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-        <div className="relative bg-gray-100 rounded-[25px] shadow-lg w-[90vw] md:w-[80vw] lg:w-[75vw] xl:w-[70vw] h-[90vh] p-6 no-scrollbar overflow-y-auto">
-            <button onClick={onClose} className="absolute top-4 right-4 mb-[55px] text-gray-600 hover:text-gray-900">
-                <MdCancel size={30} />
-            </button>
+            <div className="relative bg-gray-100 rounded-[25px] shadow-lg w-[90vw] md:w-[80vw] lg:w-[75vw] xl:w-[70vw] h-[90vh] p-6 no-scrollbar overflow-y-auto">
+                <button onClick={onClose} className="absolute top-4 right-4 mb-[55px] text-gray-600 hover:text-gray-900">
+                    <MdCancel size={30} />
+                </button>
 
-            {loading ? (
-                <div className="flex scale-[0.9] justify-center items-center h-full">
-                    <Bars
-                        height="50"
-                        width="50"
-                        color="#363636"
-                        ariaLabel="bars-loading"
-                        wrapperStyle={{}}
-                        wrapperClass=""
-                        visible={true}
-                    />
-                </div>
-            ) : error ? (
-                <div className="text-red-600 text-center mt-6">Error: {error}</div>
-            ) : (
-                <div className='mt-[55px]'>
-                    {reviews.map((review) => (
-                        <ReviewItem
-                            key={review.id}
-                            review={review}
-                            userId={userId}
-                            handleLikeReview={handleLikeReview}
+                {loading ? (
+                    <div className="flex scale-[0.9] justify-center items-center h-full">
+                        <Bars
+                            height="50"
+                            width="50"
+                            color="#363636"
+                            ariaLabel="bars-loading"
+                            wrapperStyle={{}}
+                            wrapperClass=""
+                            visible={true}
                         />
-                    ))}
-                </div>
-            )}
+                    </div>
+                ) : error ? (
+                    <div className="text-red-600 text-center mt-6">Error: {error}</div>
+                ) : (
+                    <div className='mt-[55px]'>
+                        {reviews.length === 0 &&
+                            <div className='w-full flex flex-col scale-[0.55] mx-auto contrast justify-center items-center '>
+                            <img className='grayscale  contrast-75' src="https://texleath.netlify.app/static/media/noComments.f902aa804f655a2efa74.webp" alt="" />
+                           <p className='text-gray-400 font-[600] text-[32px]'>No Review Made Till Now</p>
+                            </div>
+                        }
+                        {reviews.map((review) => (
+                            <ReviewItem
+                                key={review.id}
+                                review={review}
+                                userId={userId}
+                                handleLikeReview={handleLikeReview}
+                            />
+                        ))}
+                    </div>
+                )}
+            </div>
         </div>
-    </div>
     );
 }
 

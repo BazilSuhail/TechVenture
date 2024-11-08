@@ -7,7 +7,7 @@ function ProductData({ product, subcategories, viewSpecifications, showSubcatego
     const opacity = useTransform(scrollYProgress, [0.02, 0.08], [0.8, 1]);
 
     const truncateDescription = (description) => {
-        return description.length > 50 ? description.slice(0, 75) + '...' : description;
+        return description.length > 150 ? description.slice(0, 180) + '...' : description;
     };
 
     return (
