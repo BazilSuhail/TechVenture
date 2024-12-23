@@ -1,6 +1,14 @@
 # TechVenture
 #### `TechVenture`a comprehensive gadgets catalog that provides users with an extensive selection of gadgets, complete with detailed descriptions, specifications, and high-quality reviews from both users and experts. The platform offers advanced filtering capabilities, making it easy for users to find the gadgets that meet their specific needs.
 
+## 🤖 Tech Stack 
+
+<img alt="JavaScript" src="https://img.shields.io/badge/javascript%20-%23323330.svg?&style=for-the-badge&logo=javascript&logoColor=%23F7DF1E"/>  
+<img alt="React" src="https://img.shields.io/badge/React-%2361DAFB.svg?&style=for-the-badge&logo=react&logoColor=white"/> 
+<img alt="Supabase" src="https://img.shields.io/badge/Supabase-%233ECF8E.svg?&style=for-the-badge&logo=supabase&logoColor=white"/> 
+<img alt="Framer Motion" src="https://img.shields.io/badge/Framer%20Motion-%23ED5A9F.svg?&style=for-the-badge&logo=framer&logoColor=white"/>
+<img alt="Tailwind CSS" src="https://img.shields.io/badge/Tailwind%20CSS-%2306B6D4.svg?&style=for-the-badge&logo=tailwindcss&logoColor=white"/>
+
 # Run Locally
 
  Clone the project using following command
